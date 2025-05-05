@@ -1,0 +1,20 @@
+{
+  "name": "pcc-admin-service-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prisma": "^6.7.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "express": "^5.1.0"
+  }
+}

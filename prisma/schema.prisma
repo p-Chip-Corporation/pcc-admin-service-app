@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  IC
+}
+
+enum PermissionType {
+  VIEW
+  ADD
+  EDIT
+  DELETE
+}
+
+enum ResourceType {
+  DEVICE
+  ACCOUNT
+  ACCOUNT_DEVICE
+  ACTIVATION_CODE
+  USERS
+  USER_PERMISSIONS
+}
+
+model User {
+  id                        String              @id @default(uuid())
+  name                      String
+  email                     String              @unique
+  role                      Role                @default(IC)
+  isActive                  Boolean             @default(true)
+  createdAt                 DateTime            @default(now())
+  updatedAt                 DateTime            @updatedAt
+  createdAccounts           Account[]
+  createdDevices            Device[]
+  createdAccountActivations AccountActivation[]
+  createdUserPermission     UserPermission[]    @relation("CreatedByUser")
+  permissions               UserPermission[]    @relation("UserPermissions")
+}
+
+model UserPermission {
+  id          String         @id @default(uuid())
+  user        User           @relation("UserPermissions", fields: [userId], references: [id])
+  userId      String
+  resource    ResourceType
+  permission  PermissionType @default(VIEW)
+  createdBy   User           @relation("CreatedByUser", fields: [createdById], references: [id])
+  createdById String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@unique([userId, resource, permission]) // prevent duplicates
+}
+
+model Account {
+  id             String              @id @default(uuid())
+  name           String
+  isActive       Boolean             @default(false)
+  activationLink String
+  createdBy      User                @relation(fields: [createdById], references: [id])
+  createdById    String
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  devices        AccountDevices[]
+  activations    AccountActivation[]
+}
+
+model AccountActivation {
+  id             String    @id @default(uuid())
+  account        Account   @relation(fields: [accountId], references: [id])
+  accountId      String
+  email          String
+  code           String    @default(uuid())
+  activationLink String
+  issueDate      DateTime  @default(now())
+  expiryDate     DateTime
+  isClaimed      Boolean   @default(false)
+  claimDate      DateTime?
+  createdBy      User      @relation(fields: [createdById], references: [id])
+  createdById    String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Device {
+  id          String           @id @default(uuid())
+  name        String           @unique //PR-123456789
+  isActive    Boolean          @default(true)
+  createdBy   User             @relation(fields: [createdById], references: [id])
+  createdById String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  accounts    AccountDevices[]
+}
+
+model AccountDevices {
+  id          String   @id @default(uuid())
+  account     Account  @relation(fields: [accountId], references: [id])
+  accountId   String
+  device      Device   @relation(fields: [deviceId], references: [id])
+  deviceId    String
+  isActive    Boolean  @default(true)
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([accountId, deviceId])
+}
