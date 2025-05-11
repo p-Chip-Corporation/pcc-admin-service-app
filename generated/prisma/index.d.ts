@@ -1375,16 +1375,20 @@ export namespace Prisma {
     createdAccounts: number
     createdDevices: number
     createdAccountActivations: number
+    createdAccountDevices: number
     createdUserPermission: number
     permissions: number
+    createdUsers: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdAccounts?: boolean | UserCountOutputTypeCountCreatedAccountsArgs
     createdDevices?: boolean | UserCountOutputTypeCountCreatedDevicesArgs
     createdAccountActivations?: boolean | UserCountOutputTypeCountCreatedAccountActivationsArgs
+    createdAccountDevices?: boolean | UserCountOutputTypeCountCreatedAccountDevicesArgs
     createdUserPermission?: boolean | UserCountOutputTypeCountCreatedUserPermissionArgs
     permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
+    createdUsers?: boolean | UserCountOutputTypeCountCreatedUsersArgs
   }
 
   // Custom InputTypes
@@ -1422,6 +1426,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountCreatedAccountDevicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccountDevicesWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountCreatedUserPermissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserPermissionWhereInput
   }
@@ -1431,6 +1442,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserPermissionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
 
@@ -1521,64 +1539,76 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: string | null
+    localAccountId: string | null
     name: string | null
     email: string | null
     role: $Enums.Role | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
+    localAccountId: string | null
     name: string | null
     email: string | null
     role: $Enums.Role | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
+    localAccountId: number
     name: number
     email: number
     role: number
     isActive: number
     createdAt: number
     updatedAt: number
+    createdById: number
     _all: number
   }
 
 
   export type UserMinAggregateInputType = {
     id?: true
+    localAccountId?: true
     name?: true
     email?: true
     role?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
+    localAccountId?: true
     name?: true
     email?: true
     role?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
+    localAccountId?: true
     name?: true
     email?: true
     role?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
     _all?: true
   }
 
@@ -1656,12 +1686,14 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
+    localAccountId: string | null
     name: string
     email: string
     role: $Enums.Role
     isActive: boolean
     createdAt: Date
     updatedAt: Date
+    createdById: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1683,61 +1715,81 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    localAccountId?: boolean
     name?: boolean
     email?: boolean
     role?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
     createdAccounts?: boolean | User$createdAccountsArgs<ExtArgs>
     createdDevices?: boolean | User$createdDevicesArgs<ExtArgs>
     createdAccountActivations?: boolean | User$createdAccountActivationsArgs<ExtArgs>
+    createdAccountDevices?: boolean | User$createdAccountDevicesArgs<ExtArgs>
     createdUserPermission?: boolean | User$createdUserPermissionArgs<ExtArgs>
     permissions?: boolean | User$permissionsArgs<ExtArgs>
+    createdBy?: boolean | User$createdByArgs<ExtArgs>
+    createdUsers?: boolean | User$createdUsersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    localAccountId?: boolean
     name?: boolean
     email?: boolean
     role?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    createdBy?: boolean | User$createdByArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    localAccountId?: boolean
     name?: boolean
     email?: boolean
     role?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    createdBy?: boolean | User$createdByArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
+    localAccountId?: boolean
     name?: boolean
     email?: boolean
     role?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "role" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "localAccountId" | "name" | "email" | "role" | "isActive" | "createdAt" | "updatedAt" | "createdById", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdAccounts?: boolean | User$createdAccountsArgs<ExtArgs>
     createdDevices?: boolean | User$createdDevicesArgs<ExtArgs>
     createdAccountActivations?: boolean | User$createdAccountActivationsArgs<ExtArgs>
+    createdAccountDevices?: boolean | User$createdAccountDevicesArgs<ExtArgs>
     createdUserPermission?: boolean | User$createdUserPermissionArgs<ExtArgs>
     permissions?: boolean | User$permissionsArgs<ExtArgs>
+    createdBy?: boolean | User$createdByArgs<ExtArgs>
+    createdUsers?: boolean | User$createdUsersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | User$createdByArgs<ExtArgs>
+  }
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | User$createdByArgs<ExtArgs>
+  }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1745,17 +1797,22 @@ export namespace Prisma {
       createdAccounts: Prisma.$AccountPayload<ExtArgs>[]
       createdDevices: Prisma.$DevicePayload<ExtArgs>[]
       createdAccountActivations: Prisma.$AccountActivationPayload<ExtArgs>[]
+      createdAccountDevices: Prisma.$AccountDevicesPayload<ExtArgs>[]
       createdUserPermission: Prisma.$UserPermissionPayload<ExtArgs>[]
       permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      createdUsers: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      localAccountId: string | null
       name: string
       email: string
       role: $Enums.Role
       isActive: boolean
       createdAt: Date
       updatedAt: Date
+      createdById: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2153,8 +2210,11 @@ export namespace Prisma {
     createdAccounts<T extends User$createdAccountsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdDevices<T extends User$createdDevicesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdDevicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdAccountActivations<T extends User$createdAccountActivationsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdAccountActivationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdAccountDevices<T extends User$createdAccountDevicesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdAccountDevicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountDevicesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdUserPermission<T extends User$createdUserPermissionArgs<ExtArgs> = {}>(args?: Subset<T, User$createdUserPermissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     permissions<T extends User$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdBy<T extends User$createdByArgs<ExtArgs> = {}>(args?: Subset<T, User$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    createdUsers<T extends User$createdUsersArgs<ExtArgs> = {}>(args?: Subset<T, User$createdUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2185,12 +2245,14 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
+    readonly localAccountId: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly isActive: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly createdById: FieldRef<"User", 'String'>
   }
     
 
@@ -2440,6 +2502,10 @@ export namespace Prisma {
      */
     data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2510,6 +2576,10 @@ export namespace Prisma {
      * Limit how many Users to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2651,6 +2721,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.createdAccountDevices
+   */
+  export type User$createdAccountDevicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccountDevices
+     */
+    select?: AccountDevicesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccountDevices
+     */
+    omit?: AccountDevicesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountDevicesInclude<ExtArgs> | null
+    where?: AccountDevicesWhereInput
+    orderBy?: AccountDevicesOrderByWithRelationInput | AccountDevicesOrderByWithRelationInput[]
+    cursor?: AccountDevicesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccountDevicesScalarFieldEnum | AccountDevicesScalarFieldEnum[]
+  }
+
+  /**
    * User.createdUserPermission
    */
   export type User$createdUserPermissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2696,6 +2790,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserPermissionScalarFieldEnum | UserPermissionScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdBy
+   */
+  export type User$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * User.createdUsers
+   */
+  export type User$createdUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -3958,7 +4095,7 @@ export namespace Prisma {
     id: string
     name: string
     isActive: boolean
-    activationLink: string
+    activationLink: string | null
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -4052,7 +4189,7 @@ export namespace Prisma {
       id: string
       name: string
       isActive: boolean
-      activationLink: string
+      activationLink: string | null
       createdById: string
       createdAt: Date
       updatedAt: Date
@@ -7391,6 +7528,7 @@ export namespace Prisma {
     updatedAt?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["accountDevices"]>
 
   export type AccountDevicesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7403,6 +7541,7 @@ export namespace Prisma {
     updatedAt?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["accountDevices"]>
 
   export type AccountDevicesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7415,6 +7554,7 @@ export namespace Prisma {
     updatedAt?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["accountDevices"]>
 
   export type AccountDevicesSelectScalar = {
@@ -7431,14 +7571,17 @@ export namespace Prisma {
   export type AccountDevicesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type AccountDevicesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type AccountDevicesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $AccountDevicesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7446,6 +7589,7 @@ export namespace Prisma {
     objects: {
       account: Prisma.$AccountPayload<ExtArgs>
       device: Prisma.$DevicePayload<ExtArgs>
+      createdBy: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7851,6 +7995,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     device<T extends DeviceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviceDefaultArgs<ExtArgs>>): Prisma__DeviceClient<$Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8317,12 +8462,14 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
+    localAccountId: 'localAccountId',
     name: 'name',
     email: 'email',
     role: 'role',
     isActive: 'isActive',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    createdById: 'createdById'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -8525,36 +8672,47 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
+    localAccountId?: StringNullableFilter<"User"> | string | null
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    createdById?: StringNullableFilter<"User"> | string | null
     createdAccounts?: AccountListRelationFilter
     createdDevices?: DeviceListRelationFilter
     createdAccountActivations?: AccountActivationListRelationFilter
+    createdAccountDevices?: AccountDevicesListRelationFilter
     createdUserPermission?: UserPermissionListRelationFilter
     permissions?: UserPermissionListRelationFilter
+    createdBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    createdUsers?: UserListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
+    localAccountId?: SortOrderInput | SortOrder
     name?: SortOrder
     email?: SortOrder
     role?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
     createdAccounts?: AccountOrderByRelationAggregateInput
     createdDevices?: DeviceOrderByRelationAggregateInput
     createdAccountActivations?: AccountActivationOrderByRelationAggregateInput
+    createdAccountDevices?: AccountDevicesOrderByRelationAggregateInput
     createdUserPermission?: UserPermissionOrderByRelationAggregateInput
     permissions?: UserPermissionOrderByRelationAggregateInput
+    createdBy?: UserOrderByWithRelationInput
+    createdUsers?: UserOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    localAccountId?: string
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -8564,21 +8722,27 @@ export namespace Prisma {
     isActive?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    createdById?: StringNullableFilter<"User"> | string | null
     createdAccounts?: AccountListRelationFilter
     createdDevices?: DeviceListRelationFilter
     createdAccountActivations?: AccountActivationListRelationFilter
+    createdAccountDevices?: AccountDevicesListRelationFilter
     createdUserPermission?: UserPermissionListRelationFilter
     permissions?: UserPermissionListRelationFilter
-  }, "id" | "email">
+    createdBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    createdUsers?: UserListRelationFilter
+  }, "id" | "localAccountId" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
+    localAccountId?: SortOrderInput | SortOrder
     name?: SortOrder
     email?: SortOrder
     role?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -8589,12 +8753,14 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
+    localAccountId?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type UserPermissionWhereInput = {
@@ -8673,7 +8839,7 @@ export namespace Prisma {
     id?: StringFilter<"Account"> | string
     name?: StringFilter<"Account"> | string
     isActive?: BoolFilter<"Account"> | boolean
-    activationLink?: StringFilter<"Account"> | string
+    activationLink?: StringNullableFilter<"Account"> | string | null
     createdById?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
@@ -8686,7 +8852,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     isActive?: SortOrder
-    activationLink?: SortOrder
+    activationLink?: SortOrderInput | SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8702,7 +8868,7 @@ export namespace Prisma {
     NOT?: AccountWhereInput | AccountWhereInput[]
     name?: StringFilter<"Account"> | string
     isActive?: BoolFilter<"Account"> | boolean
-    activationLink?: StringFilter<"Account"> | string
+    activationLink?: StringNullableFilter<"Account"> | string | null
     createdById?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
@@ -8715,7 +8881,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     isActive?: SortOrder
-    activationLink?: SortOrder
+    activationLink?: SortOrderInput | SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8731,7 +8897,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Account"> | string
     name?: StringWithAggregatesFilter<"Account"> | string
     isActive?: BoolWithAggregatesFilter<"Account"> | boolean
-    activationLink?: StringWithAggregatesFilter<"Account"> | string
+    activationLink?: StringNullableWithAggregatesFilter<"Account"> | string | null
     createdById?: StringWithAggregatesFilter<"Account"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
@@ -8906,6 +9072,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"AccountDevices"> | Date | string
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     device?: XOR<DeviceScalarRelationFilter, DeviceWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type AccountDevicesOrderByWithRelationInput = {
@@ -8918,6 +9085,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     account?: AccountOrderByWithRelationInput
     device?: DeviceOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
   }
 
   export type AccountDevicesWhereUniqueInput = Prisma.AtLeast<{
@@ -8934,6 +9102,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"AccountDevices"> | Date | string
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     device?: XOR<DeviceScalarRelationFilter, DeviceWhereInput>
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "accountId_deviceId">
 
   export type AccountDevicesOrderByWithAggregationInput = {
@@ -8964,6 +9133,7 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
@@ -8973,27 +9143,35 @@ export namespace Prisma {
     createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -9003,37 +9181,47 @@ export namespace Prisma {
     createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -9044,12 +9232,14 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserPermissionCreateInput = {
@@ -9124,7 +9314,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
@@ -9136,7 +9326,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9148,7 +9338,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
@@ -9160,7 +9350,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9172,7 +9362,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9182,7 +9372,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9191,7 +9381,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9369,11 +9559,11 @@ export namespace Prisma {
   export type AccountDevicesCreateInput = {
     id?: string
     isActive?: boolean
-    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     account: AccountCreateNestedOneWithoutDevicesInput
     device: DeviceCreateNestedOneWithoutAccountsInput
+    createdBy: UserCreateNestedOneWithoutCreatedAccountDevicesInput
   }
 
   export type AccountDevicesUncheckedCreateInput = {
@@ -9389,11 +9579,11 @@ export namespace Prisma {
   export type AccountDevicesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneRequiredWithoutDevicesNestedInput
     device?: DeviceUpdateOneRequiredWithoutAccountsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountDevicesNestedInput
   }
 
   export type AccountDevicesUncheckedUpdateInput = {
@@ -9419,7 +9609,6 @@ export namespace Prisma {
   export type AccountDevicesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9447,6 +9636,21 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type EnumRoleFilter<$PrismaModel = never> = {
@@ -9490,10 +9694,32 @@ export namespace Prisma {
     none?: AccountActivationWhereInput
   }
 
+  export type AccountDevicesListRelationFilter = {
+    every?: AccountDevicesWhereInput
+    some?: AccountDevicesWhereInput
+    none?: AccountDevicesWhereInput
+  }
+
   export type UserPermissionListRelationFilter = {
     every?: UserPermissionWhereInput
     some?: UserPermissionWhereInput
     none?: UserPermissionWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type AccountOrderByRelationAggregateInput = {
@@ -9508,38 +9734,52 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type AccountDevicesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserPermissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
+    localAccountId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     role?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
+    localAccountId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     role?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
+    localAccountId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     role?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9558,6 +9798,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -9667,16 +9925,6 @@ export namespace Prisma {
     _max?: NestedEnumPermissionTypeFilter<$PrismaModel>
   }
 
-  export type AccountDevicesListRelationFilter = {
-    every?: AccountDevicesWhereInput
-    some?: AccountDevicesWhereInput
-    none?: AccountDevicesWhereInput
-  }
-
-  export type AccountDevicesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type AccountCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -9721,11 +9969,6 @@ export namespace Prisma {
   export type AccountScalarRelationFilter = {
     is?: AccountWhereInput
     isNot?: AccountWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type AccountActivationCountOrderByAggregateInput = {
@@ -9875,6 +10118,13 @@ export namespace Prisma {
     connect?: AccountActivationWhereUniqueInput | AccountActivationWhereUniqueInput[]
   }
 
+  export type AccountDevicesCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<AccountDevicesCreateWithoutCreatedByInput, AccountDevicesUncheckedCreateWithoutCreatedByInput> | AccountDevicesCreateWithoutCreatedByInput[] | AccountDevicesUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccountDevicesCreateOrConnectWithoutCreatedByInput | AccountDevicesCreateOrConnectWithoutCreatedByInput[]
+    createMany?: AccountDevicesCreateManyCreatedByInputEnvelope
+    connect?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+  }
+
   export type UserPermissionCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<UserPermissionCreateWithoutCreatedByInput, UserPermissionUncheckedCreateWithoutCreatedByInput> | UserPermissionCreateWithoutCreatedByInput[] | UserPermissionUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: UserPermissionCreateOrConnectWithoutCreatedByInput | UserPermissionCreateOrConnectWithoutCreatedByInput[]
@@ -9887,6 +10137,19 @@ export namespace Prisma {
     connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
     createMany?: UserPermissionCreateManyUserInputEnvelope
     connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCreatedUsersInput = {
+    create?: XOR<UserCreateWithoutCreatedUsersInput, UserUncheckedCreateWithoutCreatedUsersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedUsersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<UserCreateWithoutCreatedByInput, UserUncheckedCreateWithoutCreatedByInput> | UserCreateWithoutCreatedByInput[] | UserUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedByInput | UserCreateOrConnectWithoutCreatedByInput[]
+    createMany?: UserCreateManyCreatedByInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutCreatedByInput = {
@@ -9910,6 +10173,13 @@ export namespace Prisma {
     connect?: AccountActivationWhereUniqueInput | AccountActivationWhereUniqueInput[]
   }
 
+  export type AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<AccountDevicesCreateWithoutCreatedByInput, AccountDevicesUncheckedCreateWithoutCreatedByInput> | AccountDevicesCreateWithoutCreatedByInput[] | AccountDevicesUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccountDevicesCreateOrConnectWithoutCreatedByInput | AccountDevicesCreateOrConnectWithoutCreatedByInput[]
+    createMany?: AccountDevicesCreateManyCreatedByInputEnvelope
+    connect?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+  }
+
   export type UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<UserPermissionCreateWithoutCreatedByInput, UserPermissionUncheckedCreateWithoutCreatedByInput> | UserPermissionCreateWithoutCreatedByInput[] | UserPermissionUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: UserPermissionCreateOrConnectWithoutCreatedByInput | UserPermissionCreateOrConnectWithoutCreatedByInput[]
@@ -9924,8 +10194,19 @@ export namespace Prisma {
     connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
   }
 
+  export type UserUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<UserCreateWithoutCreatedByInput, UserUncheckedCreateWithoutCreatedByInput> | UserCreateWithoutCreatedByInput[] | UserUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedByInput | UserCreateOrConnectWithoutCreatedByInput[]
+    createMany?: UserCreateManyCreatedByInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -9982,6 +10263,20 @@ export namespace Prisma {
     deleteMany?: AccountActivationScalarWhereInput | AccountActivationScalarWhereInput[]
   }
 
+  export type AccountDevicesUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<AccountDevicesCreateWithoutCreatedByInput, AccountDevicesUncheckedCreateWithoutCreatedByInput> | AccountDevicesCreateWithoutCreatedByInput[] | AccountDevicesUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccountDevicesCreateOrConnectWithoutCreatedByInput | AccountDevicesCreateOrConnectWithoutCreatedByInput[]
+    upsert?: AccountDevicesUpsertWithWhereUniqueWithoutCreatedByInput | AccountDevicesUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: AccountDevicesCreateManyCreatedByInputEnvelope
+    set?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    disconnect?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    delete?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    connect?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    update?: AccountDevicesUpdateWithWhereUniqueWithoutCreatedByInput | AccountDevicesUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: AccountDevicesUpdateManyWithWhereWithoutCreatedByInput | AccountDevicesUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: AccountDevicesScalarWhereInput | AccountDevicesScalarWhereInput[]
+  }
+
   export type UserPermissionUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<UserPermissionCreateWithoutCreatedByInput, UserPermissionUncheckedCreateWithoutCreatedByInput> | UserPermissionCreateWithoutCreatedByInput[] | UserPermissionUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: UserPermissionCreateOrConnectWithoutCreatedByInput | UserPermissionCreateOrConnectWithoutCreatedByInput[]
@@ -10008,6 +10303,30 @@ export namespace Prisma {
     update?: UserPermissionUpdateWithWhereUniqueWithoutUserInput | UserPermissionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserPermissionUpdateManyWithWhereWithoutUserInput | UserPermissionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
+  }
+
+  export type UserUpdateOneWithoutCreatedUsersNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedUsersInput, UserUncheckedCreateWithoutCreatedUsersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedUsersInput
+    upsert?: UserUpsertWithoutCreatedUsersInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedUsersInput, UserUpdateWithoutCreatedUsersInput>, UserUncheckedUpdateWithoutCreatedUsersInput>
+  }
+
+  export type UserUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedByInput, UserUncheckedCreateWithoutCreatedByInput> | UserCreateWithoutCreatedByInput[] | UserUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedByInput | UserCreateOrConnectWithoutCreatedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCreatedByInput | UserUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: UserCreateManyCreatedByInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCreatedByInput | UserUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCreatedByInput | UserUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type AccountUncheckedUpdateManyWithoutCreatedByNestedInput = {
@@ -10052,6 +10371,20 @@ export namespace Prisma {
     deleteMany?: AccountActivationScalarWhereInput | AccountActivationScalarWhereInput[]
   }
 
+  export type AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<AccountDevicesCreateWithoutCreatedByInput, AccountDevicesUncheckedCreateWithoutCreatedByInput> | AccountDevicesCreateWithoutCreatedByInput[] | AccountDevicesUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccountDevicesCreateOrConnectWithoutCreatedByInput | AccountDevicesCreateOrConnectWithoutCreatedByInput[]
+    upsert?: AccountDevicesUpsertWithWhereUniqueWithoutCreatedByInput | AccountDevicesUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: AccountDevicesCreateManyCreatedByInputEnvelope
+    set?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    disconnect?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    delete?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    connect?: AccountDevicesWhereUniqueInput | AccountDevicesWhereUniqueInput[]
+    update?: AccountDevicesUpdateWithWhereUniqueWithoutCreatedByInput | AccountDevicesUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: AccountDevicesUpdateManyWithWhereWithoutCreatedByInput | AccountDevicesUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: AccountDevicesScalarWhereInput | AccountDevicesScalarWhereInput[]
+  }
+
   export type UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<UserPermissionCreateWithoutCreatedByInput, UserPermissionUncheckedCreateWithoutCreatedByInput> | UserPermissionCreateWithoutCreatedByInput[] | UserPermissionUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: UserPermissionCreateOrConnectWithoutCreatedByInput | UserPermissionCreateOrConnectWithoutCreatedByInput[]
@@ -10078,6 +10411,20 @@ export namespace Prisma {
     update?: UserPermissionUpdateWithWhereUniqueWithoutUserInput | UserPermissionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserPermissionUpdateManyWithWhereWithoutUserInput | UserPermissionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedByInput, UserUncheckedCreateWithoutCreatedByInput> | UserCreateWithoutCreatedByInput[] | UserUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedByInput | UserCreateOrConnectWithoutCreatedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCreatedByInput | UserUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: UserCreateManyCreatedByInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCreatedByInput | UserUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCreatedByInput | UserUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPermissionsInput = {
@@ -10314,6 +10661,12 @@ export namespace Prisma {
     connect?: DeviceWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutCreatedAccountDevicesInput = {
+    create?: XOR<UserCreateWithoutCreatedAccountDevicesInput, UserUncheckedCreateWithoutCreatedAccountDevicesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedAccountDevicesInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type AccountUpdateOneRequiredWithoutDevicesNestedInput = {
     create?: XOR<AccountCreateWithoutDevicesInput, AccountUncheckedCreateWithoutDevicesInput>
     connectOrCreate?: AccountCreateOrConnectWithoutDevicesInput
@@ -10330,6 +10683,14 @@ export namespace Prisma {
     update?: XOR<XOR<DeviceUpdateToOneWithWhereWithoutAccountsInput, DeviceUpdateWithoutAccountsInput>, DeviceUncheckedUpdateWithoutAccountsInput>
   }
 
+  export type UserUpdateOneRequiredWithoutCreatedAccountDevicesNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedAccountDevicesInput, UserUncheckedCreateWithoutCreatedAccountDevicesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedAccountDevicesInput
+    upsert?: UserUpsertWithoutCreatedAccountDevicesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedAccountDevicesInput, UserUpdateWithoutCreatedAccountDevicesInput>, UserUncheckedUpdateWithoutCreatedAccountDevicesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10342,6 +10703,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
@@ -10393,6 +10768,34 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -10486,22 +10889,11 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type AccountCreateWithoutCreatedByInput = {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devices?: AccountDevicesCreateNestedManyWithoutAccountInput
@@ -10512,7 +10904,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
@@ -10595,6 +10987,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AccountDevicesCreateWithoutCreatedByInput = {
+    id?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account: AccountCreateNestedOneWithoutDevicesInput
+    device: DeviceCreateNestedOneWithoutAccountsInput
+  }
+
+  export type AccountDevicesUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    accountId: string
+    deviceId: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccountDevicesCreateOrConnectWithoutCreatedByInput = {
+    where: AccountDevicesWhereUniqueInput
+    create: XOR<AccountDevicesCreateWithoutCreatedByInput, AccountDevicesUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type AccountDevicesCreateManyCreatedByInputEnvelope = {
+    data: AccountDevicesCreateManyCreatedByInput | AccountDevicesCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserPermissionCreateWithoutCreatedByInput = {
     id?: string
     resource: $Enums.ResourceType
@@ -10651,6 +11071,93 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserCreateWithoutCreatedUsersInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
+    createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
+    createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
+    createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedUsersInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
+    createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
+    createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedUsersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedUsersInput, UserUncheckedCreateWithoutCreatedUsersInput>
+  }
+
+  export type UserCreateWithoutCreatedByInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
+    createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
+    createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
+    createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
+    createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
+    createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedByInput, UserUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type UserCreateManyCreatedByInputEnvelope = {
+    data: UserCreateManyCreatedByInput | UserCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutCreatedByInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutCreatedByInput, AccountUncheckedUpdateWithoutCreatedByInput>
@@ -10674,7 +11181,7 @@ export namespace Prisma {
     id?: StringFilter<"Account"> | string
     name?: StringFilter<"Account"> | string
     isActive?: BoolFilter<"Account"> | boolean
-    activationLink?: StringFilter<"Account"> | string
+    activationLink?: StringNullableFilter<"Account"> | string | null
     createdById?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
@@ -10742,6 +11249,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"AccountActivation"> | Date | string
   }
 
+  export type AccountDevicesUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: AccountDevicesWhereUniqueInput
+    update: XOR<AccountDevicesUpdateWithoutCreatedByInput, AccountDevicesUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<AccountDevicesCreateWithoutCreatedByInput, AccountDevicesUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type AccountDevicesUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: AccountDevicesWhereUniqueInput
+    data: XOR<AccountDevicesUpdateWithoutCreatedByInput, AccountDevicesUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type AccountDevicesUpdateManyWithWhereWithoutCreatedByInput = {
+    where: AccountDevicesScalarWhereInput
+    data: XOR<AccountDevicesUpdateManyMutationInput, AccountDevicesUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type AccountDevicesScalarWhereInput = {
+    AND?: AccountDevicesScalarWhereInput | AccountDevicesScalarWhereInput[]
+    OR?: AccountDevicesScalarWhereInput[]
+    NOT?: AccountDevicesScalarWhereInput | AccountDevicesScalarWhereInput[]
+    id?: StringFilter<"AccountDevices"> | string
+    accountId?: StringFilter<"AccountDevices"> | string
+    deviceId?: StringFilter<"AccountDevices"> | string
+    isActive?: BoolFilter<"AccountDevices"> | boolean
+    createdById?: StringFilter<"AccountDevices"> | string
+    createdAt?: DateTimeFilter<"AccountDevices"> | Date | string
+    updatedAt?: DateTimeFilter<"AccountDevices"> | Date | string
+  }
+
   export type UserPermissionUpsertWithWhereUniqueWithoutCreatedByInput = {
     where: UserPermissionWhereUniqueInput
     update: XOR<UserPermissionUpdateWithoutCreatedByInput, UserPermissionUncheckedUpdateWithoutCreatedByInput>
@@ -10787,8 +11323,87 @@ export namespace Prisma {
     data: XOR<UserPermissionUpdateManyMutationInput, UserPermissionUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type UserUpsertWithoutCreatedUsersInput = {
+    update: XOR<UserUpdateWithoutCreatedUsersInput, UserUncheckedUpdateWithoutCreatedUsersInput>
+    create: XOR<UserCreateWithoutCreatedUsersInput, UserUncheckedCreateWithoutCreatedUsersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedUsersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedUsersInput, UserUncheckedUpdateWithoutCreatedUsersInput>
+  }
+
+  export type UserUpdateWithoutCreatedUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
+    createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
+    createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
+    createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutCreatedByInput, UserUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<UserCreateWithoutCreatedByInput, UserUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutCreatedByInput, UserUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutCreatedByInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    localAccountId?: StringNullableFilter<"User"> | string | null
+    name?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    isActive?: BoolFilter<"User"> | boolean
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    createdById?: StringNullableFilter<"User"> | string | null
+  }
+
   export type UserCreateWithoutPermissionsInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
@@ -10798,21 +11413,28 @@ export namespace Prisma {
     createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutPermissionsInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -10822,6 +11444,7 @@ export namespace Prisma {
 
   export type UserCreateWithoutCreatedUserPermissionInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
@@ -10831,21 +11454,28 @@ export namespace Prisma {
     createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedUserPermissionInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedUserPermissionInput = {
@@ -10866,6 +11496,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutPermissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -10875,21 +11506,28 @@ export namespace Prisma {
     createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPermissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedUserPermissionInput = {
@@ -10905,6 +11543,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutCreatedUserPermissionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -10914,25 +11553,33 @@ export namespace Prisma {
     createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedUserPermissionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateWithoutCreatedAccountsInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
@@ -10941,22 +11588,29 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAccountsInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAccountsInput = {
@@ -10967,10 +11621,10 @@ export namespace Prisma {
   export type AccountDevicesCreateWithoutAccountInput = {
     id?: string
     isActive?: boolean
-    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     device: DeviceCreateNestedOneWithoutAccountsInput
+    createdBy: UserCreateNestedOneWithoutCreatedAccountDevicesInput
   }
 
   export type AccountDevicesUncheckedCreateWithoutAccountInput = {
@@ -11043,6 +11697,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutCreatedAccountsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -11051,22 +11706,29 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAccountsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AccountDevicesUpsertWithWhereUniqueWithoutAccountInput = {
@@ -11083,19 +11745,6 @@ export namespace Prisma {
   export type AccountDevicesUpdateManyWithWhereWithoutAccountInput = {
     where: AccountDevicesScalarWhereInput
     data: XOR<AccountDevicesUpdateManyMutationInput, AccountDevicesUncheckedUpdateManyWithoutAccountInput>
-  }
-
-  export type AccountDevicesScalarWhereInput = {
-    AND?: AccountDevicesScalarWhereInput | AccountDevicesScalarWhereInput[]
-    OR?: AccountDevicesScalarWhereInput[]
-    NOT?: AccountDevicesScalarWhereInput | AccountDevicesScalarWhereInput[]
-    id?: StringFilter<"AccountDevices"> | string
-    accountId?: StringFilter<"AccountDevices"> | string
-    deviceId?: StringFilter<"AccountDevices"> | string
-    isActive?: BoolFilter<"AccountDevices"> | boolean
-    createdById?: StringFilter<"AccountDevices"> | string
-    createdAt?: DateTimeFilter<"AccountDevices"> | Date | string
-    updatedAt?: DateTimeFilter<"AccountDevices"> | Date | string
   }
 
   export type AccountActivationUpsertWithWhereUniqueWithoutAccountInput = {
@@ -11118,7 +11767,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
@@ -11129,7 +11778,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11143,6 +11792,7 @@ export namespace Prisma {
 
   export type UserCreateWithoutCreatedAccountActivationsInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
@@ -11151,22 +11801,29 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAccountActivationsInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
     createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAccountActivationsInput = {
@@ -11189,7 +11846,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
@@ -11200,7 +11857,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11220,6 +11877,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutCreatedAccountActivationsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -11228,26 +11886,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAccountActivationsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
     createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateWithoutCreatedDevicesInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
@@ -11256,22 +11922,29 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedDevicesInput = {
     id?: string
+    localAccountId?: string | null
     name: string
     email: string
     role?: $Enums.Role
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
     createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountDevices?: AccountDevicesUncheckedCreateNestedManyWithoutCreatedByInput
     createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
     permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedDevicesInput = {
@@ -11282,10 +11955,10 @@ export namespace Prisma {
   export type AccountDevicesCreateWithoutDeviceInput = {
     id?: string
     isActive?: boolean
-    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     account: AccountCreateNestedOneWithoutDevicesInput
+    createdBy: UserCreateNestedOneWithoutCreatedAccountDevicesInput
   }
 
   export type AccountDevicesUncheckedCreateWithoutDeviceInput = {
@@ -11320,6 +11993,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutCreatedDevicesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -11328,22 +12002,29 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedDevicesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
     createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
     createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
     permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AccountDevicesUpsertWithWhereUniqueWithoutDeviceInput = {
@@ -11366,7 +12047,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
@@ -11377,7 +12058,7 @@ export namespace Prisma {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11412,6 +12093,47 @@ export namespace Prisma {
     create: XOR<DeviceCreateWithoutAccountsInput, DeviceUncheckedCreateWithoutAccountsInput>
   }
 
+  export type UserCreateWithoutCreatedAccountDevicesInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdAccounts?: AccountCreateNestedManyWithoutCreatedByInput
+    createdDevices?: DeviceCreateNestedManyWithoutCreatedByInput
+    createdAccountActivations?: AccountActivationCreateNestedManyWithoutCreatedByInput
+    createdUserPermission?: UserPermissionCreateNestedManyWithoutCreatedByInput
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    createdBy?: UserCreateNestedOneWithoutCreatedUsersInput
+    createdUsers?: UserCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedAccountDevicesInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    createdAccounts?: AccountUncheckedCreateNestedManyWithoutCreatedByInput
+    createdDevices?: DeviceUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAccountActivations?: AccountActivationUncheckedCreateNestedManyWithoutCreatedByInput
+    createdUserPermission?: UserPermissionUncheckedCreateNestedManyWithoutCreatedByInput
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    createdUsers?: UserUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedAccountDevicesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedAccountDevicesInput, UserUncheckedCreateWithoutCreatedAccountDevicesInput>
+  }
+
   export type AccountUpsertWithoutDevicesInput = {
     update: XOR<AccountUpdateWithoutDevicesInput, AccountUncheckedUpdateWithoutDevicesInput>
     create: XOR<AccountCreateWithoutDevicesInput, AccountUncheckedCreateWithoutDevicesInput>
@@ -11427,7 +12149,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
@@ -11438,7 +12160,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11474,11 +12196,58 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserUpsertWithoutCreatedAccountDevicesInput = {
+    update: XOR<UserUpdateWithoutCreatedAccountDevicesInput, UserUncheckedUpdateWithoutCreatedAccountDevicesInput>
+    create: XOR<UserCreateWithoutCreatedAccountDevicesInput, UserUncheckedCreateWithoutCreatedAccountDevicesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedAccountDevicesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedAccountDevicesInput, UserUncheckedUpdateWithoutCreatedAccountDevicesInput>
+  }
+
+  export type UserUpdateWithoutCreatedAccountDevicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
+    createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
+    createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedUsersNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedAccountDevicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
   export type AccountCreateManyCreatedByInput = {
     id?: string
     name: string
     isActive?: boolean
-    activationLink: string
+    activationLink?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11505,6 +12274,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type AccountDevicesCreateManyCreatedByInput = {
+    id?: string
+    accountId: string
+    deviceId: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserPermissionCreateManyCreatedByInput = {
     id?: string
     userId: string
@@ -11523,11 +12301,22 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UserCreateManyCreatedByInput = {
+    id?: string
+    localAccountId?: string | null
+    name: string
+    email: string
+    role?: $Enums.Role
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AccountUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
@@ -11538,7 +12327,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
@@ -11549,7 +12338,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    activationLink?: StringFieldUpdateOperationsInput | string
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11622,6 +12411,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AccountDevicesUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutDevicesNestedInput
+    device?: DeviceUpdateOneRequiredWithoutAccountsNestedInput
+  }
+
+  export type AccountDevicesUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    deviceId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountDevicesUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    deviceId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserPermissionUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     resource?: EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
@@ -11676,6 +12492,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAccounts?: AccountUpdateManyWithoutCreatedByNestedInput
+    createdDevices?: DeviceUpdateManyWithoutCreatedByNestedInput
+    createdAccountActivations?: AccountActivationUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUpdateManyWithoutCreatedByNestedInput
+    createdUserPermission?: UserPermissionUpdateManyWithoutCreatedByNestedInput
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAccounts?: AccountUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdDevices?: DeviceUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountActivations?: AccountActivationUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAccountDevices?: AccountDevicesUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdUserPermission?: UserPermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AccountDevicesCreateManyAccountInput = {
     id?: string
     deviceId: string
@@ -11702,10 +12565,10 @@ export namespace Prisma {
   export type AccountDevicesUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     device?: DeviceUpdateOneRequiredWithoutAccountsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountDevicesNestedInput
   }
 
   export type AccountDevicesUncheckedUpdateWithoutAccountInput = {
@@ -11780,10 +12643,10 @@ export namespace Prisma {
   export type AccountDevicesUpdateWithoutDeviceInput = {
     id?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneRequiredWithoutDevicesNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountDevicesNestedInput
   }
 
   export type AccountDevicesUncheckedUpdateWithoutDeviceInput = {

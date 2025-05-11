@@ -38,6 +38,7 @@ enum ResourceType {
 
 model User {
   id                        String              @id @default(uuid())
+  localAccountId            String?             @unique
   name                      String
   email                     String              @unique
   role                      Role                @default(IC)
@@ -47,17 +48,21 @@ model User {
   createdAccounts           Account[]
   createdDevices            Device[]
   createdAccountActivations AccountActivation[]
+  createdAccountDevices     AccountDevices[]
   createdUserPermission     UserPermission[]    @relation("CreatedByUser")
   permissions               UserPermission[]    @relation("UserPermissions")
+  createdBy                 User?               @relation("CreatedUsers", fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdById               String?
+  createdUsers              User[]              @relation("CreatedUsers")
 }
 
 model UserPermission {
   id          String         @id @default(uuid())
-  user        User           @relation("UserPermissions", fields: [userId], references: [id])
+  user        User           @relation("UserPermissions", fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      String
   resource    ResourceType
   permission  PermissionType @default(VIEW)
-  createdBy   User           @relation("CreatedByUser", fields: [createdById], references: [id])
+  createdBy   User           @relation("CreatedByUser", fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdById String
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
@@ -69,8 +74,8 @@ model Account {
   id             String              @id @default(uuid())
   name           String
   isActive       Boolean             @default(false)
-  activationLink String
-  createdBy      User                @relation(fields: [createdById], references: [id])
+  activationLink String?
+  createdBy      User                @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdById    String
   createdAt      DateTime            @default(now())
   updatedAt      DateTime            @updatedAt
@@ -80,7 +85,7 @@ model Account {
 
 model AccountActivation {
   id             String    @id @default(uuid())
-  account        Account   @relation(fields: [accountId], references: [id])
+  account        Account   @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   accountId      String
   email          String
   code           String    @default(uuid())
@@ -89,7 +94,7 @@ model AccountActivation {
   expiryDate     DateTime
   isClaimed      Boolean   @default(false)
   claimDate      DateTime?
-  createdBy      User      @relation(fields: [createdById], references: [id])
+  createdBy      User      @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdById    String
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
@@ -99,7 +104,7 @@ model Device {
   id          String           @id @default(uuid())
   name        String           @unique //PR-123456789
   isActive    Boolean          @default(true)
-  createdBy   User             @relation(fields: [createdById], references: [id])
+  createdBy   User             @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdById String
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
@@ -108,14 +113,18 @@ model Device {
 
 model AccountDevices {
   id          String   @id @default(uuid())
-  account     Account  @relation(fields: [accountId], references: [id])
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   accountId   String
-  device      Device   @relation(fields: [deviceId], references: [id])
+  device      Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   deviceId    String
   isActive    Boolean  @default(true)
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdById String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@unique([accountId, deviceId])
+  @@index([accountId])
+  @@index([deviceId])
+  @@index([createdById])
 }

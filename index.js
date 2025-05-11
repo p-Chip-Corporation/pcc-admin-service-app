@@ -1,21 +1,36 @@
+require("dotenv").config();
+
 const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const { PrismaClient } = require("./generated/prisma");
+const prisma = new PrismaClient();
+
+const router = require("./router");
+const authRouter = require("./routes/auth");
+const authMiddleware = require("./middleware/authMiddleware");
+const queryMiddleware = require("./middleware/queryMiddleware");
 
 const app = express();
-const prisma = new PrismaClient();
+
+app.use(cookieParser());
 app.use(express.json());
 
-// Get all users
-app.get("/", async (req, res) => {
-  const userCount = await prisma.user.count();
-  res.json(
-    userCount == 0
-      ? "No users have been added yet."
-      : "Some users have been added to the database."
-  );
-});
+const CORS_ORIGIN = process.env.CORS_ORIGIN;
+const PORT = process.env.PORT || 3000;
 
-const PORT = 3000;
+console.log("Allowed origin", CORS_ORIGIN);
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
+app.use("/auth", authRouter);
+app.use("/api", authMiddleware, queryMiddleware, router);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -122,12 +122,14 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  localAccountId: 'localAccountId',
   name: 'name',
   email: 'email',
   role: 'role',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdById: 'createdById'
 };
 
 exports.Prisma.UserPermissionScalarFieldEnum = {
