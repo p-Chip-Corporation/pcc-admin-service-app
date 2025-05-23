@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("../generated/prisma");
+const {
+  createPCCAcount,
+  deactivatePCCAccount,
+} = require("../services/pcc-cloud-service");
+const { generateRSAKeyPair } = require("../utils/keyGenerator");
 
 const prisma = new PrismaClient();
 
@@ -73,6 +78,7 @@ router.get("/:id", async (req, res) => {
       id: data.id,
       name: data.name,
       isActive: data.isActive,
+      pccCloudId: data.pccCloudId,
       createdBy: data.createdBy.name,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
@@ -127,8 +133,12 @@ router.put("/:id", async (req, res) => {
       },
     });
 
-    // If the account is deactivated, deactivate all related account devices
+    if (updated.pccCloudId !== null && isActive === false) {
+      await deactivatePCCAccount(updated.pccCloudId, isActive, false);
+    }
+
     if (isActive === false) {
+      // If the account is deactivated, deactivate all related account devices
       await prisma.accountDevices.updateMany({
         where: {
           accountId: id,
@@ -142,6 +152,49 @@ router.put("/:id", async (req, res) => {
     }
 
     return res.status(200).json(updated);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ error: "Failed to update account.", detail: error.message });
+  }
+});
+
+router.put("/initialize/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const account = await prisma.account.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (account.pccCloudId !== null) {
+      return res
+        .status(400)
+        .json({ success: false, message: "This account is already active" });
+    }
+
+    const { publicKey, privateKey } = generateRSAKeyPair();
+
+    const response = await createPCCAcount(
+      account.id,
+      account.name,
+      privateKey
+    );
+
+    if (response.success) {
+      await prisma.account.update({
+        where: { id },
+        data: {
+          isActive: true,
+          publicKey: publicKey,
+          pccCloudId: response.data.id,
+        },
+      });
+    }
+
+    return res.status(200).json({ success: true, data: response.data });
   } catch (error) {
     return res
       .status(400)

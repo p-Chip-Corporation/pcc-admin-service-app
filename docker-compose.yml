@@ -1,14 +1,10 @@
-name: "pcc-admin-service-container"
+name: "pcc-admin-service-app"
 services:
-  server:
+  app:
     platform: linux/amd64
-    image: pcc-admin-service:v1.0.8
     build: 
-      context: .  
+      context: .
+      args:
+        DATABASE_URL: ${DATABASE_URL}  # Pass to Dockerfile  
       dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
     stdin_open: true
-    tty: true  # Keeps the container running for debugging
-    env_file:
-      - .env

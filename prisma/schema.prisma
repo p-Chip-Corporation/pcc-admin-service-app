@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -71,16 +72,40 @@ model UserPermission {
 }
 
 model Account {
-  id             String              @id @default(uuid())
-  name           String
-  isActive       Boolean             @default(false)
-  activationLink String?
-  createdBy      User                @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdById    String
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
-  devices        AccountDevices[]
-  activations    AccountActivation[]
+  id                    String              @id @default(uuid())
+  name                  String
+  isActive              Boolean             @default(false)
+  activationLink        String?
+  publicKey             String?
+  pccCloudId            String?
+  createdBy             User                @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdById           String
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  devices               AccountDevices[]
+  activations           AccountActivation[]
+  ownedSmartLabels      SmartLabel[]        @relation("AccountOwner")
+  registeredSmartLabels SmartLabel[]        @relation("AccountCreator")
+  ownedItems            Item[]              @relation("AccountOwner")
+  registeredItems       Item[]              @relation("AccountCreator")
+  transferOut           Transfer[]          @relation("AccountSeller")
+  transferIn            Transfer[]          @relation("AccountReceiver")
+  publishTokens         PublishToken[]
+}
+
+model PublishToken {
+  id          String       @id @default(uuid())
+  token       String       @default(uuid())
+  account     Account      @relation(fields: [accountId], references: [id])
+  accountId   String
+  isClaimed   Boolean      @default(false)
+  isActive    Boolean      @default(true)
+  isArchived  Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  smartLabels SmartLabel[]
+  items       Item[]
+  transfers   Transfer[]
 }
 
 model AccountActivation {
@@ -88,6 +113,7 @@ model AccountActivation {
   account        Account   @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   accountId      String
   email          String
+  name           String?
   code           String    @default(uuid())
   activationLink String
   issueDate      DateTime  @default(now())
@@ -117,6 +143,7 @@ model AccountDevices {
   accountId   String
   device      Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   deviceId    String
+  pccCloudId  String?
   isActive    Boolean  @default(true)
   createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdById String
@@ -127,4 +154,84 @@ model AccountDevices {
   @@index([accountId])
   @@index([deviceId])
   @@index([createdById])
+}
+
+model SmartLabel {
+  id             String               @id @default(uuid())
+  serial         String               @unique
+  reference      String?
+  name           String?
+  description    String?
+  payload        Json?
+  source         String?
+  publishToken   PublishToken         @relation(fields: [publishTokenId], references: [id])
+  publishTokenId String
+  owner          Account?             @relation("AccountOwner", fields: [ownerId], references: [id])
+  ownerId        String?
+  registeredBy   Account              @relation("AccountCreator", fields: [registeredById], references: [id])
+  registeredById String
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  item           Item?                @relation(fields: [itemId], references: [id])
+  itemId         String?
+  transfers      TransferSmartLabel[]
+}
+
+model Item {
+  id             String         @id @default(uuid())
+  serial         String         @unique
+  name           String
+  description    String
+  payload        Json?
+  publishToken   PublishToken   @relation(fields: [publishTokenId], references: [id])
+  publishTokenId String
+  owner          Account?       @relation("AccountOwner", fields: [ownerId], references: [id])
+  ownerId        String?
+  registeredBy   Account        @relation("AccountCreator", fields: [registeredById], references: [id])
+  registeredById String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  smartLabels    SmartLabel[]
+  transfers      TransferItem[]
+}
+
+model Transfer {
+  id             String               @id @default(uuid())
+  reference      String
+  seller         Account              @relation("AccountSeller", fields: [sellerId], references: [id])
+  sellerId       String
+  reciever       Account              @relation("AccountReceiver", fields: [recieverId], references: [id])
+  recieverId     String
+  transferType   TransferType
+  publishToken   PublishToken         @relation(fields: [publishTokenId], references: [id])
+  publishTokenId String
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  items          TransferItem[]
+  smartLabels    TransferSmartLabel[]
+}
+
+model TransferItem {
+  id         String   @id @default(uuid())
+  transfer   Transfer @relation(fields: [transferId], references: [id])
+  transferId String
+  item       Item     @relation(fields: [itemId], references: [id])
+  itemId     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model TransferSmartLabel {
+  id           String     @id @default(uuid())
+  transfer     Transfer   @relation(fields: [transferId], references: [id])
+  transferId   String
+  smartLabel   SmartLabel @relation(fields: [smartLabelId], references: [id])
+  smartLabelId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+enum TransferType {
+  SMART_LABEL
+  ITEM
 }

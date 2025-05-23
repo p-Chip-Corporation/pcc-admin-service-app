@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("../generated/prisma");
+const { createPCCAccountDevice } = require("../services/pcc-cloud-service");
 
 const prisma = new PrismaClient();
 
@@ -67,6 +68,7 @@ router.get("/", async (req, res) => {
       accountName: item.account.name,
       deviceName: item.device.name,
       isActive: item.isActive,
+      pccCloudId: item.pccCloudId,
       createdBy: item.createdBy.name,
       createdAt: item.createdAt,
       updatedAt: item.updatedAt,
@@ -109,6 +111,7 @@ router.get("/:id", async (req, res) => {
       accountName: data.account.name,
       deviceId: data.device.id,
       deviceName: data.device.name,
+      pccCloudId: data.pccCloudId,
       isActive: data.isActive,
       createdBy: data.createdBy.name,
       createdAt: data.createdAt,
@@ -168,11 +171,53 @@ router.put("/:id", async (req, res) => {
       },
     });
 
-    return res.json(updated);
+    return res.status(200).json(updated);
   } catch (error) {
     return res
       .status(400)
       .json({ error: "Failed to update record.", detail: error.message });
+  }
+});
+router.put("/initialize/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const accountDevice = await prisma.accountDevices.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        device: true,
+        account: true,
+      },
+    });
+
+    if (accountDevice.pccCloudId !== null) {
+      return res
+        .status(400)
+        .json({ success: false, message: "This account is already active" });
+    }
+
+    const response = await createPCCAccountDevice(
+      accountDevice.id,
+      accountDevice.device.name,
+      accountDevice.account.pccCloudId
+    );
+
+    if (response.success) {
+      await prisma.accountDevices.update({
+        where: { id },
+        data: {
+          pccCloudId: response.data.id,
+        },
+      });
+    }
+
+    return res.status(200).json({ success: true, data: response.data });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ error: "Failed to update account.", detail: error.message });
   }
 });
 

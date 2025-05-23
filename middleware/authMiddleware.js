@@ -3,7 +3,6 @@ const { verifyToken } = require("../utils/jwtTokens");
 const authMiddleware = (req, res, next) => {
   try {
     const token = req.cookies.token;
-    console.log("[authMiddleware] token:", token);
 
     if (!token) {
       console.warn("[authMiddleware] No token provided");
@@ -11,7 +10,6 @@ const authMiddleware = (req, res, next) => {
     }
 
     const decoded = verifyToken(token);
-    console.log("[authMiddleware] decoded user:", decoded);
 
     req.user = decoded;
     next();

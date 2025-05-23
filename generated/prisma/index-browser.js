@@ -147,7 +147,20 @@ exports.Prisma.AccountScalarFieldEnum = {
   name: 'name',
   isActive: 'isActive',
   activationLink: 'activationLink',
+  publicKey: 'publicKey',
+  pccCloudId: 'pccCloudId',
   createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PublishTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  accountId: 'accountId',
+  isClaimed: 'isClaimed',
+  isActive: 'isActive',
+  isArchived: 'isArchived',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -156,6 +169,7 @@ exports.Prisma.AccountActivationScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
   email: 'email',
+  name: 'name',
   code: 'code',
   activationLink: 'activationLink',
   issueDate: 'issueDate',
@@ -180,8 +194,65 @@ exports.Prisma.AccountDevicesScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
   deviceId: 'deviceId',
+  pccCloudId: 'pccCloudId',
   isActive: 'isActive',
   createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SmartLabelScalarFieldEnum = {
+  id: 'id',
+  serial: 'serial',
+  reference: 'reference',
+  name: 'name',
+  description: 'description',
+  payload: 'payload',
+  source: 'source',
+  publishTokenId: 'publishTokenId',
+  ownerId: 'ownerId',
+  registeredById: 'registeredById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  itemId: 'itemId'
+};
+
+exports.Prisma.ItemScalarFieldEnum = {
+  id: 'id',
+  serial: 'serial',
+  name: 'name',
+  description: 'description',
+  payload: 'payload',
+  publishTokenId: 'publishTokenId',
+  ownerId: 'ownerId',
+  registeredById: 'registeredById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransferScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  sellerId: 'sellerId',
+  recieverId: 'recieverId',
+  transferType: 'transferType',
+  publishTokenId: 'publishTokenId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransferItemScalarFieldEnum = {
+  id: 'id',
+  transferId: 'transferId',
+  itemId: 'itemId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransferSmartLabelScalarFieldEnum = {
+  id: 'id',
+  transferId: 'transferId',
+  smartLabelId: 'smartLabelId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -189,6 +260,11 @@ exports.Prisma.AccountDevicesScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -199,6 +275,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',
@@ -222,13 +304,24 @@ exports.PermissionType = exports.$Enums.PermissionType = {
   DELETE: 'DELETE'
 };
 
+exports.TransferType = exports.$Enums.TransferType = {
+  SMART_LABEL: 'SMART_LABEL',
+  ITEM: 'ITEM'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   UserPermission: 'UserPermission',
   Account: 'Account',
+  PublishToken: 'PublishToken',
   AccountActivation: 'AccountActivation',
   Device: 'Device',
-  AccountDevices: 'AccountDevices'
+  AccountDevices: 'AccountDevices',
+  SmartLabel: 'SmartLabel',
+  Item: 'Item',
+  Transfer: 'Transfer',
+  TransferItem: 'TransferItem',
+  TransferSmartLabel: 'TransferSmartLabel'
 };
 
 /**

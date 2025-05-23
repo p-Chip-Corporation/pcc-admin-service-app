@@ -1,0 +1,10 @@
+services:
+  app:
+    image: zacrodney/pcc-admin-service-app:dev
+    ports:
+      - '3000:3000'
+    tty: true  # Keeps the container running for debugging
+    environment:
+      - NODE_ENV=development
+    env_file: ".env"
+    command: npm run dev

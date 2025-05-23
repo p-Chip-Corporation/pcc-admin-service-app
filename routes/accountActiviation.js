@@ -3,14 +3,13 @@ const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const { PrismaClient } = require("../generated/prisma");
 const { transporter } = require("../utils/transporter");
+const { createPCCAccountAdmin } = require("../services/pcc-cloud-service");
 
 const prisma = new PrismaClient();
 
 router.get("/", async (req, res) => {
   const { filters, queryText, pagination, sort } = req;
   const { accountId } = req.query;
-
-  console.log("Filters", filters);
 
   const [[field, direction]] = Object.entries(sort.orderBy);
 
@@ -118,9 +117,9 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const user = req.user;
-  console.log("User", user);
   const {
     accountId,
+    name,
     email,
     expiryDate: providedExpiryDate,
     isClaimed = false,
@@ -136,7 +135,7 @@ router.post("/", async (req, res) => {
   const activationLink = `${process.env.PCHIP_CLOUD_BASEURL}/activate/${code}`;
 
   // Validate inputs
-  if (!accountId || !email) {
+  if (!accountId || !name || !email) {
     return res.status(400).json({ error: "Missing required fields." });
   }
 
@@ -144,6 +143,7 @@ router.post("/", async (req, res) => {
     const activation = await prisma.accountActivation.create({
       data: {
         accountId,
+        name,
         email,
         code,
         activationLink,
@@ -157,21 +157,11 @@ router.post("/", async (req, res) => {
       },
     });
 
-    // Prepare email content
-    const mailOptions = {
-      from: `"p-Chip Cloud" <${process.env.EMAIL_USER}>`,
-      to: activation.email,
-      subject: "Welcome to the p-Chip Cloud!",
-      text: `An account for ${activation.account.name} has been created. Please follow this link to activate your account: ${activationLink}`,
-      html: `
-        <p>An account for <strong>${activation.account.name}</strong> has been created.</p>
-        <p>Please click the link below to verify your identity and activate your account:</p>
-        <p><a href="${activationLink}">${activationLink}</a></p>
-      `,
-    };
-
-    // Require an smtp service for this
-    //await transporter.sendMail(mailOptions);
+    await createPCCAccountAdmin(
+      activation.email,
+      activation.name,
+      activation.account.pccCloudId
+    );
 
     return res.status(201).json(activation);
   } catch (error) {

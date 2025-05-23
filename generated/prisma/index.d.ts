@@ -29,6 +29,11 @@ export type UserPermission = $Result.DefaultSelection<Prisma.$UserPermissionPayl
  */
 export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
 /**
+ * Model PublishToken
+ * 
+ */
+export type PublishToken = $Result.DefaultSelection<Prisma.$PublishTokenPayload>
+/**
  * Model AccountActivation
  * 
  */
@@ -43,6 +48,31 @@ export type Device = $Result.DefaultSelection<Prisma.$DevicePayload>
  * 
  */
 export type AccountDevices = $Result.DefaultSelection<Prisma.$AccountDevicesPayload>
+/**
+ * Model SmartLabel
+ * 
+ */
+export type SmartLabel = $Result.DefaultSelection<Prisma.$SmartLabelPayload>
+/**
+ * Model Item
+ * 
+ */
+export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
+/**
+ * Model Transfer
+ * 
+ */
+export type Transfer = $Result.DefaultSelection<Prisma.$TransferPayload>
+/**
+ * Model TransferItem
+ * 
+ */
+export type TransferItem = $Result.DefaultSelection<Prisma.$TransferItemPayload>
+/**
+ * Model TransferSmartLabel
+ * 
+ */
+export type TransferSmartLabel = $Result.DefaultSelection<Prisma.$TransferSmartLabelPayload>
 
 /**
  * Enums
@@ -78,6 +108,14 @@ export const ResourceType: {
 
 export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType]
 
+
+export const TransferType: {
+  SMART_LABEL: 'SMART_LABEL',
+  ITEM: 'ITEM'
+};
+
+export type TransferType = (typeof TransferType)[keyof typeof TransferType]
+
 }
 
 export type Role = $Enums.Role
@@ -91,6 +129,10 @@ export const PermissionType: typeof $Enums.PermissionType
 export type ResourceType = $Enums.ResourceType
 
 export const ResourceType: typeof $Enums.ResourceType
+
+export type TransferType = $Enums.TransferType
+
+export const TransferType: typeof $Enums.TransferType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -248,6 +290,16 @@ export class PrismaClient<
   get account(): Prisma.AccountDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.publishToken`: Exposes CRUD operations for the **PublishToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PublishTokens
+    * const publishTokens = await prisma.publishToken.findMany()
+    * ```
+    */
+  get publishToken(): Prisma.PublishTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.accountActivation`: Exposes CRUD operations for the **AccountActivation** model.
     * Example usage:
     * ```ts
@@ -276,6 +328,56 @@ export class PrismaClient<
     * ```
     */
   get accountDevices(): Prisma.AccountDevicesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.smartLabel`: Exposes CRUD operations for the **SmartLabel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SmartLabels
+    * const smartLabels = await prisma.smartLabel.findMany()
+    * ```
+    */
+  get smartLabel(): Prisma.SmartLabelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.item`: Exposes CRUD operations for the **Item** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Items
+    * const items = await prisma.item.findMany()
+    * ```
+    */
+  get item(): Prisma.ItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.transfer`: Exposes CRUD operations for the **Transfer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Transfers
+    * const transfers = await prisma.transfer.findMany()
+    * ```
+    */
+  get transfer(): Prisma.TransferDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.transferItem`: Exposes CRUD operations for the **TransferItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TransferItems
+    * const transferItems = await prisma.transferItem.findMany()
+    * ```
+    */
+  get transferItem(): Prisma.TransferItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.transferSmartLabel`: Exposes CRUD operations for the **TransferSmartLabel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TransferSmartLabels
+    * const transferSmartLabels = await prisma.transferSmartLabel.findMany()
+    * ```
+    */
+  get transferSmartLabel(): Prisma.TransferSmartLabelDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -719,9 +821,15 @@ export namespace Prisma {
     User: 'User',
     UserPermission: 'UserPermission',
     Account: 'Account',
+    PublishToken: 'PublishToken',
     AccountActivation: 'AccountActivation',
     Device: 'Device',
-    AccountDevices: 'AccountDevices'
+    AccountDevices: 'AccountDevices',
+    SmartLabel: 'SmartLabel',
+    Item: 'Item',
+    Transfer: 'Transfer',
+    TransferItem: 'TransferItem',
+    TransferSmartLabel: 'TransferSmartLabel'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -740,7 +848,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userPermission" | "account" | "accountActivation" | "device" | "accountDevices"
+      modelProps: "user" | "userPermission" | "account" | "publishToken" | "accountActivation" | "device" | "accountDevices" | "smartLabel" | "item" | "transfer" | "transferItem" | "transferSmartLabel"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -966,6 +1074,80 @@ export namespace Prisma {
           }
         }
       }
+      PublishToken: {
+        payload: Prisma.$PublishTokenPayload<ExtArgs>
+        fields: Prisma.PublishTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PublishTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PublishTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.PublishTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PublishTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>
+          }
+          findMany: {
+            args: Prisma.PublishTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>[]
+          }
+          create: {
+            args: Prisma.PublishTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>
+          }
+          createMany: {
+            args: Prisma.PublishTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PublishTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.PublishTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>
+          }
+          update: {
+            args: Prisma.PublishTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.PublishTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PublishTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PublishTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.PublishTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PublishTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.PublishTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePublishToken>
+          }
+          groupBy: {
+            args: Prisma.PublishTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PublishTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PublishTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<PublishTokenCountAggregateOutputType> | number
+          }
+        }
+      }
       AccountActivation: {
         payload: Prisma.$AccountActivationPayload<ExtArgs>
         fields: Prisma.AccountActivationFieldRefs
@@ -1188,6 +1370,376 @@ export namespace Prisma {
           }
         }
       }
+      SmartLabel: {
+        payload: Prisma.$SmartLabelPayload<ExtArgs>
+        fields: Prisma.SmartLabelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SmartLabelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SmartLabelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>
+          }
+          findFirst: {
+            args: Prisma.SmartLabelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SmartLabelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>
+          }
+          findMany: {
+            args: Prisma.SmartLabelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>[]
+          }
+          create: {
+            args: Prisma.SmartLabelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>
+          }
+          createMany: {
+            args: Prisma.SmartLabelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SmartLabelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>[]
+          }
+          delete: {
+            args: Prisma.SmartLabelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>
+          }
+          update: {
+            args: Prisma.SmartLabelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>
+          }
+          deleteMany: {
+            args: Prisma.SmartLabelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SmartLabelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SmartLabelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>[]
+          }
+          upsert: {
+            args: Prisma.SmartLabelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SmartLabelPayload>
+          }
+          aggregate: {
+            args: Prisma.SmartLabelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSmartLabel>
+          }
+          groupBy: {
+            args: Prisma.SmartLabelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SmartLabelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SmartLabelCountArgs<ExtArgs>
+            result: $Utils.Optional<SmartLabelCountAggregateOutputType> | number
+          }
+        }
+      }
+      Item: {
+        payload: Prisma.$ItemPayload<ExtArgs>
+        fields: Prisma.ItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          findMany: {
+            args: Prisma.ItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          create: {
+            args: Prisma.ItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          createMany: {
+            args: Prisma.ItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          delete: {
+            args: Prisma.ItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          update: {
+            args: Prisma.ItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.ItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateItem>
+          }
+          groupBy: {
+            args: Prisma.ItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      Transfer: {
+        payload: Prisma.$TransferPayload<ExtArgs>
+        fields: Prisma.TransferFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TransferFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TransferFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>
+          }
+          findFirst: {
+            args: Prisma.TransferFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TransferFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>
+          }
+          findMany: {
+            args: Prisma.TransferFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>[]
+          }
+          create: {
+            args: Prisma.TransferCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>
+          }
+          createMany: {
+            args: Prisma.TransferCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TransferCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>[]
+          }
+          delete: {
+            args: Prisma.TransferDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>
+          }
+          update: {
+            args: Prisma.TransferUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>
+          }
+          deleteMany: {
+            args: Prisma.TransferDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TransferUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TransferUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>[]
+          }
+          upsert: {
+            args: Prisma.TransferUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferPayload>
+          }
+          aggregate: {
+            args: Prisma.TransferAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTransfer>
+          }
+          groupBy: {
+            args: Prisma.TransferGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TransferGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TransferCountArgs<ExtArgs>
+            result: $Utils.Optional<TransferCountAggregateOutputType> | number
+          }
+        }
+      }
+      TransferItem: {
+        payload: Prisma.$TransferItemPayload<ExtArgs>
+        fields: Prisma.TransferItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TransferItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TransferItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>
+          }
+          findFirst: {
+            args: Prisma.TransferItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TransferItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>
+          }
+          findMany: {
+            args: Prisma.TransferItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>[]
+          }
+          create: {
+            args: Prisma.TransferItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>
+          }
+          createMany: {
+            args: Prisma.TransferItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TransferItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>[]
+          }
+          delete: {
+            args: Prisma.TransferItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>
+          }
+          update: {
+            args: Prisma.TransferItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.TransferItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TransferItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TransferItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.TransferItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferItemPayload>
+          }
+          aggregate: {
+            args: Prisma.TransferItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTransferItem>
+          }
+          groupBy: {
+            args: Prisma.TransferItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TransferItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TransferItemCountArgs<ExtArgs>
+            result: $Utils.Optional<TransferItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      TransferSmartLabel: {
+        payload: Prisma.$TransferSmartLabelPayload<ExtArgs>
+        fields: Prisma.TransferSmartLabelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TransferSmartLabelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TransferSmartLabelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>
+          }
+          findFirst: {
+            args: Prisma.TransferSmartLabelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TransferSmartLabelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>
+          }
+          findMany: {
+            args: Prisma.TransferSmartLabelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>[]
+          }
+          create: {
+            args: Prisma.TransferSmartLabelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>
+          }
+          createMany: {
+            args: Prisma.TransferSmartLabelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TransferSmartLabelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>[]
+          }
+          delete: {
+            args: Prisma.TransferSmartLabelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>
+          }
+          update: {
+            args: Prisma.TransferSmartLabelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>
+          }
+          deleteMany: {
+            args: Prisma.TransferSmartLabelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TransferSmartLabelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TransferSmartLabelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>[]
+          }
+          upsert: {
+            args: Prisma.TransferSmartLabelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TransferSmartLabelPayload>
+          }
+          aggregate: {
+            args: Prisma.TransferSmartLabelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTransferSmartLabel>
+          }
+          groupBy: {
+            args: Prisma.TransferSmartLabelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TransferSmartLabelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TransferSmartLabelCountArgs<ExtArgs>
+            result: $Utils.Optional<TransferSmartLabelCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1275,9 +1827,15 @@ export namespace Prisma {
     user?: UserOmit
     userPermission?: UserPermissionOmit
     account?: AccountOmit
+    publishToken?: PublishTokenOmit
     accountActivation?: AccountActivationOmit
     device?: DeviceOmit
     accountDevices?: AccountDevicesOmit
+    smartLabel?: SmartLabelOmit
+    item?: ItemOmit
+    transfer?: TransferOmit
+    transferItem?: TransferItemOmit
+    transferSmartLabel?: TransferSmartLabelOmit
   }
 
   /* Types for Logging */
@@ -1459,11 +2017,25 @@ export namespace Prisma {
   export type AccountCountOutputType = {
     devices: number
     activations: number
+    ownedSmartLabels: number
+    registeredSmartLabels: number
+    ownedItems: number
+    registeredItems: number
+    transferOut: number
+    transferIn: number
+    publishTokens: number
   }
 
   export type AccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     devices?: boolean | AccountCountOutputTypeCountDevicesArgs
     activations?: boolean | AccountCountOutputTypeCountActivationsArgs
+    ownedSmartLabels?: boolean | AccountCountOutputTypeCountOwnedSmartLabelsArgs
+    registeredSmartLabels?: boolean | AccountCountOutputTypeCountRegisteredSmartLabelsArgs
+    ownedItems?: boolean | AccountCountOutputTypeCountOwnedItemsArgs
+    registeredItems?: boolean | AccountCountOutputTypeCountRegisteredItemsArgs
+    transferOut?: boolean | AccountCountOutputTypeCountTransferOutArgs
+    transferIn?: boolean | AccountCountOutputTypeCountTransferInArgs
+    publishTokens?: boolean | AccountCountOutputTypeCountPublishTokensArgs
   }
 
   // Custom InputTypes
@@ -1489,6 +2061,104 @@ export namespace Prisma {
    */
   export type AccountCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountActivationWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountOwnedSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SmartLabelWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountRegisteredSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SmartLabelWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountOwnedItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountRegisteredItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountTransferOutArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountTransferInArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountPublishTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PublishTokenWhereInput
+  }
+
+
+  /**
+   * Count Type PublishTokenCountOutputType
+   */
+
+  export type PublishTokenCountOutputType = {
+    smartLabels: number
+    items: number
+    transfers: number
+  }
+
+  export type PublishTokenCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    smartLabels?: boolean | PublishTokenCountOutputTypeCountSmartLabelsArgs
+    items?: boolean | PublishTokenCountOutputTypeCountItemsArgs
+    transfers?: boolean | PublishTokenCountOutputTypeCountTransfersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PublishTokenCountOutputType without action
+   */
+  export type PublishTokenCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishTokenCountOutputType
+     */
+    select?: PublishTokenCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PublishTokenCountOutputType without action
+   */
+  export type PublishTokenCountOutputTypeCountSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SmartLabelWhereInput
+  }
+
+  /**
+   * PublishTokenCountOutputType without action
+   */
+  export type PublishTokenCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+  }
+
+  /**
+   * PublishTokenCountOutputType without action
+   */
+  export type PublishTokenCountOutputTypeCountTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferWhereInput
   }
 
 
@@ -1520,6 +2190,117 @@ export namespace Prisma {
    */
   export type DeviceCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountDevicesWhereInput
+  }
+
+
+  /**
+   * Count Type SmartLabelCountOutputType
+   */
+
+  export type SmartLabelCountOutputType = {
+    transfers: number
+  }
+
+  export type SmartLabelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfers?: boolean | SmartLabelCountOutputTypeCountTransfersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SmartLabelCountOutputType without action
+   */
+  export type SmartLabelCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabelCountOutputType
+     */
+    select?: SmartLabelCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SmartLabelCountOutputType without action
+   */
+  export type SmartLabelCountOutputTypeCountTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferSmartLabelWhereInput
+  }
+
+
+  /**
+   * Count Type ItemCountOutputType
+   */
+
+  export type ItemCountOutputType = {
+    smartLabels: number
+    transfers: number
+  }
+
+  export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    smartLabels?: boolean | ItemCountOutputTypeCountSmartLabelsArgs
+    transfers?: boolean | ItemCountOutputTypeCountTransfersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemCountOutputType
+     */
+    select?: ItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SmartLabelWhereInput
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferItemWhereInput
+  }
+
+
+  /**
+   * Count Type TransferCountOutputType
+   */
+
+  export type TransferCountOutputType = {
+    items: number
+    smartLabels: number
+  }
+
+  export type TransferCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | TransferCountOutputTypeCountItemsArgs
+    smartLabels?: boolean | TransferCountOutputTypeCountSmartLabelsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TransferCountOutputType without action
+   */
+  export type TransferCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferCountOutputType
+     */
+    select?: TransferCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TransferCountOutputType without action
+   */
+  export type TransferCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferItemWhereInput
+  }
+
+  /**
+   * TransferCountOutputType without action
+   */
+  export type TransferCountOutputTypeCountSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferSmartLabelWhereInput
   }
 
 
@@ -3961,6 +4742,8 @@ export namespace Prisma {
     name: string | null
     isActive: boolean | null
     activationLink: string | null
+    publicKey: string | null
+    pccCloudId: string | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3971,6 +4754,8 @@ export namespace Prisma {
     name: string | null
     isActive: boolean | null
     activationLink: string | null
+    publicKey: string | null
+    pccCloudId: string | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3981,6 +4766,8 @@ export namespace Prisma {
     name: number
     isActive: number
     activationLink: number
+    publicKey: number
+    pccCloudId: number
     createdById: number
     createdAt: number
     updatedAt: number
@@ -3993,6 +4780,8 @@ export namespace Prisma {
     name?: true
     isActive?: true
     activationLink?: true
+    publicKey?: true
+    pccCloudId?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -4003,6 +4792,8 @@ export namespace Prisma {
     name?: true
     isActive?: true
     activationLink?: true
+    publicKey?: true
+    pccCloudId?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -4013,6 +4804,8 @@ export namespace Prisma {
     name?: true
     isActive?: true
     activationLink?: true
+    publicKey?: true
+    pccCloudId?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -4096,6 +4889,8 @@ export namespace Prisma {
     name: string
     isActive: boolean
     activationLink: string | null
+    publicKey: string | null
+    pccCloudId: string | null
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -4123,12 +4918,21 @@ export namespace Prisma {
     name?: boolean
     isActive?: boolean
     activationLink?: boolean
+    publicKey?: boolean
+    pccCloudId?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     devices?: boolean | Account$devicesArgs<ExtArgs>
     activations?: boolean | Account$activationsArgs<ExtArgs>
+    ownedSmartLabels?: boolean | Account$ownedSmartLabelsArgs<ExtArgs>
+    registeredSmartLabels?: boolean | Account$registeredSmartLabelsArgs<ExtArgs>
+    ownedItems?: boolean | Account$ownedItemsArgs<ExtArgs>
+    registeredItems?: boolean | Account$registeredItemsArgs<ExtArgs>
+    transferOut?: boolean | Account$transferOutArgs<ExtArgs>
+    transferIn?: boolean | Account$transferInArgs<ExtArgs>
+    publishTokens?: boolean | Account$publishTokensArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -4137,6 +4941,8 @@ export namespace Prisma {
     name?: boolean
     isActive?: boolean
     activationLink?: boolean
+    publicKey?: boolean
+    pccCloudId?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4148,6 +4954,8 @@ export namespace Prisma {
     name?: boolean
     isActive?: boolean
     activationLink?: boolean
+    publicKey?: boolean
+    pccCloudId?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4159,16 +4967,25 @@ export namespace Prisma {
     name?: boolean
     isActive?: boolean
     activationLink?: boolean
+    publicKey?: boolean
+    pccCloudId?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "isActive" | "activationLink" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "isActive" | "activationLink" | "publicKey" | "pccCloudId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     devices?: boolean | Account$devicesArgs<ExtArgs>
     activations?: boolean | Account$activationsArgs<ExtArgs>
+    ownedSmartLabels?: boolean | Account$ownedSmartLabelsArgs<ExtArgs>
+    registeredSmartLabels?: boolean | Account$registeredSmartLabelsArgs<ExtArgs>
+    ownedItems?: boolean | Account$ownedItemsArgs<ExtArgs>
+    registeredItems?: boolean | Account$registeredItemsArgs<ExtArgs>
+    transferOut?: boolean | Account$transferOutArgs<ExtArgs>
+    transferIn?: boolean | Account$transferInArgs<ExtArgs>
+    publishTokens?: boolean | Account$publishTokensArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4184,12 +5001,21 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs>
       devices: Prisma.$AccountDevicesPayload<ExtArgs>[]
       activations: Prisma.$AccountActivationPayload<ExtArgs>[]
+      ownedSmartLabels: Prisma.$SmartLabelPayload<ExtArgs>[]
+      registeredSmartLabels: Prisma.$SmartLabelPayload<ExtArgs>[]
+      ownedItems: Prisma.$ItemPayload<ExtArgs>[]
+      registeredItems: Prisma.$ItemPayload<ExtArgs>[]
+      transferOut: Prisma.$TransferPayload<ExtArgs>[]
+      transferIn: Prisma.$TransferPayload<ExtArgs>[]
+      publishTokens: Prisma.$PublishTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       isActive: boolean
       activationLink: string | null
+      publicKey: string | null
+      pccCloudId: string | null
       createdById: string
       createdAt: Date
       updatedAt: Date
@@ -4590,6 +5416,13 @@ export namespace Prisma {
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     devices<T extends Account$devicesArgs<ExtArgs> = {}>(args?: Subset<T, Account$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountDevicesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activations<T extends Account$activationsArgs<ExtArgs> = {}>(args?: Subset<T, Account$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ownedSmartLabels<T extends Account$ownedSmartLabelsArgs<ExtArgs> = {}>(args?: Subset<T, Account$ownedSmartLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    registeredSmartLabels<T extends Account$registeredSmartLabelsArgs<ExtArgs> = {}>(args?: Subset<T, Account$registeredSmartLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ownedItems<T extends Account$ownedItemsArgs<ExtArgs> = {}>(args?: Subset<T, Account$ownedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    registeredItems<T extends Account$registeredItemsArgs<ExtArgs> = {}>(args?: Subset<T, Account$registeredItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    transferOut<T extends Account$transferOutArgs<ExtArgs> = {}>(args?: Subset<T, Account$transferOutArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    transferIn<T extends Account$transferInArgs<ExtArgs> = {}>(args?: Subset<T, Account$transferInArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    publishTokens<T extends Account$publishTokensArgs<ExtArgs> = {}>(args?: Subset<T, Account$publishTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4623,6 +5456,8 @@ export namespace Prisma {
     readonly name: FieldRef<"Account", 'String'>
     readonly isActive: FieldRef<"Account", 'Boolean'>
     readonly activationLink: FieldRef<"Account", 'String'>
+    readonly publicKey: FieldRef<"Account", 'String'>
+    readonly pccCloudId: FieldRef<"Account", 'String'>
     readonly createdById: FieldRef<"Account", 'String'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
     readonly updatedAt: FieldRef<"Account", 'DateTime'>
@@ -5070,6 +5905,174 @@ export namespace Prisma {
   }
 
   /**
+   * Account.ownedSmartLabels
+   */
+  export type Account$ownedSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    where?: SmartLabelWhereInput
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    cursor?: SmartLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Account.registeredSmartLabels
+   */
+  export type Account$registeredSmartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    where?: SmartLabelWhereInput
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    cursor?: SmartLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Account.ownedItems
+   */
+  export type Account$ownedItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    cursor?: ItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Account.registeredItems
+   */
+  export type Account$registeredItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    cursor?: ItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Account.transferOut
+   */
+  export type Account$transferOutArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    where?: TransferWhereInput
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    cursor?: TransferWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferScalarFieldEnum | TransferScalarFieldEnum[]
+  }
+
+  /**
+   * Account.transferIn
+   */
+  export type Account$transferInArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    where?: TransferWhereInput
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    cursor?: TransferWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferScalarFieldEnum | TransferScalarFieldEnum[]
+  }
+
+  /**
+   * Account.publishTokens
+   */
+  export type Account$publishTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    where?: PublishTokenWhereInput
+    orderBy?: PublishTokenOrderByWithRelationInput | PublishTokenOrderByWithRelationInput[]
+    cursor?: PublishTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PublishTokenScalarFieldEnum | PublishTokenScalarFieldEnum[]
+  }
+
+  /**
    * Account without action
    */
   export type AccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5089,6 +6092,1189 @@ export namespace Prisma {
 
 
   /**
+   * Model PublishToken
+   */
+
+  export type AggregatePublishToken = {
+    _count: PublishTokenCountAggregateOutputType | null
+    _min: PublishTokenMinAggregateOutputType | null
+    _max: PublishTokenMaxAggregateOutputType | null
+  }
+
+  export type PublishTokenMinAggregateOutputType = {
+    id: string | null
+    token: string | null
+    accountId: string | null
+    isClaimed: boolean | null
+    isActive: boolean | null
+    isArchived: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PublishTokenMaxAggregateOutputType = {
+    id: string | null
+    token: string | null
+    accountId: string | null
+    isClaimed: boolean | null
+    isActive: boolean | null
+    isArchived: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PublishTokenCountAggregateOutputType = {
+    id: number
+    token: number
+    accountId: number
+    isClaimed: number
+    isActive: number
+    isArchived: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PublishTokenMinAggregateInputType = {
+    id?: true
+    token?: true
+    accountId?: true
+    isClaimed?: true
+    isActive?: true
+    isArchived?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PublishTokenMaxAggregateInputType = {
+    id?: true
+    token?: true
+    accountId?: true
+    isClaimed?: true
+    isActive?: true
+    isArchived?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PublishTokenCountAggregateInputType = {
+    id?: true
+    token?: true
+    accountId?: true
+    isClaimed?: true
+    isActive?: true
+    isArchived?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PublishTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PublishToken to aggregate.
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublishTokens to fetch.
+     */
+    orderBy?: PublishTokenOrderByWithRelationInput | PublishTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PublishTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublishTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublishTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PublishTokens
+    **/
+    _count?: true | PublishTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PublishTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PublishTokenMaxAggregateInputType
+  }
+
+  export type GetPublishTokenAggregateType<T extends PublishTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregatePublishToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePublishToken[P]>
+      : GetScalarType<T[P], AggregatePublishToken[P]>
+  }
+
+
+
+
+  export type PublishTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PublishTokenWhereInput
+    orderBy?: PublishTokenOrderByWithAggregationInput | PublishTokenOrderByWithAggregationInput[]
+    by: PublishTokenScalarFieldEnum[] | PublishTokenScalarFieldEnum
+    having?: PublishTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PublishTokenCountAggregateInputType | true
+    _min?: PublishTokenMinAggregateInputType
+    _max?: PublishTokenMaxAggregateInputType
+  }
+
+  export type PublishTokenGroupByOutputType = {
+    id: string
+    token: string
+    accountId: string
+    isClaimed: boolean
+    isActive: boolean
+    isArchived: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: PublishTokenCountAggregateOutputType | null
+    _min: PublishTokenMinAggregateOutputType | null
+    _max: PublishTokenMaxAggregateOutputType | null
+  }
+
+  type GetPublishTokenGroupByPayload<T extends PublishTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PublishTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PublishTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PublishTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], PublishTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PublishTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    accountId?: boolean
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+    smartLabels?: boolean | PublishToken$smartLabelsArgs<ExtArgs>
+    items?: boolean | PublishToken$itemsArgs<ExtArgs>
+    transfers?: boolean | PublishToken$transfersArgs<ExtArgs>
+    _count?: boolean | PublishTokenCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["publishToken"]>
+
+  export type PublishTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    accountId?: boolean
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["publishToken"]>
+
+  export type PublishTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    accountId?: boolean
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["publishToken"]>
+
+  export type PublishTokenSelectScalar = {
+    id?: boolean
+    token?: boolean
+    accountId?: boolean
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PublishTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "accountId" | "isClaimed" | "isActive" | "isArchived" | "createdAt" | "updatedAt", ExtArgs["result"]["publishToken"]>
+  export type PublishTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+    smartLabels?: boolean | PublishToken$smartLabelsArgs<ExtArgs>
+    items?: boolean | PublishToken$itemsArgs<ExtArgs>
+    transfers?: boolean | PublishToken$transfersArgs<ExtArgs>
+    _count?: boolean | PublishTokenCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PublishTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type PublishTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+
+  export type $PublishTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PublishToken"
+    objects: {
+      account: Prisma.$AccountPayload<ExtArgs>
+      smartLabels: Prisma.$SmartLabelPayload<ExtArgs>[]
+      items: Prisma.$ItemPayload<ExtArgs>[]
+      transfers: Prisma.$TransferPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      token: string
+      accountId: string
+      isClaimed: boolean
+      isActive: boolean
+      isArchived: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["publishToken"]>
+    composites: {}
+  }
+
+  type PublishTokenGetPayload<S extends boolean | null | undefined | PublishTokenDefaultArgs> = $Result.GetResult<Prisma.$PublishTokenPayload, S>
+
+  type PublishTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PublishTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PublishTokenCountAggregateInputType | true
+    }
+
+  export interface PublishTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PublishToken'], meta: { name: 'PublishToken' } }
+    /**
+     * Find zero or one PublishToken that matches the filter.
+     * @param {PublishTokenFindUniqueArgs} args - Arguments to find a PublishToken
+     * @example
+     * // Get one PublishToken
+     * const publishToken = await prisma.publishToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PublishTokenFindUniqueArgs>(args: SelectSubset<T, PublishTokenFindUniqueArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PublishToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PublishTokenFindUniqueOrThrowArgs} args - Arguments to find a PublishToken
+     * @example
+     * // Get one PublishToken
+     * const publishToken = await prisma.publishToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PublishTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, PublishTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PublishToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenFindFirstArgs} args - Arguments to find a PublishToken
+     * @example
+     * // Get one PublishToken
+     * const publishToken = await prisma.publishToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PublishTokenFindFirstArgs>(args?: SelectSubset<T, PublishTokenFindFirstArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PublishToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenFindFirstOrThrowArgs} args - Arguments to find a PublishToken
+     * @example
+     * // Get one PublishToken
+     * const publishToken = await prisma.publishToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PublishTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, PublishTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PublishTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PublishTokens
+     * const publishTokens = await prisma.publishToken.findMany()
+     * 
+     * // Get first 10 PublishTokens
+     * const publishTokens = await prisma.publishToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const publishTokenWithIdOnly = await prisma.publishToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PublishTokenFindManyArgs>(args?: SelectSubset<T, PublishTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PublishToken.
+     * @param {PublishTokenCreateArgs} args - Arguments to create a PublishToken.
+     * @example
+     * // Create one PublishToken
+     * const PublishToken = await prisma.publishToken.create({
+     *   data: {
+     *     // ... data to create a PublishToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends PublishTokenCreateArgs>(args: SelectSubset<T, PublishTokenCreateArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PublishTokens.
+     * @param {PublishTokenCreateManyArgs} args - Arguments to create many PublishTokens.
+     * @example
+     * // Create many PublishTokens
+     * const publishToken = await prisma.publishToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PublishTokenCreateManyArgs>(args?: SelectSubset<T, PublishTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PublishTokens and returns the data saved in the database.
+     * @param {PublishTokenCreateManyAndReturnArgs} args - Arguments to create many PublishTokens.
+     * @example
+     * // Create many PublishTokens
+     * const publishToken = await prisma.publishToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PublishTokens and only return the `id`
+     * const publishTokenWithIdOnly = await prisma.publishToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PublishTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, PublishTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PublishToken.
+     * @param {PublishTokenDeleteArgs} args - Arguments to delete one PublishToken.
+     * @example
+     * // Delete one PublishToken
+     * const PublishToken = await prisma.publishToken.delete({
+     *   where: {
+     *     // ... filter to delete one PublishToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PublishTokenDeleteArgs>(args: SelectSubset<T, PublishTokenDeleteArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PublishToken.
+     * @param {PublishTokenUpdateArgs} args - Arguments to update one PublishToken.
+     * @example
+     * // Update one PublishToken
+     * const publishToken = await prisma.publishToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PublishTokenUpdateArgs>(args: SelectSubset<T, PublishTokenUpdateArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PublishTokens.
+     * @param {PublishTokenDeleteManyArgs} args - Arguments to filter PublishTokens to delete.
+     * @example
+     * // Delete a few PublishTokens
+     * const { count } = await prisma.publishToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PublishTokenDeleteManyArgs>(args?: SelectSubset<T, PublishTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PublishTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PublishTokens
+     * const publishToken = await prisma.publishToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PublishTokenUpdateManyArgs>(args: SelectSubset<T, PublishTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PublishTokens and returns the data updated in the database.
+     * @param {PublishTokenUpdateManyAndReturnArgs} args - Arguments to update many PublishTokens.
+     * @example
+     * // Update many PublishTokens
+     * const publishToken = await prisma.publishToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PublishTokens and only return the `id`
+     * const publishTokenWithIdOnly = await prisma.publishToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PublishTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, PublishTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PublishToken.
+     * @param {PublishTokenUpsertArgs} args - Arguments to update or create a PublishToken.
+     * @example
+     * // Update or create a PublishToken
+     * const publishToken = await prisma.publishToken.upsert({
+     *   create: {
+     *     // ... data to create a PublishToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PublishToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PublishTokenUpsertArgs>(args: SelectSubset<T, PublishTokenUpsertArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PublishTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenCountArgs} args - Arguments to filter PublishTokens to count.
+     * @example
+     * // Count the number of PublishTokens
+     * const count = await prisma.publishToken.count({
+     *   where: {
+     *     // ... the filter for the PublishTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends PublishTokenCountArgs>(
+      args?: Subset<T, PublishTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PublishTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PublishToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PublishTokenAggregateArgs>(args: Subset<T, PublishTokenAggregateArgs>): Prisma.PrismaPromise<GetPublishTokenAggregateType<T>>
+
+    /**
+     * Group by PublishToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PublishTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PublishTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PublishTokenGroupByArgs['orderBy'] }
+        : { orderBy?: PublishTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PublishTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPublishTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PublishToken model
+   */
+  readonly fields: PublishTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PublishToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PublishTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    smartLabels<T extends PublishToken$smartLabelsArgs<ExtArgs> = {}>(args?: Subset<T, PublishToken$smartLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    items<T extends PublishToken$itemsArgs<ExtArgs> = {}>(args?: Subset<T, PublishToken$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    transfers<T extends PublishToken$transfersArgs<ExtArgs> = {}>(args?: Subset<T, PublishToken$transfersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PublishToken model
+   */
+  interface PublishTokenFieldRefs {
+    readonly id: FieldRef<"PublishToken", 'String'>
+    readonly token: FieldRef<"PublishToken", 'String'>
+    readonly accountId: FieldRef<"PublishToken", 'String'>
+    readonly isClaimed: FieldRef<"PublishToken", 'Boolean'>
+    readonly isActive: FieldRef<"PublishToken", 'Boolean'>
+    readonly isArchived: FieldRef<"PublishToken", 'Boolean'>
+    readonly createdAt: FieldRef<"PublishToken", 'DateTime'>
+    readonly updatedAt: FieldRef<"PublishToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PublishToken findUnique
+   */
+  export type PublishTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PublishToken to fetch.
+     */
+    where: PublishTokenWhereUniqueInput
+  }
+
+  /**
+   * PublishToken findUniqueOrThrow
+   */
+  export type PublishTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PublishToken to fetch.
+     */
+    where: PublishTokenWhereUniqueInput
+  }
+
+  /**
+   * PublishToken findFirst
+   */
+  export type PublishTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PublishToken to fetch.
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublishTokens to fetch.
+     */
+    orderBy?: PublishTokenOrderByWithRelationInput | PublishTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PublishTokens.
+     */
+    cursor?: PublishTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublishTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublishTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PublishTokens.
+     */
+    distinct?: PublishTokenScalarFieldEnum | PublishTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PublishToken findFirstOrThrow
+   */
+  export type PublishTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PublishToken to fetch.
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublishTokens to fetch.
+     */
+    orderBy?: PublishTokenOrderByWithRelationInput | PublishTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PublishTokens.
+     */
+    cursor?: PublishTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublishTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublishTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PublishTokens.
+     */
+    distinct?: PublishTokenScalarFieldEnum | PublishTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PublishToken findMany
+   */
+  export type PublishTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PublishTokens to fetch.
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PublishTokens to fetch.
+     */
+    orderBy?: PublishTokenOrderByWithRelationInput | PublishTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PublishTokens.
+     */
+    cursor?: PublishTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PublishTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PublishTokens.
+     */
+    skip?: number
+    distinct?: PublishTokenScalarFieldEnum | PublishTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PublishToken create
+   */
+  export type PublishTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PublishToken.
+     */
+    data: XOR<PublishTokenCreateInput, PublishTokenUncheckedCreateInput>
+  }
+
+  /**
+   * PublishToken createMany
+   */
+  export type PublishTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PublishTokens.
+     */
+    data: PublishTokenCreateManyInput | PublishTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PublishToken createManyAndReturn
+   */
+  export type PublishTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many PublishTokens.
+     */
+    data: PublishTokenCreateManyInput | PublishTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PublishToken update
+   */
+  export type PublishTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PublishToken.
+     */
+    data: XOR<PublishTokenUpdateInput, PublishTokenUncheckedUpdateInput>
+    /**
+     * Choose, which PublishToken to update.
+     */
+    where: PublishTokenWhereUniqueInput
+  }
+
+  /**
+   * PublishToken updateMany
+   */
+  export type PublishTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PublishTokens.
+     */
+    data: XOR<PublishTokenUpdateManyMutationInput, PublishTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which PublishTokens to update
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * Limit how many PublishTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PublishToken updateManyAndReturn
+   */
+  export type PublishTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update PublishTokens.
+     */
+    data: XOR<PublishTokenUpdateManyMutationInput, PublishTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which PublishTokens to update
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * Limit how many PublishTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PublishToken upsert
+   */
+  export type PublishTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PublishToken to update in case it exists.
+     */
+    where: PublishTokenWhereUniqueInput
+    /**
+     * In case the PublishToken found by the `where` argument doesn't exist, create a new PublishToken with this data.
+     */
+    create: XOR<PublishTokenCreateInput, PublishTokenUncheckedCreateInput>
+    /**
+     * In case the PublishToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PublishTokenUpdateInput, PublishTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * PublishToken delete
+   */
+  export type PublishTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+    /**
+     * Filter which PublishToken to delete.
+     */
+    where: PublishTokenWhereUniqueInput
+  }
+
+  /**
+   * PublishToken deleteMany
+   */
+  export type PublishTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PublishTokens to delete
+     */
+    where?: PublishTokenWhereInput
+    /**
+     * Limit how many PublishTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PublishToken.smartLabels
+   */
+  export type PublishToken$smartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    where?: SmartLabelWhereInput
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    cursor?: SmartLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * PublishToken.items
+   */
+  export type PublishToken$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    cursor?: ItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * PublishToken.transfers
+   */
+  export type PublishToken$transfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    where?: TransferWhereInput
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    cursor?: TransferWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferScalarFieldEnum | TransferScalarFieldEnum[]
+  }
+
+  /**
+   * PublishToken without action
+   */
+  export type PublishTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PublishToken
+     */
+    select?: PublishTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PublishToken
+     */
+    omit?: PublishTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublishTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model AccountActivation
    */
 
@@ -5102,6 +7288,7 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     email: string | null
+    name: string | null
     code: string | null
     activationLink: string | null
     issueDate: Date | null
@@ -5117,6 +7304,7 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     email: string | null
+    name: string | null
     code: string | null
     activationLink: string | null
     issueDate: Date | null
@@ -5132,6 +7320,7 @@ export namespace Prisma {
     id: number
     accountId: number
     email: number
+    name: number
     code: number
     activationLink: number
     issueDate: number
@@ -5149,6 +7338,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     email?: true
+    name?: true
     code?: true
     activationLink?: true
     issueDate?: true
@@ -5164,6 +7354,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     email?: true
+    name?: true
     code?: true
     activationLink?: true
     issueDate?: true
@@ -5179,6 +7370,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     email?: true
+    name?: true
     code?: true
     activationLink?: true
     issueDate?: true
@@ -5267,6 +7459,7 @@ export namespace Prisma {
     id: string
     accountId: string
     email: string
+    name: string | null
     code: string
     activationLink: string
     issueDate: Date
@@ -5299,6 +7492,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     email?: boolean
+    name?: boolean
     code?: boolean
     activationLink?: boolean
     issueDate?: boolean
@@ -5316,6 +7510,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     email?: boolean
+    name?: boolean
     code?: boolean
     activationLink?: boolean
     issueDate?: boolean
@@ -5333,6 +7528,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     email?: boolean
+    name?: boolean
     code?: boolean
     activationLink?: boolean
     issueDate?: boolean
@@ -5350,6 +7546,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     email?: boolean
+    name?: boolean
     code?: boolean
     activationLink?: boolean
     issueDate?: boolean
@@ -5361,7 +7558,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AccountActivationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "email" | "code" | "activationLink" | "issueDate" | "expiryDate" | "isClaimed" | "claimDate" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["accountActivation"]>
+  export type AccountActivationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "email" | "name" | "code" | "activationLink" | "issueDate" | "expiryDate" | "isClaimed" | "claimDate" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["accountActivation"]>
   export type AccountActivationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
@@ -5385,6 +7582,7 @@ export namespace Prisma {
       id: string
       accountId: string
       email: string
+      name: string | null
       code: string
       activationLink: string
       issueDate: Date
@@ -5822,6 +8020,7 @@ export namespace Prisma {
     readonly id: FieldRef<"AccountActivation", 'String'>
     readonly accountId: FieldRef<"AccountActivation", 'String'>
     readonly email: FieldRef<"AccountActivation", 'String'>
+    readonly name: FieldRef<"AccountActivation", 'String'>
     readonly code: FieldRef<"AccountActivation", 'String'>
     readonly activationLink: FieldRef<"AccountActivation", 'String'>
     readonly issueDate: FieldRef<"AccountActivation", 'DateTime'>
@@ -7360,6 +9559,7 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     deviceId: string | null
+    pccCloudId: string | null
     isActive: boolean | null
     createdById: string | null
     createdAt: Date | null
@@ -7370,6 +9570,7 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     deviceId: string | null
+    pccCloudId: string | null
     isActive: boolean | null
     createdById: string | null
     createdAt: Date | null
@@ -7380,6 +9581,7 @@ export namespace Prisma {
     id: number
     accountId: number
     deviceId: number
+    pccCloudId: number
     isActive: number
     createdById: number
     createdAt: number
@@ -7392,6 +9594,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     deviceId?: true
+    pccCloudId?: true
     isActive?: true
     createdById?: true
     createdAt?: true
@@ -7402,6 +9605,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     deviceId?: true
+    pccCloudId?: true
     isActive?: true
     createdById?: true
     createdAt?: true
@@ -7412,6 +9616,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     deviceId?: true
+    pccCloudId?: true
     isActive?: true
     createdById?: true
     createdAt?: true
@@ -7495,6 +9700,7 @@ export namespace Prisma {
     id: string
     accountId: string
     deviceId: string
+    pccCloudId: string | null
     isActive: boolean
     createdById: string
     createdAt: Date
@@ -7522,6 +9728,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     deviceId?: boolean
+    pccCloudId?: boolean
     isActive?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -7535,6 +9742,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     deviceId?: boolean
+    pccCloudId?: boolean
     isActive?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -7548,6 +9756,7 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     deviceId?: boolean
+    pccCloudId?: boolean
     isActive?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -7561,13 +9770,14 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     deviceId?: boolean
+    pccCloudId?: boolean
     isActive?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AccountDevicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "deviceId" | "isActive" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["accountDevices"]>
+  export type AccountDevicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "deviceId" | "pccCloudId" | "isActive" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["accountDevices"]>
   export type AccountDevicesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     device?: boolean | DeviceDefaultArgs<ExtArgs>
@@ -7595,6 +9805,7 @@ export namespace Prisma {
       id: string
       accountId: string
       deviceId: string
+      pccCloudId: string | null
       isActive: boolean
       createdById: string
       createdAt: Date
@@ -8028,6 +10239,7 @@ export namespace Prisma {
     readonly id: FieldRef<"AccountDevices", 'String'>
     readonly accountId: FieldRef<"AccountDevices", 'String'>
     readonly deviceId: FieldRef<"AccountDevices", 'String'>
+    readonly pccCloudId: FieldRef<"AccountDevices", 'String'>
     readonly isActive: FieldRef<"AccountDevices", 'Boolean'>
     readonly createdById: FieldRef<"AccountDevices", 'String'>
     readonly createdAt: FieldRef<"AccountDevices", 'DateTime'>
@@ -8447,6 +10659,5771 @@ export namespace Prisma {
 
 
   /**
+   * Model SmartLabel
+   */
+
+  export type AggregateSmartLabel = {
+    _count: SmartLabelCountAggregateOutputType | null
+    _min: SmartLabelMinAggregateOutputType | null
+    _max: SmartLabelMaxAggregateOutputType | null
+  }
+
+  export type SmartLabelMinAggregateOutputType = {
+    id: string | null
+    serial: string | null
+    reference: string | null
+    name: string | null
+    description: string | null
+    source: string | null
+    publishTokenId: string | null
+    ownerId: string | null
+    registeredById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    itemId: string | null
+  }
+
+  export type SmartLabelMaxAggregateOutputType = {
+    id: string | null
+    serial: string | null
+    reference: string | null
+    name: string | null
+    description: string | null
+    source: string | null
+    publishTokenId: string | null
+    ownerId: string | null
+    registeredById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    itemId: string | null
+  }
+
+  export type SmartLabelCountAggregateOutputType = {
+    id: number
+    serial: number
+    reference: number
+    name: number
+    description: number
+    payload: number
+    source: number
+    publishTokenId: number
+    ownerId: number
+    registeredById: number
+    createdAt: number
+    updatedAt: number
+    itemId: number
+    _all: number
+  }
+
+
+  export type SmartLabelMinAggregateInputType = {
+    id?: true
+    serial?: true
+    reference?: true
+    name?: true
+    description?: true
+    source?: true
+    publishTokenId?: true
+    ownerId?: true
+    registeredById?: true
+    createdAt?: true
+    updatedAt?: true
+    itemId?: true
+  }
+
+  export type SmartLabelMaxAggregateInputType = {
+    id?: true
+    serial?: true
+    reference?: true
+    name?: true
+    description?: true
+    source?: true
+    publishTokenId?: true
+    ownerId?: true
+    registeredById?: true
+    createdAt?: true
+    updatedAt?: true
+    itemId?: true
+  }
+
+  export type SmartLabelCountAggregateInputType = {
+    id?: true
+    serial?: true
+    reference?: true
+    name?: true
+    description?: true
+    payload?: true
+    source?: true
+    publishTokenId?: true
+    ownerId?: true
+    registeredById?: true
+    createdAt?: true
+    updatedAt?: true
+    itemId?: true
+    _all?: true
+  }
+
+  export type SmartLabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SmartLabel to aggregate.
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SmartLabels to fetch.
+     */
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SmartLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SmartLabels
+    **/
+    _count?: true | SmartLabelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SmartLabelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SmartLabelMaxAggregateInputType
+  }
+
+  export type GetSmartLabelAggregateType<T extends SmartLabelAggregateArgs> = {
+        [P in keyof T & keyof AggregateSmartLabel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSmartLabel[P]>
+      : GetScalarType<T[P], AggregateSmartLabel[P]>
+  }
+
+
+
+
+  export type SmartLabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SmartLabelWhereInput
+    orderBy?: SmartLabelOrderByWithAggregationInput | SmartLabelOrderByWithAggregationInput[]
+    by: SmartLabelScalarFieldEnum[] | SmartLabelScalarFieldEnum
+    having?: SmartLabelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SmartLabelCountAggregateInputType | true
+    _min?: SmartLabelMinAggregateInputType
+    _max?: SmartLabelMaxAggregateInputType
+  }
+
+  export type SmartLabelGroupByOutputType = {
+    id: string
+    serial: string
+    reference: string | null
+    name: string | null
+    description: string | null
+    payload: JsonValue | null
+    source: string | null
+    publishTokenId: string
+    ownerId: string | null
+    registeredById: string
+    createdAt: Date
+    updatedAt: Date
+    itemId: string | null
+    _count: SmartLabelCountAggregateOutputType | null
+    _min: SmartLabelMinAggregateOutputType | null
+    _max: SmartLabelMaxAggregateOutputType | null
+  }
+
+  type GetSmartLabelGroupByPayload<T extends SmartLabelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SmartLabelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SmartLabelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SmartLabelGroupByOutputType[P]>
+            : GetScalarType<T[P], SmartLabelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SmartLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    serial?: boolean
+    reference?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    source?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    itemId?: boolean
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | SmartLabel$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    item?: boolean | SmartLabel$itemArgs<ExtArgs>
+    transfers?: boolean | SmartLabel$transfersArgs<ExtArgs>
+    _count?: boolean | SmartLabelCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["smartLabel"]>
+
+  export type SmartLabelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    serial?: boolean
+    reference?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    source?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    itemId?: boolean
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | SmartLabel$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    item?: boolean | SmartLabel$itemArgs<ExtArgs>
+  }, ExtArgs["result"]["smartLabel"]>
+
+  export type SmartLabelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    serial?: boolean
+    reference?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    source?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    itemId?: boolean
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | SmartLabel$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    item?: boolean | SmartLabel$itemArgs<ExtArgs>
+  }, ExtArgs["result"]["smartLabel"]>
+
+  export type SmartLabelSelectScalar = {
+    id?: boolean
+    serial?: boolean
+    reference?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    source?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    itemId?: boolean
+  }
+
+  export type SmartLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "serial" | "reference" | "name" | "description" | "payload" | "source" | "publishTokenId" | "ownerId" | "registeredById" | "createdAt" | "updatedAt" | "itemId", ExtArgs["result"]["smartLabel"]>
+  export type SmartLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | SmartLabel$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    item?: boolean | SmartLabel$itemArgs<ExtArgs>
+    transfers?: boolean | SmartLabel$transfersArgs<ExtArgs>
+    _count?: boolean | SmartLabelCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SmartLabelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | SmartLabel$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    item?: boolean | SmartLabel$itemArgs<ExtArgs>
+  }
+  export type SmartLabelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | SmartLabel$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    item?: boolean | SmartLabel$itemArgs<ExtArgs>
+  }
+
+  export type $SmartLabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SmartLabel"
+    objects: {
+      publishToken: Prisma.$PublishTokenPayload<ExtArgs>
+      owner: Prisma.$AccountPayload<ExtArgs> | null
+      registeredBy: Prisma.$AccountPayload<ExtArgs>
+      item: Prisma.$ItemPayload<ExtArgs> | null
+      transfers: Prisma.$TransferSmartLabelPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      serial: string
+      reference: string | null
+      name: string | null
+      description: string | null
+      payload: Prisma.JsonValue | null
+      source: string | null
+      publishTokenId: string
+      ownerId: string | null
+      registeredById: string
+      createdAt: Date
+      updatedAt: Date
+      itemId: string | null
+    }, ExtArgs["result"]["smartLabel"]>
+    composites: {}
+  }
+
+  type SmartLabelGetPayload<S extends boolean | null | undefined | SmartLabelDefaultArgs> = $Result.GetResult<Prisma.$SmartLabelPayload, S>
+
+  type SmartLabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SmartLabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SmartLabelCountAggregateInputType | true
+    }
+
+  export interface SmartLabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SmartLabel'], meta: { name: 'SmartLabel' } }
+    /**
+     * Find zero or one SmartLabel that matches the filter.
+     * @param {SmartLabelFindUniqueArgs} args - Arguments to find a SmartLabel
+     * @example
+     * // Get one SmartLabel
+     * const smartLabel = await prisma.smartLabel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SmartLabelFindUniqueArgs>(args: SelectSubset<T, SmartLabelFindUniqueArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SmartLabel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SmartLabelFindUniqueOrThrowArgs} args - Arguments to find a SmartLabel
+     * @example
+     * // Get one SmartLabel
+     * const smartLabel = await prisma.smartLabel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SmartLabelFindUniqueOrThrowArgs>(args: SelectSubset<T, SmartLabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SmartLabel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelFindFirstArgs} args - Arguments to find a SmartLabel
+     * @example
+     * // Get one SmartLabel
+     * const smartLabel = await prisma.smartLabel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SmartLabelFindFirstArgs>(args?: SelectSubset<T, SmartLabelFindFirstArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SmartLabel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelFindFirstOrThrowArgs} args - Arguments to find a SmartLabel
+     * @example
+     * // Get one SmartLabel
+     * const smartLabel = await prisma.smartLabel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SmartLabelFindFirstOrThrowArgs>(args?: SelectSubset<T, SmartLabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SmartLabels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SmartLabels
+     * const smartLabels = await prisma.smartLabel.findMany()
+     * 
+     * // Get first 10 SmartLabels
+     * const smartLabels = await prisma.smartLabel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const smartLabelWithIdOnly = await prisma.smartLabel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SmartLabelFindManyArgs>(args?: SelectSubset<T, SmartLabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SmartLabel.
+     * @param {SmartLabelCreateArgs} args - Arguments to create a SmartLabel.
+     * @example
+     * // Create one SmartLabel
+     * const SmartLabel = await prisma.smartLabel.create({
+     *   data: {
+     *     // ... data to create a SmartLabel
+     *   }
+     * })
+     * 
+     */
+    create<T extends SmartLabelCreateArgs>(args: SelectSubset<T, SmartLabelCreateArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SmartLabels.
+     * @param {SmartLabelCreateManyArgs} args - Arguments to create many SmartLabels.
+     * @example
+     * // Create many SmartLabels
+     * const smartLabel = await prisma.smartLabel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SmartLabelCreateManyArgs>(args?: SelectSubset<T, SmartLabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SmartLabels and returns the data saved in the database.
+     * @param {SmartLabelCreateManyAndReturnArgs} args - Arguments to create many SmartLabels.
+     * @example
+     * // Create many SmartLabels
+     * const smartLabel = await prisma.smartLabel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SmartLabels and only return the `id`
+     * const smartLabelWithIdOnly = await prisma.smartLabel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SmartLabelCreateManyAndReturnArgs>(args?: SelectSubset<T, SmartLabelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SmartLabel.
+     * @param {SmartLabelDeleteArgs} args - Arguments to delete one SmartLabel.
+     * @example
+     * // Delete one SmartLabel
+     * const SmartLabel = await prisma.smartLabel.delete({
+     *   where: {
+     *     // ... filter to delete one SmartLabel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SmartLabelDeleteArgs>(args: SelectSubset<T, SmartLabelDeleteArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SmartLabel.
+     * @param {SmartLabelUpdateArgs} args - Arguments to update one SmartLabel.
+     * @example
+     * // Update one SmartLabel
+     * const smartLabel = await prisma.smartLabel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SmartLabelUpdateArgs>(args: SelectSubset<T, SmartLabelUpdateArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SmartLabels.
+     * @param {SmartLabelDeleteManyArgs} args - Arguments to filter SmartLabels to delete.
+     * @example
+     * // Delete a few SmartLabels
+     * const { count } = await prisma.smartLabel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SmartLabelDeleteManyArgs>(args?: SelectSubset<T, SmartLabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SmartLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SmartLabels
+     * const smartLabel = await prisma.smartLabel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SmartLabelUpdateManyArgs>(args: SelectSubset<T, SmartLabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SmartLabels and returns the data updated in the database.
+     * @param {SmartLabelUpdateManyAndReturnArgs} args - Arguments to update many SmartLabels.
+     * @example
+     * // Update many SmartLabels
+     * const smartLabel = await prisma.smartLabel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SmartLabels and only return the `id`
+     * const smartLabelWithIdOnly = await prisma.smartLabel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SmartLabelUpdateManyAndReturnArgs>(args: SelectSubset<T, SmartLabelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SmartLabel.
+     * @param {SmartLabelUpsertArgs} args - Arguments to update or create a SmartLabel.
+     * @example
+     * // Update or create a SmartLabel
+     * const smartLabel = await prisma.smartLabel.upsert({
+     *   create: {
+     *     // ... data to create a SmartLabel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SmartLabel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SmartLabelUpsertArgs>(args: SelectSubset<T, SmartLabelUpsertArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SmartLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelCountArgs} args - Arguments to filter SmartLabels to count.
+     * @example
+     * // Count the number of SmartLabels
+     * const count = await prisma.smartLabel.count({
+     *   where: {
+     *     // ... the filter for the SmartLabels we want to count
+     *   }
+     * })
+    **/
+    count<T extends SmartLabelCountArgs>(
+      args?: Subset<T, SmartLabelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SmartLabelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SmartLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SmartLabelAggregateArgs>(args: Subset<T, SmartLabelAggregateArgs>): Prisma.PrismaPromise<GetSmartLabelAggregateType<T>>
+
+    /**
+     * Group by SmartLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SmartLabelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SmartLabelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SmartLabelGroupByArgs['orderBy'] }
+        : { orderBy?: SmartLabelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SmartLabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSmartLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SmartLabel model
+   */
+  readonly fields: SmartLabelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SmartLabel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SmartLabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    publishToken<T extends PublishTokenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PublishTokenDefaultArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    owner<T extends SmartLabel$ownerArgs<ExtArgs> = {}>(args?: Subset<T, SmartLabel$ownerArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    registeredBy<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    item<T extends SmartLabel$itemArgs<ExtArgs> = {}>(args?: Subset<T, SmartLabel$itemArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    transfers<T extends SmartLabel$transfersArgs<ExtArgs> = {}>(args?: Subset<T, SmartLabel$transfersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SmartLabel model
+   */
+  interface SmartLabelFieldRefs {
+    readonly id: FieldRef<"SmartLabel", 'String'>
+    readonly serial: FieldRef<"SmartLabel", 'String'>
+    readonly reference: FieldRef<"SmartLabel", 'String'>
+    readonly name: FieldRef<"SmartLabel", 'String'>
+    readonly description: FieldRef<"SmartLabel", 'String'>
+    readonly payload: FieldRef<"SmartLabel", 'Json'>
+    readonly source: FieldRef<"SmartLabel", 'String'>
+    readonly publishTokenId: FieldRef<"SmartLabel", 'String'>
+    readonly ownerId: FieldRef<"SmartLabel", 'String'>
+    readonly registeredById: FieldRef<"SmartLabel", 'String'>
+    readonly createdAt: FieldRef<"SmartLabel", 'DateTime'>
+    readonly updatedAt: FieldRef<"SmartLabel", 'DateTime'>
+    readonly itemId: FieldRef<"SmartLabel", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SmartLabel findUnique
+   */
+  export type SmartLabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which SmartLabel to fetch.
+     */
+    where: SmartLabelWhereUniqueInput
+  }
+
+  /**
+   * SmartLabel findUniqueOrThrow
+   */
+  export type SmartLabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which SmartLabel to fetch.
+     */
+    where: SmartLabelWhereUniqueInput
+  }
+
+  /**
+   * SmartLabel findFirst
+   */
+  export type SmartLabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which SmartLabel to fetch.
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SmartLabels to fetch.
+     */
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SmartLabels.
+     */
+    cursor?: SmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SmartLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SmartLabels.
+     */
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * SmartLabel findFirstOrThrow
+   */
+  export type SmartLabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which SmartLabel to fetch.
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SmartLabels to fetch.
+     */
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SmartLabels.
+     */
+    cursor?: SmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SmartLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SmartLabels.
+     */
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * SmartLabel findMany
+   */
+  export type SmartLabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which SmartLabels to fetch.
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SmartLabels to fetch.
+     */
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SmartLabels.
+     */
+    cursor?: SmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SmartLabels.
+     */
+    skip?: number
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * SmartLabel create
+   */
+  export type SmartLabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SmartLabel.
+     */
+    data: XOR<SmartLabelCreateInput, SmartLabelUncheckedCreateInput>
+  }
+
+  /**
+   * SmartLabel createMany
+   */
+  export type SmartLabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SmartLabels.
+     */
+    data: SmartLabelCreateManyInput | SmartLabelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SmartLabel createManyAndReturn
+   */
+  export type SmartLabelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * The data used to create many SmartLabels.
+     */
+    data: SmartLabelCreateManyInput | SmartLabelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SmartLabel update
+   */
+  export type SmartLabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SmartLabel.
+     */
+    data: XOR<SmartLabelUpdateInput, SmartLabelUncheckedUpdateInput>
+    /**
+     * Choose, which SmartLabel to update.
+     */
+    where: SmartLabelWhereUniqueInput
+  }
+
+  /**
+   * SmartLabel updateMany
+   */
+  export type SmartLabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SmartLabels.
+     */
+    data: XOR<SmartLabelUpdateManyMutationInput, SmartLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which SmartLabels to update
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * Limit how many SmartLabels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SmartLabel updateManyAndReturn
+   */
+  export type SmartLabelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * The data used to update SmartLabels.
+     */
+    data: XOR<SmartLabelUpdateManyMutationInput, SmartLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which SmartLabels to update
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * Limit how many SmartLabels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SmartLabel upsert
+   */
+  export type SmartLabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SmartLabel to update in case it exists.
+     */
+    where: SmartLabelWhereUniqueInput
+    /**
+     * In case the SmartLabel found by the `where` argument doesn't exist, create a new SmartLabel with this data.
+     */
+    create: XOR<SmartLabelCreateInput, SmartLabelUncheckedCreateInput>
+    /**
+     * In case the SmartLabel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SmartLabelUpdateInput, SmartLabelUncheckedUpdateInput>
+  }
+
+  /**
+   * SmartLabel delete
+   */
+  export type SmartLabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter which SmartLabel to delete.
+     */
+    where: SmartLabelWhereUniqueInput
+  }
+
+  /**
+   * SmartLabel deleteMany
+   */
+  export type SmartLabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SmartLabels to delete
+     */
+    where?: SmartLabelWhereInput
+    /**
+     * Limit how many SmartLabels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SmartLabel.owner
+   */
+  export type SmartLabel$ownerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Account
+     */
+    omit?: AccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    where?: AccountWhereInput
+  }
+
+  /**
+   * SmartLabel.item
+   */
+  export type SmartLabel$itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+  }
+
+  /**
+   * SmartLabel.transfers
+   */
+  export type SmartLabel$transfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    where?: TransferSmartLabelWhereInput
+    orderBy?: TransferSmartLabelOrderByWithRelationInput | TransferSmartLabelOrderByWithRelationInput[]
+    cursor?: TransferSmartLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferSmartLabelScalarFieldEnum | TransferSmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * SmartLabel without action
+   */
+  export type SmartLabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Item
+   */
+
+  export type AggregateItem = {
+    _count: ItemCountAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
+  }
+
+  export type ItemMinAggregateOutputType = {
+    id: string | null
+    serial: string | null
+    name: string | null
+    description: string | null
+    publishTokenId: string | null
+    ownerId: string | null
+    registeredById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ItemMaxAggregateOutputType = {
+    id: string | null
+    serial: string | null
+    name: string | null
+    description: string | null
+    publishTokenId: string | null
+    ownerId: string | null
+    registeredById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ItemCountAggregateOutputType = {
+    id: number
+    serial: number
+    name: number
+    description: number
+    payload: number
+    publishTokenId: number
+    ownerId: number
+    registeredById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ItemMinAggregateInputType = {
+    id?: true
+    serial?: true
+    name?: true
+    description?: true
+    publishTokenId?: true
+    ownerId?: true
+    registeredById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ItemMaxAggregateInputType = {
+    id?: true
+    serial?: true
+    name?: true
+    description?: true
+    publishTokenId?: true
+    ownerId?: true
+    registeredById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ItemCountAggregateInputType = {
+    id?: true
+    serial?: true
+    name?: true
+    description?: true
+    payload?: true
+    publishTokenId?: true
+    ownerId?: true
+    registeredById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Item to aggregate.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Items
+    **/
+    _count?: true | ItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemMaxAggregateInputType
+  }
+
+  export type GetItemAggregateType<T extends ItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItem[P]>
+      : GetScalarType<T[P], AggregateItem[P]>
+  }
+
+
+
+
+  export type ItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithAggregationInput | ItemOrderByWithAggregationInput[]
+    by: ItemScalarFieldEnum[] | ItemScalarFieldEnum
+    having?: ItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemCountAggregateInputType | true
+    _min?: ItemMinAggregateInputType
+    _max?: ItemMaxAggregateInputType
+  }
+
+  export type ItemGroupByOutputType = {
+    id: string
+    serial: string
+    name: string
+    description: string
+    payload: JsonValue | null
+    publishTokenId: string
+    ownerId: string | null
+    registeredById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ItemCountAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
+  }
+
+  type GetItemGroupByPayload<T extends ItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    serial?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | Item$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    smartLabels?: boolean | Item$smartLabelsArgs<ExtArgs>
+    transfers?: boolean | Item$transfersArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    serial?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | Item$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    serial?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | Item$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectScalar = {
+    id?: boolean
+    serial?: boolean
+    name?: boolean
+    description?: boolean
+    payload?: boolean
+    publishTokenId?: boolean
+    ownerId?: boolean
+    registeredById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "serial" | "name" | "description" | "payload" | "publishTokenId" | "ownerId" | "registeredById" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+  export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | Item$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+    smartLabels?: boolean | Item$smartLabelsArgs<ExtArgs>
+    transfers?: boolean | Item$transfersArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | Item$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type ItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    owner?: boolean | Item$ownerArgs<ExtArgs>
+    registeredBy?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+
+  export type $ItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Item"
+    objects: {
+      publishToken: Prisma.$PublishTokenPayload<ExtArgs>
+      owner: Prisma.$AccountPayload<ExtArgs> | null
+      registeredBy: Prisma.$AccountPayload<ExtArgs>
+      smartLabels: Prisma.$SmartLabelPayload<ExtArgs>[]
+      transfers: Prisma.$TransferItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      serial: string
+      name: string
+      description: string
+      payload: Prisma.JsonValue | null
+      publishTokenId: string
+      ownerId: string | null
+      registeredById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["item"]>
+    composites: {}
+  }
+
+  type ItemGetPayload<S extends boolean | null | undefined | ItemDefaultArgs> = $Result.GetResult<Prisma.$ItemPayload, S>
+
+  type ItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ItemCountAggregateInputType | true
+    }
+
+  export interface ItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Item'], meta: { name: 'Item' } }
+    /**
+     * Find zero or one Item that matches the filter.
+     * @param {ItemFindUniqueArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ItemFindUniqueArgs>(args: SelectSubset<T, ItemFindUniqueArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Item that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ItemFindUniqueOrThrowArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Item that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindFirstArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ItemFindFirstArgs>(args?: SelectSubset<T, ItemFindFirstArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Item that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindFirstOrThrowArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Items that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Items
+     * const items = await prisma.item.findMany()
+     * 
+     * // Get first 10 Items
+     * const items = await prisma.item.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemWithIdOnly = await prisma.item.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ItemFindManyArgs>(args?: SelectSubset<T, ItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Item.
+     * @param {ItemCreateArgs} args - Arguments to create a Item.
+     * @example
+     * // Create one Item
+     * const Item = await prisma.item.create({
+     *   data: {
+     *     // ... data to create a Item
+     *   }
+     * })
+     * 
+     */
+    create<T extends ItemCreateArgs>(args: SelectSubset<T, ItemCreateArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Items.
+     * @param {ItemCreateManyArgs} args - Arguments to create many Items.
+     * @example
+     * // Create many Items
+     * const item = await prisma.item.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ItemCreateManyArgs>(args?: SelectSubset<T, ItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Items and returns the data saved in the database.
+     * @param {ItemCreateManyAndReturnArgs} args - Arguments to create many Items.
+     * @example
+     * // Create many Items
+     * const item = await prisma.item.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Items and only return the `id`
+     * const itemWithIdOnly = await prisma.item.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ItemCreateManyAndReturnArgs>(args?: SelectSubset<T, ItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Item.
+     * @param {ItemDeleteArgs} args - Arguments to delete one Item.
+     * @example
+     * // Delete one Item
+     * const Item = await prisma.item.delete({
+     *   where: {
+     *     // ... filter to delete one Item
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ItemDeleteArgs>(args: SelectSubset<T, ItemDeleteArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Item.
+     * @param {ItemUpdateArgs} args - Arguments to update one Item.
+     * @example
+     * // Update one Item
+     * const item = await prisma.item.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ItemUpdateArgs>(args: SelectSubset<T, ItemUpdateArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Items.
+     * @param {ItemDeleteManyArgs} args - Arguments to filter Items to delete.
+     * @example
+     * // Delete a few Items
+     * const { count } = await prisma.item.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ItemDeleteManyArgs>(args?: SelectSubset<T, ItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Items.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Items
+     * const item = await prisma.item.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ItemUpdateManyArgs>(args: SelectSubset<T, ItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Items and returns the data updated in the database.
+     * @param {ItemUpdateManyAndReturnArgs} args - Arguments to update many Items.
+     * @example
+     * // Update many Items
+     * const item = await prisma.item.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Items and only return the `id`
+     * const itemWithIdOnly = await prisma.item.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ItemUpdateManyAndReturnArgs>(args: SelectSubset<T, ItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Item.
+     * @param {ItemUpsertArgs} args - Arguments to update or create a Item.
+     * @example
+     * // Update or create a Item
+     * const item = await prisma.item.upsert({
+     *   create: {
+     *     // ... data to create a Item
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Item we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ItemUpsertArgs>(args: SelectSubset<T, ItemUpsertArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Items.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemCountArgs} args - Arguments to filter Items to count.
+     * @example
+     * // Count the number of Items
+     * const count = await prisma.item.count({
+     *   where: {
+     *     // ... the filter for the Items we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemCountArgs>(
+      args?: Subset<T, ItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Item.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemAggregateArgs>(args: Subset<T, ItemAggregateArgs>): Prisma.PrismaPromise<GetItemAggregateType<T>>
+
+    /**
+     * Group by Item.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemGroupByArgs['orderBy'] }
+        : { orderBy?: ItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Item model
+   */
+  readonly fields: ItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Item.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    publishToken<T extends PublishTokenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PublishTokenDefaultArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    owner<T extends Item$ownerArgs<ExtArgs> = {}>(args?: Subset<T, Item$ownerArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    registeredBy<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    smartLabels<T extends Item$smartLabelsArgs<ExtArgs> = {}>(args?: Subset<T, Item$smartLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    transfers<T extends Item$transfersArgs<ExtArgs> = {}>(args?: Subset<T, Item$transfersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Item model
+   */
+  interface ItemFieldRefs {
+    readonly id: FieldRef<"Item", 'String'>
+    readonly serial: FieldRef<"Item", 'String'>
+    readonly name: FieldRef<"Item", 'String'>
+    readonly description: FieldRef<"Item", 'String'>
+    readonly payload: FieldRef<"Item", 'Json'>
+    readonly publishTokenId: FieldRef<"Item", 'String'>
+    readonly ownerId: FieldRef<"Item", 'String'>
+    readonly registeredById: FieldRef<"Item", 'String'>
+    readonly createdAt: FieldRef<"Item", 'DateTime'>
+    readonly updatedAt: FieldRef<"Item", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Item findUnique
+   */
+  export type ItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item findUniqueOrThrow
+   */
+  export type ItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item findFirst
+   */
+  export type ItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Items.
+     */
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item findFirstOrThrow
+   */
+  export type ItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Items.
+     */
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item findMany
+   */
+  export type ItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Items to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item create
+   */
+  export type ItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Item.
+     */
+    data: XOR<ItemCreateInput, ItemUncheckedCreateInput>
+  }
+
+  /**
+   * Item createMany
+   */
+  export type ItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Items.
+     */
+    data: ItemCreateManyInput | ItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Item createManyAndReturn
+   */
+  export type ItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many Items.
+     */
+    data: ItemCreateManyInput | ItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Item update
+   */
+  export type ItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Item.
+     */
+    data: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
+    /**
+     * Choose, which Item to update.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item updateMany
+   */
+  export type ItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Items.
+     */
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
+    /**
+     * Filter which Items to update
+     */
+    where?: ItemWhereInput
+    /**
+     * Limit how many Items to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Item updateManyAndReturn
+   */
+  export type ItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * The data used to update Items.
+     */
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
+    /**
+     * Filter which Items to update
+     */
+    where?: ItemWhereInput
+    /**
+     * Limit how many Items to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Item upsert
+   */
+  export type ItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Item to update in case it exists.
+     */
+    where: ItemWhereUniqueInput
+    /**
+     * In case the Item found by the `where` argument doesn't exist, create a new Item with this data.
+     */
+    create: XOR<ItemCreateInput, ItemUncheckedCreateInput>
+    /**
+     * In case the Item was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
+  }
+
+  /**
+   * Item delete
+   */
+  export type ItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter which Item to delete.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+  /**
+   * Item deleteMany
+   */
+  export type ItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Items to delete
+     */
+    where?: ItemWhereInput
+    /**
+     * Limit how many Items to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Item.owner
+   */
+  export type Item$ownerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Account
+     */
+    omit?: AccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    where?: AccountWhereInput
+  }
+
+  /**
+   * Item.smartLabels
+   */
+  export type Item$smartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SmartLabel
+     */
+    select?: SmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SmartLabel
+     */
+    omit?: SmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SmartLabelInclude<ExtArgs> | null
+    where?: SmartLabelWhereInput
+    orderBy?: SmartLabelOrderByWithRelationInput | SmartLabelOrderByWithRelationInput[]
+    cursor?: SmartLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SmartLabelScalarFieldEnum | SmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Item.transfers
+   */
+  export type Item$transfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    where?: TransferItemWhereInput
+    orderBy?: TransferItemOrderByWithRelationInput | TransferItemOrderByWithRelationInput[]
+    cursor?: TransferItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferItemScalarFieldEnum | TransferItemScalarFieldEnum[]
+  }
+
+  /**
+   * Item without action
+   */
+  export type ItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Item
+     */
+    omit?: ItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Transfer
+   */
+
+  export type AggregateTransfer = {
+    _count: TransferCountAggregateOutputType | null
+    _min: TransferMinAggregateOutputType | null
+    _max: TransferMaxAggregateOutputType | null
+  }
+
+  export type TransferMinAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    sellerId: string | null
+    recieverId: string | null
+    transferType: $Enums.TransferType | null
+    publishTokenId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TransferMaxAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    sellerId: string | null
+    recieverId: string | null
+    transferType: $Enums.TransferType | null
+    publishTokenId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TransferCountAggregateOutputType = {
+    id: number
+    reference: number
+    sellerId: number
+    recieverId: number
+    transferType: number
+    publishTokenId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TransferMinAggregateInputType = {
+    id?: true
+    reference?: true
+    sellerId?: true
+    recieverId?: true
+    transferType?: true
+    publishTokenId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TransferMaxAggregateInputType = {
+    id?: true
+    reference?: true
+    sellerId?: true
+    recieverId?: true
+    transferType?: true
+    publishTokenId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TransferCountAggregateInputType = {
+    id?: true
+    reference?: true
+    sellerId?: true
+    recieverId?: true
+    transferType?: true
+    publishTokenId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TransferAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Transfer to aggregate.
+     */
+    where?: TransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Transfers to fetch.
+     */
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Transfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Transfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Transfers
+    **/
+    _count?: true | TransferCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TransferMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TransferMaxAggregateInputType
+  }
+
+  export type GetTransferAggregateType<T extends TransferAggregateArgs> = {
+        [P in keyof T & keyof AggregateTransfer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTransfer[P]>
+      : GetScalarType<T[P], AggregateTransfer[P]>
+  }
+
+
+
+
+  export type TransferGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferWhereInput
+    orderBy?: TransferOrderByWithAggregationInput | TransferOrderByWithAggregationInput[]
+    by: TransferScalarFieldEnum[] | TransferScalarFieldEnum
+    having?: TransferScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TransferCountAggregateInputType | true
+    _min?: TransferMinAggregateInputType
+    _max?: TransferMaxAggregateInputType
+  }
+
+  export type TransferGroupByOutputType = {
+    id: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TransferCountAggregateOutputType | null
+    _min: TransferMinAggregateOutputType | null
+    _max: TransferMaxAggregateOutputType | null
+  }
+
+  type GetTransferGroupByPayload<T extends TransferGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TransferGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TransferGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TransferGroupByOutputType[P]>
+            : GetScalarType<T[P], TransferGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TransferSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    sellerId?: boolean
+    recieverId?: boolean
+    transferType?: boolean
+    publishTokenId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seller?: boolean | AccountDefaultArgs<ExtArgs>
+    reciever?: boolean | AccountDefaultArgs<ExtArgs>
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    items?: boolean | Transfer$itemsArgs<ExtArgs>
+    smartLabels?: boolean | Transfer$smartLabelsArgs<ExtArgs>
+    _count?: boolean | TransferCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transfer"]>
+
+  export type TransferSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    sellerId?: boolean
+    recieverId?: boolean
+    transferType?: boolean
+    publishTokenId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seller?: boolean | AccountDefaultArgs<ExtArgs>
+    reciever?: boolean | AccountDefaultArgs<ExtArgs>
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transfer"]>
+
+  export type TransferSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    sellerId?: boolean
+    recieverId?: boolean
+    transferType?: boolean
+    publishTokenId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seller?: boolean | AccountDefaultArgs<ExtArgs>
+    reciever?: boolean | AccountDefaultArgs<ExtArgs>
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transfer"]>
+
+  export type TransferSelectScalar = {
+    id?: boolean
+    reference?: boolean
+    sellerId?: boolean
+    recieverId?: boolean
+    transferType?: boolean
+    publishTokenId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TransferOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reference" | "sellerId" | "recieverId" | "transferType" | "publishTokenId" | "createdAt" | "updatedAt", ExtArgs["result"]["transfer"]>
+  export type TransferInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seller?: boolean | AccountDefaultArgs<ExtArgs>
+    reciever?: boolean | AccountDefaultArgs<ExtArgs>
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+    items?: boolean | Transfer$itemsArgs<ExtArgs>
+    smartLabels?: boolean | Transfer$smartLabelsArgs<ExtArgs>
+    _count?: boolean | TransferCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TransferIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seller?: boolean | AccountDefaultArgs<ExtArgs>
+    reciever?: boolean | AccountDefaultArgs<ExtArgs>
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+  }
+  export type TransferIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seller?: boolean | AccountDefaultArgs<ExtArgs>
+    reciever?: boolean | AccountDefaultArgs<ExtArgs>
+    publishToken?: boolean | PublishTokenDefaultArgs<ExtArgs>
+  }
+
+  export type $TransferPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Transfer"
+    objects: {
+      seller: Prisma.$AccountPayload<ExtArgs>
+      reciever: Prisma.$AccountPayload<ExtArgs>
+      publishToken: Prisma.$PublishTokenPayload<ExtArgs>
+      items: Prisma.$TransferItemPayload<ExtArgs>[]
+      smartLabels: Prisma.$TransferSmartLabelPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reference: string
+      sellerId: string
+      recieverId: string
+      transferType: $Enums.TransferType
+      publishTokenId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["transfer"]>
+    composites: {}
+  }
+
+  type TransferGetPayload<S extends boolean | null | undefined | TransferDefaultArgs> = $Result.GetResult<Prisma.$TransferPayload, S>
+
+  type TransferCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TransferFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TransferCountAggregateInputType | true
+    }
+
+  export interface TransferDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Transfer'], meta: { name: 'Transfer' } }
+    /**
+     * Find zero or one Transfer that matches the filter.
+     * @param {TransferFindUniqueArgs} args - Arguments to find a Transfer
+     * @example
+     * // Get one Transfer
+     * const transfer = await prisma.transfer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TransferFindUniqueArgs>(args: SelectSubset<T, TransferFindUniqueArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Transfer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TransferFindUniqueOrThrowArgs} args - Arguments to find a Transfer
+     * @example
+     * // Get one Transfer
+     * const transfer = await prisma.transfer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TransferFindUniqueOrThrowArgs>(args: SelectSubset<T, TransferFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Transfer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferFindFirstArgs} args - Arguments to find a Transfer
+     * @example
+     * // Get one Transfer
+     * const transfer = await prisma.transfer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TransferFindFirstArgs>(args?: SelectSubset<T, TransferFindFirstArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Transfer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferFindFirstOrThrowArgs} args - Arguments to find a Transfer
+     * @example
+     * // Get one Transfer
+     * const transfer = await prisma.transfer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TransferFindFirstOrThrowArgs>(args?: SelectSubset<T, TransferFindFirstOrThrowArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Transfers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Transfers
+     * const transfers = await prisma.transfer.findMany()
+     * 
+     * // Get first 10 Transfers
+     * const transfers = await prisma.transfer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const transferWithIdOnly = await prisma.transfer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TransferFindManyArgs>(args?: SelectSubset<T, TransferFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Transfer.
+     * @param {TransferCreateArgs} args - Arguments to create a Transfer.
+     * @example
+     * // Create one Transfer
+     * const Transfer = await prisma.transfer.create({
+     *   data: {
+     *     // ... data to create a Transfer
+     *   }
+     * })
+     * 
+     */
+    create<T extends TransferCreateArgs>(args: SelectSubset<T, TransferCreateArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Transfers.
+     * @param {TransferCreateManyArgs} args - Arguments to create many Transfers.
+     * @example
+     * // Create many Transfers
+     * const transfer = await prisma.transfer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TransferCreateManyArgs>(args?: SelectSubset<T, TransferCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Transfers and returns the data saved in the database.
+     * @param {TransferCreateManyAndReturnArgs} args - Arguments to create many Transfers.
+     * @example
+     * // Create many Transfers
+     * const transfer = await prisma.transfer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Transfers and only return the `id`
+     * const transferWithIdOnly = await prisma.transfer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TransferCreateManyAndReturnArgs>(args?: SelectSubset<T, TransferCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Transfer.
+     * @param {TransferDeleteArgs} args - Arguments to delete one Transfer.
+     * @example
+     * // Delete one Transfer
+     * const Transfer = await prisma.transfer.delete({
+     *   where: {
+     *     // ... filter to delete one Transfer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TransferDeleteArgs>(args: SelectSubset<T, TransferDeleteArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Transfer.
+     * @param {TransferUpdateArgs} args - Arguments to update one Transfer.
+     * @example
+     * // Update one Transfer
+     * const transfer = await prisma.transfer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TransferUpdateArgs>(args: SelectSubset<T, TransferUpdateArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Transfers.
+     * @param {TransferDeleteManyArgs} args - Arguments to filter Transfers to delete.
+     * @example
+     * // Delete a few Transfers
+     * const { count } = await prisma.transfer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TransferDeleteManyArgs>(args?: SelectSubset<T, TransferDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Transfers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Transfers
+     * const transfer = await prisma.transfer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TransferUpdateManyArgs>(args: SelectSubset<T, TransferUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Transfers and returns the data updated in the database.
+     * @param {TransferUpdateManyAndReturnArgs} args - Arguments to update many Transfers.
+     * @example
+     * // Update many Transfers
+     * const transfer = await prisma.transfer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Transfers and only return the `id`
+     * const transferWithIdOnly = await prisma.transfer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TransferUpdateManyAndReturnArgs>(args: SelectSubset<T, TransferUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Transfer.
+     * @param {TransferUpsertArgs} args - Arguments to update or create a Transfer.
+     * @example
+     * // Update or create a Transfer
+     * const transfer = await prisma.transfer.upsert({
+     *   create: {
+     *     // ... data to create a Transfer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Transfer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TransferUpsertArgs>(args: SelectSubset<T, TransferUpsertArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Transfers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferCountArgs} args - Arguments to filter Transfers to count.
+     * @example
+     * // Count the number of Transfers
+     * const count = await prisma.transfer.count({
+     *   where: {
+     *     // ... the filter for the Transfers we want to count
+     *   }
+     * })
+    **/
+    count<T extends TransferCountArgs>(
+      args?: Subset<T, TransferCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TransferCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Transfer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TransferAggregateArgs>(args: Subset<T, TransferAggregateArgs>): Prisma.PrismaPromise<GetTransferAggregateType<T>>
+
+    /**
+     * Group by Transfer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TransferGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TransferGroupByArgs['orderBy'] }
+        : { orderBy?: TransferGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TransferGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTransferGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Transfer model
+   */
+  readonly fields: TransferFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Transfer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TransferClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    seller<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reciever<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    publishToken<T extends PublishTokenDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PublishTokenDefaultArgs<ExtArgs>>): Prisma__PublishTokenClient<$Result.GetResult<Prisma.$PublishTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends Transfer$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Transfer$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    smartLabels<T extends Transfer$smartLabelsArgs<ExtArgs> = {}>(args?: Subset<T, Transfer$smartLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Transfer model
+   */
+  interface TransferFieldRefs {
+    readonly id: FieldRef<"Transfer", 'String'>
+    readonly reference: FieldRef<"Transfer", 'String'>
+    readonly sellerId: FieldRef<"Transfer", 'String'>
+    readonly recieverId: FieldRef<"Transfer", 'String'>
+    readonly transferType: FieldRef<"Transfer", 'TransferType'>
+    readonly publishTokenId: FieldRef<"Transfer", 'String'>
+    readonly createdAt: FieldRef<"Transfer", 'DateTime'>
+    readonly updatedAt: FieldRef<"Transfer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Transfer findUnique
+   */
+  export type TransferFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * Filter, which Transfer to fetch.
+     */
+    where: TransferWhereUniqueInput
+  }
+
+  /**
+   * Transfer findUniqueOrThrow
+   */
+  export type TransferFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * Filter, which Transfer to fetch.
+     */
+    where: TransferWhereUniqueInput
+  }
+
+  /**
+   * Transfer findFirst
+   */
+  export type TransferFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * Filter, which Transfer to fetch.
+     */
+    where?: TransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Transfers to fetch.
+     */
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Transfers.
+     */
+    cursor?: TransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Transfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Transfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Transfers.
+     */
+    distinct?: TransferScalarFieldEnum | TransferScalarFieldEnum[]
+  }
+
+  /**
+   * Transfer findFirstOrThrow
+   */
+  export type TransferFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * Filter, which Transfer to fetch.
+     */
+    where?: TransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Transfers to fetch.
+     */
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Transfers.
+     */
+    cursor?: TransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Transfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Transfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Transfers.
+     */
+    distinct?: TransferScalarFieldEnum | TransferScalarFieldEnum[]
+  }
+
+  /**
+   * Transfer findMany
+   */
+  export type TransferFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * Filter, which Transfers to fetch.
+     */
+    where?: TransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Transfers to fetch.
+     */
+    orderBy?: TransferOrderByWithRelationInput | TransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Transfers.
+     */
+    cursor?: TransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Transfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Transfers.
+     */
+    skip?: number
+    distinct?: TransferScalarFieldEnum | TransferScalarFieldEnum[]
+  }
+
+  /**
+   * Transfer create
+   */
+  export type TransferCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Transfer.
+     */
+    data: XOR<TransferCreateInput, TransferUncheckedCreateInput>
+  }
+
+  /**
+   * Transfer createMany
+   */
+  export type TransferCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Transfers.
+     */
+    data: TransferCreateManyInput | TransferCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Transfer createManyAndReturn
+   */
+  export type TransferCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * The data used to create many Transfers.
+     */
+    data: TransferCreateManyInput | TransferCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Transfer update
+   */
+  export type TransferUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Transfer.
+     */
+    data: XOR<TransferUpdateInput, TransferUncheckedUpdateInput>
+    /**
+     * Choose, which Transfer to update.
+     */
+    where: TransferWhereUniqueInput
+  }
+
+  /**
+   * Transfer updateMany
+   */
+  export type TransferUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Transfers.
+     */
+    data: XOR<TransferUpdateManyMutationInput, TransferUncheckedUpdateManyInput>
+    /**
+     * Filter which Transfers to update
+     */
+    where?: TransferWhereInput
+    /**
+     * Limit how many Transfers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Transfer updateManyAndReturn
+   */
+  export type TransferUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * The data used to update Transfers.
+     */
+    data: XOR<TransferUpdateManyMutationInput, TransferUncheckedUpdateManyInput>
+    /**
+     * Filter which Transfers to update
+     */
+    where?: TransferWhereInput
+    /**
+     * Limit how many Transfers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Transfer upsert
+   */
+  export type TransferUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Transfer to update in case it exists.
+     */
+    where: TransferWhereUniqueInput
+    /**
+     * In case the Transfer found by the `where` argument doesn't exist, create a new Transfer with this data.
+     */
+    create: XOR<TransferCreateInput, TransferUncheckedCreateInput>
+    /**
+     * In case the Transfer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TransferUpdateInput, TransferUncheckedUpdateInput>
+  }
+
+  /**
+   * Transfer delete
+   */
+  export type TransferDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+    /**
+     * Filter which Transfer to delete.
+     */
+    where: TransferWhereUniqueInput
+  }
+
+  /**
+   * Transfer deleteMany
+   */
+  export type TransferDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Transfers to delete
+     */
+    where?: TransferWhereInput
+    /**
+     * Limit how many Transfers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Transfer.items
+   */
+  export type Transfer$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    where?: TransferItemWhereInput
+    orderBy?: TransferItemOrderByWithRelationInput | TransferItemOrderByWithRelationInput[]
+    cursor?: TransferItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferItemScalarFieldEnum | TransferItemScalarFieldEnum[]
+  }
+
+  /**
+   * Transfer.smartLabels
+   */
+  export type Transfer$smartLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    where?: TransferSmartLabelWhereInput
+    orderBy?: TransferSmartLabelOrderByWithRelationInput | TransferSmartLabelOrderByWithRelationInput[]
+    cursor?: TransferSmartLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransferSmartLabelScalarFieldEnum | TransferSmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Transfer without action
+   */
+  export type TransferDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transfer
+     */
+    select?: TransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transfer
+     */
+    omit?: TransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TransferItem
+   */
+
+  export type AggregateTransferItem = {
+    _count: TransferItemCountAggregateOutputType | null
+    _min: TransferItemMinAggregateOutputType | null
+    _max: TransferItemMaxAggregateOutputType | null
+  }
+
+  export type TransferItemMinAggregateOutputType = {
+    id: string | null
+    transferId: string | null
+    itemId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TransferItemMaxAggregateOutputType = {
+    id: string | null
+    transferId: string | null
+    itemId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TransferItemCountAggregateOutputType = {
+    id: number
+    transferId: number
+    itemId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TransferItemMinAggregateInputType = {
+    id?: true
+    transferId?: true
+    itemId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TransferItemMaxAggregateInputType = {
+    id?: true
+    transferId?: true
+    itemId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TransferItemCountAggregateInputType = {
+    id?: true
+    transferId?: true
+    itemId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TransferItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TransferItem to aggregate.
+     */
+    where?: TransferItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferItems to fetch.
+     */
+    orderBy?: TransferItemOrderByWithRelationInput | TransferItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TransferItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TransferItems
+    **/
+    _count?: true | TransferItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TransferItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TransferItemMaxAggregateInputType
+  }
+
+  export type GetTransferItemAggregateType<T extends TransferItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateTransferItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTransferItem[P]>
+      : GetScalarType<T[P], AggregateTransferItem[P]>
+  }
+
+
+
+
+  export type TransferItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferItemWhereInput
+    orderBy?: TransferItemOrderByWithAggregationInput | TransferItemOrderByWithAggregationInput[]
+    by: TransferItemScalarFieldEnum[] | TransferItemScalarFieldEnum
+    having?: TransferItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TransferItemCountAggregateInputType | true
+    _min?: TransferItemMinAggregateInputType
+    _max?: TransferItemMaxAggregateInputType
+  }
+
+  export type TransferItemGroupByOutputType = {
+    id: string
+    transferId: string
+    itemId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TransferItemCountAggregateOutputType | null
+    _min: TransferItemMinAggregateOutputType | null
+    _max: TransferItemMaxAggregateOutputType | null
+  }
+
+  type GetTransferItemGroupByPayload<T extends TransferItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TransferItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TransferItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TransferItemGroupByOutputType[P]>
+            : GetScalarType<T[P], TransferItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TransferItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    itemId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transferItem"]>
+
+  export type TransferItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    itemId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transferItem"]>
+
+  export type TransferItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    itemId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transferItem"]>
+
+  export type TransferItemSelectScalar = {
+    id?: boolean
+    transferId?: boolean
+    itemId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TransferItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transferId" | "itemId" | "createdAt" | "updatedAt", ExtArgs["result"]["transferItem"]>
+  export type TransferItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type TransferItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type TransferItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+
+  export type $TransferItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TransferItem"
+    objects: {
+      transfer: Prisma.$TransferPayload<ExtArgs>
+      item: Prisma.$ItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      transferId: string
+      itemId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["transferItem"]>
+    composites: {}
+  }
+
+  type TransferItemGetPayload<S extends boolean | null | undefined | TransferItemDefaultArgs> = $Result.GetResult<Prisma.$TransferItemPayload, S>
+
+  type TransferItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TransferItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TransferItemCountAggregateInputType | true
+    }
+
+  export interface TransferItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TransferItem'], meta: { name: 'TransferItem' } }
+    /**
+     * Find zero or one TransferItem that matches the filter.
+     * @param {TransferItemFindUniqueArgs} args - Arguments to find a TransferItem
+     * @example
+     * // Get one TransferItem
+     * const transferItem = await prisma.transferItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TransferItemFindUniqueArgs>(args: SelectSubset<T, TransferItemFindUniqueArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TransferItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TransferItemFindUniqueOrThrowArgs} args - Arguments to find a TransferItem
+     * @example
+     * // Get one TransferItem
+     * const transferItem = await prisma.transferItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TransferItemFindUniqueOrThrowArgs>(args: SelectSubset<T, TransferItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TransferItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemFindFirstArgs} args - Arguments to find a TransferItem
+     * @example
+     * // Get one TransferItem
+     * const transferItem = await prisma.transferItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TransferItemFindFirstArgs>(args?: SelectSubset<T, TransferItemFindFirstArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TransferItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemFindFirstOrThrowArgs} args - Arguments to find a TransferItem
+     * @example
+     * // Get one TransferItem
+     * const transferItem = await prisma.transferItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TransferItemFindFirstOrThrowArgs>(args?: SelectSubset<T, TransferItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TransferItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TransferItems
+     * const transferItems = await prisma.transferItem.findMany()
+     * 
+     * // Get first 10 TransferItems
+     * const transferItems = await prisma.transferItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const transferItemWithIdOnly = await prisma.transferItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TransferItemFindManyArgs>(args?: SelectSubset<T, TransferItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TransferItem.
+     * @param {TransferItemCreateArgs} args - Arguments to create a TransferItem.
+     * @example
+     * // Create one TransferItem
+     * const TransferItem = await prisma.transferItem.create({
+     *   data: {
+     *     // ... data to create a TransferItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends TransferItemCreateArgs>(args: SelectSubset<T, TransferItemCreateArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TransferItems.
+     * @param {TransferItemCreateManyArgs} args - Arguments to create many TransferItems.
+     * @example
+     * // Create many TransferItems
+     * const transferItem = await prisma.transferItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TransferItemCreateManyArgs>(args?: SelectSubset<T, TransferItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TransferItems and returns the data saved in the database.
+     * @param {TransferItemCreateManyAndReturnArgs} args - Arguments to create many TransferItems.
+     * @example
+     * // Create many TransferItems
+     * const transferItem = await prisma.transferItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TransferItems and only return the `id`
+     * const transferItemWithIdOnly = await prisma.transferItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TransferItemCreateManyAndReturnArgs>(args?: SelectSubset<T, TransferItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TransferItem.
+     * @param {TransferItemDeleteArgs} args - Arguments to delete one TransferItem.
+     * @example
+     * // Delete one TransferItem
+     * const TransferItem = await prisma.transferItem.delete({
+     *   where: {
+     *     // ... filter to delete one TransferItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TransferItemDeleteArgs>(args: SelectSubset<T, TransferItemDeleteArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TransferItem.
+     * @param {TransferItemUpdateArgs} args - Arguments to update one TransferItem.
+     * @example
+     * // Update one TransferItem
+     * const transferItem = await prisma.transferItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TransferItemUpdateArgs>(args: SelectSubset<T, TransferItemUpdateArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TransferItems.
+     * @param {TransferItemDeleteManyArgs} args - Arguments to filter TransferItems to delete.
+     * @example
+     * // Delete a few TransferItems
+     * const { count } = await prisma.transferItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TransferItemDeleteManyArgs>(args?: SelectSubset<T, TransferItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TransferItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TransferItems
+     * const transferItem = await prisma.transferItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TransferItemUpdateManyArgs>(args: SelectSubset<T, TransferItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TransferItems and returns the data updated in the database.
+     * @param {TransferItemUpdateManyAndReturnArgs} args - Arguments to update many TransferItems.
+     * @example
+     * // Update many TransferItems
+     * const transferItem = await prisma.transferItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TransferItems and only return the `id`
+     * const transferItemWithIdOnly = await prisma.transferItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TransferItemUpdateManyAndReturnArgs>(args: SelectSubset<T, TransferItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TransferItem.
+     * @param {TransferItemUpsertArgs} args - Arguments to update or create a TransferItem.
+     * @example
+     * // Update or create a TransferItem
+     * const transferItem = await prisma.transferItem.upsert({
+     *   create: {
+     *     // ... data to create a TransferItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TransferItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TransferItemUpsertArgs>(args: SelectSubset<T, TransferItemUpsertArgs<ExtArgs>>): Prisma__TransferItemClient<$Result.GetResult<Prisma.$TransferItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TransferItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemCountArgs} args - Arguments to filter TransferItems to count.
+     * @example
+     * // Count the number of TransferItems
+     * const count = await prisma.transferItem.count({
+     *   where: {
+     *     // ... the filter for the TransferItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends TransferItemCountArgs>(
+      args?: Subset<T, TransferItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TransferItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TransferItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TransferItemAggregateArgs>(args: Subset<T, TransferItemAggregateArgs>): Prisma.PrismaPromise<GetTransferItemAggregateType<T>>
+
+    /**
+     * Group by TransferItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TransferItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TransferItemGroupByArgs['orderBy'] }
+        : { orderBy?: TransferItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TransferItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTransferItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TransferItem model
+   */
+  readonly fields: TransferItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TransferItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TransferItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    transfer<T extends TransferDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TransferDefaultArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TransferItem model
+   */
+  interface TransferItemFieldRefs {
+    readonly id: FieldRef<"TransferItem", 'String'>
+    readonly transferId: FieldRef<"TransferItem", 'String'>
+    readonly itemId: FieldRef<"TransferItem", 'String'>
+    readonly createdAt: FieldRef<"TransferItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"TransferItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TransferItem findUnique
+   */
+  export type TransferItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferItem to fetch.
+     */
+    where: TransferItemWhereUniqueInput
+  }
+
+  /**
+   * TransferItem findUniqueOrThrow
+   */
+  export type TransferItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferItem to fetch.
+     */
+    where: TransferItemWhereUniqueInput
+  }
+
+  /**
+   * TransferItem findFirst
+   */
+  export type TransferItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferItem to fetch.
+     */
+    where?: TransferItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferItems to fetch.
+     */
+    orderBy?: TransferItemOrderByWithRelationInput | TransferItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TransferItems.
+     */
+    cursor?: TransferItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TransferItems.
+     */
+    distinct?: TransferItemScalarFieldEnum | TransferItemScalarFieldEnum[]
+  }
+
+  /**
+   * TransferItem findFirstOrThrow
+   */
+  export type TransferItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferItem to fetch.
+     */
+    where?: TransferItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferItems to fetch.
+     */
+    orderBy?: TransferItemOrderByWithRelationInput | TransferItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TransferItems.
+     */
+    cursor?: TransferItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TransferItems.
+     */
+    distinct?: TransferItemScalarFieldEnum | TransferItemScalarFieldEnum[]
+  }
+
+  /**
+   * TransferItem findMany
+   */
+  export type TransferItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferItems to fetch.
+     */
+    where?: TransferItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferItems to fetch.
+     */
+    orderBy?: TransferItemOrderByWithRelationInput | TransferItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TransferItems.
+     */
+    cursor?: TransferItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferItems.
+     */
+    skip?: number
+    distinct?: TransferItemScalarFieldEnum | TransferItemScalarFieldEnum[]
+  }
+
+  /**
+   * TransferItem create
+   */
+  export type TransferItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TransferItem.
+     */
+    data: XOR<TransferItemCreateInput, TransferItemUncheckedCreateInput>
+  }
+
+  /**
+   * TransferItem createMany
+   */
+  export type TransferItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TransferItems.
+     */
+    data: TransferItemCreateManyInput | TransferItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TransferItem createManyAndReturn
+   */
+  export type TransferItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many TransferItems.
+     */
+    data: TransferItemCreateManyInput | TransferItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TransferItem update
+   */
+  export type TransferItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TransferItem.
+     */
+    data: XOR<TransferItemUpdateInput, TransferItemUncheckedUpdateInput>
+    /**
+     * Choose, which TransferItem to update.
+     */
+    where: TransferItemWhereUniqueInput
+  }
+
+  /**
+   * TransferItem updateMany
+   */
+  export type TransferItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TransferItems.
+     */
+    data: XOR<TransferItemUpdateManyMutationInput, TransferItemUncheckedUpdateManyInput>
+    /**
+     * Filter which TransferItems to update
+     */
+    where?: TransferItemWhereInput
+    /**
+     * Limit how many TransferItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TransferItem updateManyAndReturn
+   */
+  export type TransferItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * The data used to update TransferItems.
+     */
+    data: XOR<TransferItemUpdateManyMutationInput, TransferItemUncheckedUpdateManyInput>
+    /**
+     * Filter which TransferItems to update
+     */
+    where?: TransferItemWhereInput
+    /**
+     * Limit how many TransferItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TransferItem upsert
+   */
+  export type TransferItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TransferItem to update in case it exists.
+     */
+    where: TransferItemWhereUniqueInput
+    /**
+     * In case the TransferItem found by the `where` argument doesn't exist, create a new TransferItem with this data.
+     */
+    create: XOR<TransferItemCreateInput, TransferItemUncheckedCreateInput>
+    /**
+     * In case the TransferItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TransferItemUpdateInput, TransferItemUncheckedUpdateInput>
+  }
+
+  /**
+   * TransferItem delete
+   */
+  export type TransferItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+    /**
+     * Filter which TransferItem to delete.
+     */
+    where: TransferItemWhereUniqueInput
+  }
+
+  /**
+   * TransferItem deleteMany
+   */
+  export type TransferItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TransferItems to delete
+     */
+    where?: TransferItemWhereInput
+    /**
+     * Limit how many TransferItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TransferItem without action
+   */
+  export type TransferItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferItem
+     */
+    select?: TransferItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferItem
+     */
+    omit?: TransferItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TransferSmartLabel
+   */
+
+  export type AggregateTransferSmartLabel = {
+    _count: TransferSmartLabelCountAggregateOutputType | null
+    _min: TransferSmartLabelMinAggregateOutputType | null
+    _max: TransferSmartLabelMaxAggregateOutputType | null
+  }
+
+  export type TransferSmartLabelMinAggregateOutputType = {
+    id: string | null
+    transferId: string | null
+    smartLabelId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TransferSmartLabelMaxAggregateOutputType = {
+    id: string | null
+    transferId: string | null
+    smartLabelId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TransferSmartLabelCountAggregateOutputType = {
+    id: number
+    transferId: number
+    smartLabelId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TransferSmartLabelMinAggregateInputType = {
+    id?: true
+    transferId?: true
+    smartLabelId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TransferSmartLabelMaxAggregateInputType = {
+    id?: true
+    transferId?: true
+    smartLabelId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TransferSmartLabelCountAggregateInputType = {
+    id?: true
+    transferId?: true
+    smartLabelId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TransferSmartLabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TransferSmartLabel to aggregate.
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferSmartLabels to fetch.
+     */
+    orderBy?: TransferSmartLabelOrderByWithRelationInput | TransferSmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TransferSmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferSmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferSmartLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TransferSmartLabels
+    **/
+    _count?: true | TransferSmartLabelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TransferSmartLabelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TransferSmartLabelMaxAggregateInputType
+  }
+
+  export type GetTransferSmartLabelAggregateType<T extends TransferSmartLabelAggregateArgs> = {
+        [P in keyof T & keyof AggregateTransferSmartLabel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTransferSmartLabel[P]>
+      : GetScalarType<T[P], AggregateTransferSmartLabel[P]>
+  }
+
+
+
+
+  export type TransferSmartLabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransferSmartLabelWhereInput
+    orderBy?: TransferSmartLabelOrderByWithAggregationInput | TransferSmartLabelOrderByWithAggregationInput[]
+    by: TransferSmartLabelScalarFieldEnum[] | TransferSmartLabelScalarFieldEnum
+    having?: TransferSmartLabelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TransferSmartLabelCountAggregateInputType | true
+    _min?: TransferSmartLabelMinAggregateInputType
+    _max?: TransferSmartLabelMaxAggregateInputType
+  }
+
+  export type TransferSmartLabelGroupByOutputType = {
+    id: string
+    transferId: string
+    smartLabelId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TransferSmartLabelCountAggregateOutputType | null
+    _min: TransferSmartLabelMinAggregateOutputType | null
+    _max: TransferSmartLabelMaxAggregateOutputType | null
+  }
+
+  type GetTransferSmartLabelGroupByPayload<T extends TransferSmartLabelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TransferSmartLabelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TransferSmartLabelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TransferSmartLabelGroupByOutputType[P]>
+            : GetScalarType<T[P], TransferSmartLabelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TransferSmartLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    smartLabelId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    smartLabel?: boolean | SmartLabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transferSmartLabel"]>
+
+  export type TransferSmartLabelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    smartLabelId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    smartLabel?: boolean | SmartLabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transferSmartLabel"]>
+
+  export type TransferSmartLabelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    smartLabelId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    smartLabel?: boolean | SmartLabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["transferSmartLabel"]>
+
+  export type TransferSmartLabelSelectScalar = {
+    id?: boolean
+    transferId?: boolean
+    smartLabelId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TransferSmartLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transferId" | "smartLabelId" | "createdAt" | "updatedAt", ExtArgs["result"]["transferSmartLabel"]>
+  export type TransferSmartLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    smartLabel?: boolean | SmartLabelDefaultArgs<ExtArgs>
+  }
+  export type TransferSmartLabelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    smartLabel?: boolean | SmartLabelDefaultArgs<ExtArgs>
+  }
+  export type TransferSmartLabelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transfer?: boolean | TransferDefaultArgs<ExtArgs>
+    smartLabel?: boolean | SmartLabelDefaultArgs<ExtArgs>
+  }
+
+  export type $TransferSmartLabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TransferSmartLabel"
+    objects: {
+      transfer: Prisma.$TransferPayload<ExtArgs>
+      smartLabel: Prisma.$SmartLabelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      transferId: string
+      smartLabelId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["transferSmartLabel"]>
+    composites: {}
+  }
+
+  type TransferSmartLabelGetPayload<S extends boolean | null | undefined | TransferSmartLabelDefaultArgs> = $Result.GetResult<Prisma.$TransferSmartLabelPayload, S>
+
+  type TransferSmartLabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TransferSmartLabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TransferSmartLabelCountAggregateInputType | true
+    }
+
+  export interface TransferSmartLabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TransferSmartLabel'], meta: { name: 'TransferSmartLabel' } }
+    /**
+     * Find zero or one TransferSmartLabel that matches the filter.
+     * @param {TransferSmartLabelFindUniqueArgs} args - Arguments to find a TransferSmartLabel
+     * @example
+     * // Get one TransferSmartLabel
+     * const transferSmartLabel = await prisma.transferSmartLabel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TransferSmartLabelFindUniqueArgs>(args: SelectSubset<T, TransferSmartLabelFindUniqueArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TransferSmartLabel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TransferSmartLabelFindUniqueOrThrowArgs} args - Arguments to find a TransferSmartLabel
+     * @example
+     * // Get one TransferSmartLabel
+     * const transferSmartLabel = await prisma.transferSmartLabel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TransferSmartLabelFindUniqueOrThrowArgs>(args: SelectSubset<T, TransferSmartLabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TransferSmartLabel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelFindFirstArgs} args - Arguments to find a TransferSmartLabel
+     * @example
+     * // Get one TransferSmartLabel
+     * const transferSmartLabel = await prisma.transferSmartLabel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TransferSmartLabelFindFirstArgs>(args?: SelectSubset<T, TransferSmartLabelFindFirstArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TransferSmartLabel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelFindFirstOrThrowArgs} args - Arguments to find a TransferSmartLabel
+     * @example
+     * // Get one TransferSmartLabel
+     * const transferSmartLabel = await prisma.transferSmartLabel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TransferSmartLabelFindFirstOrThrowArgs>(args?: SelectSubset<T, TransferSmartLabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TransferSmartLabels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TransferSmartLabels
+     * const transferSmartLabels = await prisma.transferSmartLabel.findMany()
+     * 
+     * // Get first 10 TransferSmartLabels
+     * const transferSmartLabels = await prisma.transferSmartLabel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const transferSmartLabelWithIdOnly = await prisma.transferSmartLabel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TransferSmartLabelFindManyArgs>(args?: SelectSubset<T, TransferSmartLabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TransferSmartLabel.
+     * @param {TransferSmartLabelCreateArgs} args - Arguments to create a TransferSmartLabel.
+     * @example
+     * // Create one TransferSmartLabel
+     * const TransferSmartLabel = await prisma.transferSmartLabel.create({
+     *   data: {
+     *     // ... data to create a TransferSmartLabel
+     *   }
+     * })
+     * 
+     */
+    create<T extends TransferSmartLabelCreateArgs>(args: SelectSubset<T, TransferSmartLabelCreateArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TransferSmartLabels.
+     * @param {TransferSmartLabelCreateManyArgs} args - Arguments to create many TransferSmartLabels.
+     * @example
+     * // Create many TransferSmartLabels
+     * const transferSmartLabel = await prisma.transferSmartLabel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TransferSmartLabelCreateManyArgs>(args?: SelectSubset<T, TransferSmartLabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TransferSmartLabels and returns the data saved in the database.
+     * @param {TransferSmartLabelCreateManyAndReturnArgs} args - Arguments to create many TransferSmartLabels.
+     * @example
+     * // Create many TransferSmartLabels
+     * const transferSmartLabel = await prisma.transferSmartLabel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TransferSmartLabels and only return the `id`
+     * const transferSmartLabelWithIdOnly = await prisma.transferSmartLabel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TransferSmartLabelCreateManyAndReturnArgs>(args?: SelectSubset<T, TransferSmartLabelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TransferSmartLabel.
+     * @param {TransferSmartLabelDeleteArgs} args - Arguments to delete one TransferSmartLabel.
+     * @example
+     * // Delete one TransferSmartLabel
+     * const TransferSmartLabel = await prisma.transferSmartLabel.delete({
+     *   where: {
+     *     // ... filter to delete one TransferSmartLabel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TransferSmartLabelDeleteArgs>(args: SelectSubset<T, TransferSmartLabelDeleteArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TransferSmartLabel.
+     * @param {TransferSmartLabelUpdateArgs} args - Arguments to update one TransferSmartLabel.
+     * @example
+     * // Update one TransferSmartLabel
+     * const transferSmartLabel = await prisma.transferSmartLabel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TransferSmartLabelUpdateArgs>(args: SelectSubset<T, TransferSmartLabelUpdateArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TransferSmartLabels.
+     * @param {TransferSmartLabelDeleteManyArgs} args - Arguments to filter TransferSmartLabels to delete.
+     * @example
+     * // Delete a few TransferSmartLabels
+     * const { count } = await prisma.transferSmartLabel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TransferSmartLabelDeleteManyArgs>(args?: SelectSubset<T, TransferSmartLabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TransferSmartLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TransferSmartLabels
+     * const transferSmartLabel = await prisma.transferSmartLabel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TransferSmartLabelUpdateManyArgs>(args: SelectSubset<T, TransferSmartLabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TransferSmartLabels and returns the data updated in the database.
+     * @param {TransferSmartLabelUpdateManyAndReturnArgs} args - Arguments to update many TransferSmartLabels.
+     * @example
+     * // Update many TransferSmartLabels
+     * const transferSmartLabel = await prisma.transferSmartLabel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TransferSmartLabels and only return the `id`
+     * const transferSmartLabelWithIdOnly = await prisma.transferSmartLabel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TransferSmartLabelUpdateManyAndReturnArgs>(args: SelectSubset<T, TransferSmartLabelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TransferSmartLabel.
+     * @param {TransferSmartLabelUpsertArgs} args - Arguments to update or create a TransferSmartLabel.
+     * @example
+     * // Update or create a TransferSmartLabel
+     * const transferSmartLabel = await prisma.transferSmartLabel.upsert({
+     *   create: {
+     *     // ... data to create a TransferSmartLabel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TransferSmartLabel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TransferSmartLabelUpsertArgs>(args: SelectSubset<T, TransferSmartLabelUpsertArgs<ExtArgs>>): Prisma__TransferSmartLabelClient<$Result.GetResult<Prisma.$TransferSmartLabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TransferSmartLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelCountArgs} args - Arguments to filter TransferSmartLabels to count.
+     * @example
+     * // Count the number of TransferSmartLabels
+     * const count = await prisma.transferSmartLabel.count({
+     *   where: {
+     *     // ... the filter for the TransferSmartLabels we want to count
+     *   }
+     * })
+    **/
+    count<T extends TransferSmartLabelCountArgs>(
+      args?: Subset<T, TransferSmartLabelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TransferSmartLabelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TransferSmartLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TransferSmartLabelAggregateArgs>(args: Subset<T, TransferSmartLabelAggregateArgs>): Prisma.PrismaPromise<GetTransferSmartLabelAggregateType<T>>
+
+    /**
+     * Group by TransferSmartLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TransferSmartLabelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TransferSmartLabelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TransferSmartLabelGroupByArgs['orderBy'] }
+        : { orderBy?: TransferSmartLabelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TransferSmartLabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTransferSmartLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TransferSmartLabel model
+   */
+  readonly fields: TransferSmartLabelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TransferSmartLabel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TransferSmartLabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    transfer<T extends TransferDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TransferDefaultArgs<ExtArgs>>): Prisma__TransferClient<$Result.GetResult<Prisma.$TransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    smartLabel<T extends SmartLabelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SmartLabelDefaultArgs<ExtArgs>>): Prisma__SmartLabelClient<$Result.GetResult<Prisma.$SmartLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TransferSmartLabel model
+   */
+  interface TransferSmartLabelFieldRefs {
+    readonly id: FieldRef<"TransferSmartLabel", 'String'>
+    readonly transferId: FieldRef<"TransferSmartLabel", 'String'>
+    readonly smartLabelId: FieldRef<"TransferSmartLabel", 'String'>
+    readonly createdAt: FieldRef<"TransferSmartLabel", 'DateTime'>
+    readonly updatedAt: FieldRef<"TransferSmartLabel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TransferSmartLabel findUnique
+   */
+  export type TransferSmartLabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferSmartLabel to fetch.
+     */
+    where: TransferSmartLabelWhereUniqueInput
+  }
+
+  /**
+   * TransferSmartLabel findUniqueOrThrow
+   */
+  export type TransferSmartLabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferSmartLabel to fetch.
+     */
+    where: TransferSmartLabelWhereUniqueInput
+  }
+
+  /**
+   * TransferSmartLabel findFirst
+   */
+  export type TransferSmartLabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferSmartLabel to fetch.
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferSmartLabels to fetch.
+     */
+    orderBy?: TransferSmartLabelOrderByWithRelationInput | TransferSmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TransferSmartLabels.
+     */
+    cursor?: TransferSmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferSmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferSmartLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TransferSmartLabels.
+     */
+    distinct?: TransferSmartLabelScalarFieldEnum | TransferSmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * TransferSmartLabel findFirstOrThrow
+   */
+  export type TransferSmartLabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferSmartLabel to fetch.
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferSmartLabels to fetch.
+     */
+    orderBy?: TransferSmartLabelOrderByWithRelationInput | TransferSmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TransferSmartLabels.
+     */
+    cursor?: TransferSmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferSmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferSmartLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TransferSmartLabels.
+     */
+    distinct?: TransferSmartLabelScalarFieldEnum | TransferSmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * TransferSmartLabel findMany
+   */
+  export type TransferSmartLabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which TransferSmartLabels to fetch.
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TransferSmartLabels to fetch.
+     */
+    orderBy?: TransferSmartLabelOrderByWithRelationInput | TransferSmartLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TransferSmartLabels.
+     */
+    cursor?: TransferSmartLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TransferSmartLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TransferSmartLabels.
+     */
+    skip?: number
+    distinct?: TransferSmartLabelScalarFieldEnum | TransferSmartLabelScalarFieldEnum[]
+  }
+
+  /**
+   * TransferSmartLabel create
+   */
+  export type TransferSmartLabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TransferSmartLabel.
+     */
+    data: XOR<TransferSmartLabelCreateInput, TransferSmartLabelUncheckedCreateInput>
+  }
+
+  /**
+   * TransferSmartLabel createMany
+   */
+  export type TransferSmartLabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TransferSmartLabels.
+     */
+    data: TransferSmartLabelCreateManyInput | TransferSmartLabelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TransferSmartLabel createManyAndReturn
+   */
+  export type TransferSmartLabelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * The data used to create many TransferSmartLabels.
+     */
+    data: TransferSmartLabelCreateManyInput | TransferSmartLabelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TransferSmartLabel update
+   */
+  export type TransferSmartLabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TransferSmartLabel.
+     */
+    data: XOR<TransferSmartLabelUpdateInput, TransferSmartLabelUncheckedUpdateInput>
+    /**
+     * Choose, which TransferSmartLabel to update.
+     */
+    where: TransferSmartLabelWhereUniqueInput
+  }
+
+  /**
+   * TransferSmartLabel updateMany
+   */
+  export type TransferSmartLabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TransferSmartLabels.
+     */
+    data: XOR<TransferSmartLabelUpdateManyMutationInput, TransferSmartLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which TransferSmartLabels to update
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * Limit how many TransferSmartLabels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TransferSmartLabel updateManyAndReturn
+   */
+  export type TransferSmartLabelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * The data used to update TransferSmartLabels.
+     */
+    data: XOR<TransferSmartLabelUpdateManyMutationInput, TransferSmartLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which TransferSmartLabels to update
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * Limit how many TransferSmartLabels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TransferSmartLabel upsert
+   */
+  export type TransferSmartLabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TransferSmartLabel to update in case it exists.
+     */
+    where: TransferSmartLabelWhereUniqueInput
+    /**
+     * In case the TransferSmartLabel found by the `where` argument doesn't exist, create a new TransferSmartLabel with this data.
+     */
+    create: XOR<TransferSmartLabelCreateInput, TransferSmartLabelUncheckedCreateInput>
+    /**
+     * In case the TransferSmartLabel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TransferSmartLabelUpdateInput, TransferSmartLabelUncheckedUpdateInput>
+  }
+
+  /**
+   * TransferSmartLabel delete
+   */
+  export type TransferSmartLabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+    /**
+     * Filter which TransferSmartLabel to delete.
+     */
+    where: TransferSmartLabelWhereUniqueInput
+  }
+
+  /**
+   * TransferSmartLabel deleteMany
+   */
+  export type TransferSmartLabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TransferSmartLabels to delete
+     */
+    where?: TransferSmartLabelWhereInput
+    /**
+     * Limit how many TransferSmartLabels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TransferSmartLabel without action
+   */
+  export type TransferSmartLabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TransferSmartLabel
+     */
+    select?: TransferSmartLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TransferSmartLabel
+     */
+    omit?: TransferSmartLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransferSmartLabelInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8493,6 +16470,8 @@ export namespace Prisma {
     name: 'name',
     isActive: 'isActive',
     activationLink: 'activationLink',
+    publicKey: 'publicKey',
+    pccCloudId: 'pccCloudId',
     createdById: 'createdById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -8501,10 +16480,25 @@ export namespace Prisma {
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
 
 
+  export const PublishTokenScalarFieldEnum: {
+    id: 'id',
+    token: 'token',
+    accountId: 'accountId',
+    isClaimed: 'isClaimed',
+    isActive: 'isActive',
+    isArchived: 'isArchived',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PublishTokenScalarFieldEnum = (typeof PublishTokenScalarFieldEnum)[keyof typeof PublishTokenScalarFieldEnum]
+
+
   export const AccountActivationScalarFieldEnum: {
     id: 'id',
     accountId: 'accountId',
     email: 'email',
+    name: 'name',
     code: 'code',
     activationLink: 'activationLink',
     issueDate: 'issueDate',
@@ -8535,6 +16529,7 @@ export namespace Prisma {
     id: 'id',
     accountId: 'accountId',
     deviceId: 'deviceId',
+    pccCloudId: 'pccCloudId',
     isActive: 'isActive',
     createdById: 'createdById',
     createdAt: 'createdAt',
@@ -8544,12 +16539,91 @@ export namespace Prisma {
   export type AccountDevicesScalarFieldEnum = (typeof AccountDevicesScalarFieldEnum)[keyof typeof AccountDevicesScalarFieldEnum]
 
 
+  export const SmartLabelScalarFieldEnum: {
+    id: 'id',
+    serial: 'serial',
+    reference: 'reference',
+    name: 'name',
+    description: 'description',
+    payload: 'payload',
+    source: 'source',
+    publishTokenId: 'publishTokenId',
+    ownerId: 'ownerId',
+    registeredById: 'registeredById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    itemId: 'itemId'
+  };
+
+  export type SmartLabelScalarFieldEnum = (typeof SmartLabelScalarFieldEnum)[keyof typeof SmartLabelScalarFieldEnum]
+
+
+  export const ItemScalarFieldEnum: {
+    id: 'id',
+    serial: 'serial',
+    name: 'name',
+    description: 'description',
+    payload: 'payload',
+    publishTokenId: 'publishTokenId',
+    ownerId: 'ownerId',
+    registeredById: 'registeredById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+  export const TransferScalarFieldEnum: {
+    id: 'id',
+    reference: 'reference',
+    sellerId: 'sellerId',
+    recieverId: 'recieverId',
+    transferType: 'transferType',
+    publishTokenId: 'publishTokenId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TransferScalarFieldEnum = (typeof TransferScalarFieldEnum)[keyof typeof TransferScalarFieldEnum]
+
+
+  export const TransferItemScalarFieldEnum: {
+    id: 'id',
+    transferId: 'transferId',
+    itemId: 'itemId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TransferItemScalarFieldEnum = (typeof TransferItemScalarFieldEnum)[keyof typeof TransferItemScalarFieldEnum]
+
+
+  export const TransferSmartLabelScalarFieldEnum: {
+    id: 'id',
+    transferId: 'transferId',
+    smartLabelId: 'smartLabelId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TransferSmartLabelScalarFieldEnum = (typeof TransferSmartLabelScalarFieldEnum)[keyof typeof TransferSmartLabelScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -8566,6 +16640,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -8647,6 +16730,34 @@ export namespace Prisma {
    * Reference to a field of type 'PermissionType[]'
    */
   export type ListEnumPermissionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PermissionType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransferType'
+   */
+  export type EnumTransferTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransferType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransferType[]'
+   */
+  export type ListEnumTransferTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransferType[]'>
     
 
 
@@ -8840,12 +16951,21 @@ export namespace Prisma {
     name?: StringFilter<"Account"> | string
     isActive?: BoolFilter<"Account"> | boolean
     activationLink?: StringNullableFilter<"Account"> | string | null
+    publicKey?: StringNullableFilter<"Account"> | string | null
+    pccCloudId?: StringNullableFilter<"Account"> | string | null
     createdById?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     devices?: AccountDevicesListRelationFilter
     activations?: AccountActivationListRelationFilter
+    ownedSmartLabels?: SmartLabelListRelationFilter
+    registeredSmartLabels?: SmartLabelListRelationFilter
+    ownedItems?: ItemListRelationFilter
+    registeredItems?: ItemListRelationFilter
+    transferOut?: TransferListRelationFilter
+    transferIn?: TransferListRelationFilter
+    publishTokens?: PublishTokenListRelationFilter
   }
 
   export type AccountOrderByWithRelationInput = {
@@ -8853,12 +16973,21 @@ export namespace Prisma {
     name?: SortOrder
     isActive?: SortOrder
     activationLink?: SortOrderInput | SortOrder
+    publicKey?: SortOrderInput | SortOrder
+    pccCloudId?: SortOrderInput | SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdBy?: UserOrderByWithRelationInput
     devices?: AccountDevicesOrderByRelationAggregateInput
     activations?: AccountActivationOrderByRelationAggregateInput
+    ownedSmartLabels?: SmartLabelOrderByRelationAggregateInput
+    registeredSmartLabels?: SmartLabelOrderByRelationAggregateInput
+    ownedItems?: ItemOrderByRelationAggregateInput
+    registeredItems?: ItemOrderByRelationAggregateInput
+    transferOut?: TransferOrderByRelationAggregateInput
+    transferIn?: TransferOrderByRelationAggregateInput
+    publishTokens?: PublishTokenOrderByRelationAggregateInput
   }
 
   export type AccountWhereUniqueInput = Prisma.AtLeast<{
@@ -8869,12 +16998,21 @@ export namespace Prisma {
     name?: StringFilter<"Account"> | string
     isActive?: BoolFilter<"Account"> | boolean
     activationLink?: StringNullableFilter<"Account"> | string | null
+    publicKey?: StringNullableFilter<"Account"> | string | null
+    pccCloudId?: StringNullableFilter<"Account"> | string | null
     createdById?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     devices?: AccountDevicesListRelationFilter
     activations?: AccountActivationListRelationFilter
+    ownedSmartLabels?: SmartLabelListRelationFilter
+    registeredSmartLabels?: SmartLabelListRelationFilter
+    ownedItems?: ItemListRelationFilter
+    registeredItems?: ItemListRelationFilter
+    transferOut?: TransferListRelationFilter
+    transferIn?: TransferListRelationFilter
+    publishTokens?: PublishTokenListRelationFilter
   }, "id">
 
   export type AccountOrderByWithAggregationInput = {
@@ -8882,6 +17020,8 @@ export namespace Prisma {
     name?: SortOrder
     isActive?: SortOrder
     activationLink?: SortOrderInput | SortOrder
+    publicKey?: SortOrderInput | SortOrder
+    pccCloudId?: SortOrderInput | SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8898,9 +17038,90 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Account"> | string
     isActive?: BoolWithAggregatesFilter<"Account"> | boolean
     activationLink?: StringNullableWithAggregatesFilter<"Account"> | string | null
+    publicKey?: StringNullableWithAggregatesFilter<"Account"> | string | null
+    pccCloudId?: StringNullableWithAggregatesFilter<"Account"> | string | null
     createdById?: StringWithAggregatesFilter<"Account"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+  }
+
+  export type PublishTokenWhereInput = {
+    AND?: PublishTokenWhereInput | PublishTokenWhereInput[]
+    OR?: PublishTokenWhereInput[]
+    NOT?: PublishTokenWhereInput | PublishTokenWhereInput[]
+    id?: StringFilter<"PublishToken"> | string
+    token?: StringFilter<"PublishToken"> | string
+    accountId?: StringFilter<"PublishToken"> | string
+    isClaimed?: BoolFilter<"PublishToken"> | boolean
+    isActive?: BoolFilter<"PublishToken"> | boolean
+    isArchived?: BoolFilter<"PublishToken"> | boolean
+    createdAt?: DateTimeFilter<"PublishToken"> | Date | string
+    updatedAt?: DateTimeFilter<"PublishToken"> | Date | string
+    account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    smartLabels?: SmartLabelListRelationFilter
+    items?: ItemListRelationFilter
+    transfers?: TransferListRelationFilter
+  }
+
+  export type PublishTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    accountId?: SortOrder
+    isClaimed?: SortOrder
+    isActive?: SortOrder
+    isArchived?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    account?: AccountOrderByWithRelationInput
+    smartLabels?: SmartLabelOrderByRelationAggregateInput
+    items?: ItemOrderByRelationAggregateInput
+    transfers?: TransferOrderByRelationAggregateInput
+  }
+
+  export type PublishTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PublishTokenWhereInput | PublishTokenWhereInput[]
+    OR?: PublishTokenWhereInput[]
+    NOT?: PublishTokenWhereInput | PublishTokenWhereInput[]
+    token?: StringFilter<"PublishToken"> | string
+    accountId?: StringFilter<"PublishToken"> | string
+    isClaimed?: BoolFilter<"PublishToken"> | boolean
+    isActive?: BoolFilter<"PublishToken"> | boolean
+    isArchived?: BoolFilter<"PublishToken"> | boolean
+    createdAt?: DateTimeFilter<"PublishToken"> | Date | string
+    updatedAt?: DateTimeFilter<"PublishToken"> | Date | string
+    account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    smartLabels?: SmartLabelListRelationFilter
+    items?: ItemListRelationFilter
+    transfers?: TransferListRelationFilter
+  }, "id">
+
+  export type PublishTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    accountId?: SortOrder
+    isClaimed?: SortOrder
+    isActive?: SortOrder
+    isArchived?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PublishTokenCountOrderByAggregateInput
+    _max?: PublishTokenMaxOrderByAggregateInput
+    _min?: PublishTokenMinOrderByAggregateInput
+  }
+
+  export type PublishTokenScalarWhereWithAggregatesInput = {
+    AND?: PublishTokenScalarWhereWithAggregatesInput | PublishTokenScalarWhereWithAggregatesInput[]
+    OR?: PublishTokenScalarWhereWithAggregatesInput[]
+    NOT?: PublishTokenScalarWhereWithAggregatesInput | PublishTokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PublishToken"> | string
+    token?: StringWithAggregatesFilter<"PublishToken"> | string
+    accountId?: StringWithAggregatesFilter<"PublishToken"> | string
+    isClaimed?: BoolWithAggregatesFilter<"PublishToken"> | boolean
+    isActive?: BoolWithAggregatesFilter<"PublishToken"> | boolean
+    isArchived?: BoolWithAggregatesFilter<"PublishToken"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"PublishToken"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PublishToken"> | Date | string
   }
 
   export type AccountActivationWhereInput = {
@@ -8910,6 +17131,7 @@ export namespace Prisma {
     id?: StringFilter<"AccountActivation"> | string
     accountId?: StringFilter<"AccountActivation"> | string
     email?: StringFilter<"AccountActivation"> | string
+    name?: StringNullableFilter<"AccountActivation"> | string | null
     code?: StringFilter<"AccountActivation"> | string
     activationLink?: StringFilter<"AccountActivation"> | string
     issueDate?: DateTimeFilter<"AccountActivation"> | Date | string
@@ -8927,6 +17149,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     email?: SortOrder
+    name?: SortOrderInput | SortOrder
     code?: SortOrder
     activationLink?: SortOrder
     issueDate?: SortOrder
@@ -8947,6 +17170,7 @@ export namespace Prisma {
     NOT?: AccountActivationWhereInput | AccountActivationWhereInput[]
     accountId?: StringFilter<"AccountActivation"> | string
     email?: StringFilter<"AccountActivation"> | string
+    name?: StringNullableFilter<"AccountActivation"> | string | null
     code?: StringFilter<"AccountActivation"> | string
     activationLink?: StringFilter<"AccountActivation"> | string
     issueDate?: DateTimeFilter<"AccountActivation"> | Date | string
@@ -8964,6 +17188,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     email?: SortOrder
+    name?: SortOrderInput | SortOrder
     code?: SortOrder
     activationLink?: SortOrder
     issueDate?: SortOrder
@@ -8985,6 +17210,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"AccountActivation"> | string
     accountId?: StringWithAggregatesFilter<"AccountActivation"> | string
     email?: StringWithAggregatesFilter<"AccountActivation"> | string
+    name?: StringNullableWithAggregatesFilter<"AccountActivation"> | string | null
     code?: StringWithAggregatesFilter<"AccountActivation"> | string
     activationLink?: StringWithAggregatesFilter<"AccountActivation"> | string
     issueDate?: DateTimeWithAggregatesFilter<"AccountActivation"> | Date | string
@@ -9066,6 +17292,7 @@ export namespace Prisma {
     id?: StringFilter<"AccountDevices"> | string
     accountId?: StringFilter<"AccountDevices"> | string
     deviceId?: StringFilter<"AccountDevices"> | string
+    pccCloudId?: StringNullableFilter<"AccountDevices"> | string | null
     isActive?: BoolFilter<"AccountDevices"> | boolean
     createdById?: StringFilter<"AccountDevices"> | string
     createdAt?: DateTimeFilter<"AccountDevices"> | Date | string
@@ -9079,6 +17306,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     deviceId?: SortOrder
+    pccCloudId?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -9096,6 +17324,7 @@ export namespace Prisma {
     NOT?: AccountDevicesWhereInput | AccountDevicesWhereInput[]
     accountId?: StringFilter<"AccountDevices"> | string
     deviceId?: StringFilter<"AccountDevices"> | string
+    pccCloudId?: StringNullableFilter<"AccountDevices"> | string | null
     isActive?: BoolFilter<"AccountDevices"> | boolean
     createdById?: StringFilter<"AccountDevices"> | string
     createdAt?: DateTimeFilter<"AccountDevices"> | Date | string
@@ -9109,6 +17338,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     deviceId?: SortOrder
+    pccCloudId?: SortOrderInput | SortOrder
     isActive?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -9125,10 +17355,408 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"AccountDevices"> | string
     accountId?: StringWithAggregatesFilter<"AccountDevices"> | string
     deviceId?: StringWithAggregatesFilter<"AccountDevices"> | string
+    pccCloudId?: StringNullableWithAggregatesFilter<"AccountDevices"> | string | null
     isActive?: BoolWithAggregatesFilter<"AccountDevices"> | boolean
     createdById?: StringWithAggregatesFilter<"AccountDevices"> | string
     createdAt?: DateTimeWithAggregatesFilter<"AccountDevices"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AccountDevices"> | Date | string
+  }
+
+  export type SmartLabelWhereInput = {
+    AND?: SmartLabelWhereInput | SmartLabelWhereInput[]
+    OR?: SmartLabelWhereInput[]
+    NOT?: SmartLabelWhereInput | SmartLabelWhereInput[]
+    id?: StringFilter<"SmartLabel"> | string
+    serial?: StringFilter<"SmartLabel"> | string
+    reference?: StringNullableFilter<"SmartLabel"> | string | null
+    name?: StringNullableFilter<"SmartLabel"> | string | null
+    description?: StringNullableFilter<"SmartLabel"> | string | null
+    payload?: JsonNullableFilter<"SmartLabel">
+    source?: StringNullableFilter<"SmartLabel"> | string | null
+    publishTokenId?: StringFilter<"SmartLabel"> | string
+    ownerId?: StringNullableFilter<"SmartLabel"> | string | null
+    registeredById?: StringFilter<"SmartLabel"> | string
+    createdAt?: DateTimeFilter<"SmartLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"SmartLabel"> | Date | string
+    itemId?: StringNullableFilter<"SmartLabel"> | string | null
+    publishToken?: XOR<PublishTokenScalarRelationFilter, PublishTokenWhereInput>
+    owner?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
+    registeredBy?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    item?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
+    transfers?: TransferSmartLabelListRelationFilter
+  }
+
+  export type SmartLabelOrderByWithRelationInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    reference?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    payload?: SortOrderInput | SortOrder
+    source?: SortOrderInput | SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    itemId?: SortOrderInput | SortOrder
+    publishToken?: PublishTokenOrderByWithRelationInput
+    owner?: AccountOrderByWithRelationInput
+    registeredBy?: AccountOrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
+    transfers?: TransferSmartLabelOrderByRelationAggregateInput
+  }
+
+  export type SmartLabelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    serial?: string
+    AND?: SmartLabelWhereInput | SmartLabelWhereInput[]
+    OR?: SmartLabelWhereInput[]
+    NOT?: SmartLabelWhereInput | SmartLabelWhereInput[]
+    reference?: StringNullableFilter<"SmartLabel"> | string | null
+    name?: StringNullableFilter<"SmartLabel"> | string | null
+    description?: StringNullableFilter<"SmartLabel"> | string | null
+    payload?: JsonNullableFilter<"SmartLabel">
+    source?: StringNullableFilter<"SmartLabel"> | string | null
+    publishTokenId?: StringFilter<"SmartLabel"> | string
+    ownerId?: StringNullableFilter<"SmartLabel"> | string | null
+    registeredById?: StringFilter<"SmartLabel"> | string
+    createdAt?: DateTimeFilter<"SmartLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"SmartLabel"> | Date | string
+    itemId?: StringNullableFilter<"SmartLabel"> | string | null
+    publishToken?: XOR<PublishTokenScalarRelationFilter, PublishTokenWhereInput>
+    owner?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
+    registeredBy?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    item?: XOR<ItemNullableScalarRelationFilter, ItemWhereInput> | null
+    transfers?: TransferSmartLabelListRelationFilter
+  }, "id" | "serial">
+
+  export type SmartLabelOrderByWithAggregationInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    reference?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    payload?: SortOrderInput | SortOrder
+    source?: SortOrderInput | SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    itemId?: SortOrderInput | SortOrder
+    _count?: SmartLabelCountOrderByAggregateInput
+    _max?: SmartLabelMaxOrderByAggregateInput
+    _min?: SmartLabelMinOrderByAggregateInput
+  }
+
+  export type SmartLabelScalarWhereWithAggregatesInput = {
+    AND?: SmartLabelScalarWhereWithAggregatesInput | SmartLabelScalarWhereWithAggregatesInput[]
+    OR?: SmartLabelScalarWhereWithAggregatesInput[]
+    NOT?: SmartLabelScalarWhereWithAggregatesInput | SmartLabelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SmartLabel"> | string
+    serial?: StringWithAggregatesFilter<"SmartLabel"> | string
+    reference?: StringNullableWithAggregatesFilter<"SmartLabel"> | string | null
+    name?: StringNullableWithAggregatesFilter<"SmartLabel"> | string | null
+    description?: StringNullableWithAggregatesFilter<"SmartLabel"> | string | null
+    payload?: JsonNullableWithAggregatesFilter<"SmartLabel">
+    source?: StringNullableWithAggregatesFilter<"SmartLabel"> | string | null
+    publishTokenId?: StringWithAggregatesFilter<"SmartLabel"> | string
+    ownerId?: StringNullableWithAggregatesFilter<"SmartLabel"> | string | null
+    registeredById?: StringWithAggregatesFilter<"SmartLabel"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SmartLabel"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SmartLabel"> | Date | string
+    itemId?: StringNullableWithAggregatesFilter<"SmartLabel"> | string | null
+  }
+
+  export type ItemWhereInput = {
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    id?: StringFilter<"Item"> | string
+    serial?: StringFilter<"Item"> | string
+    name?: StringFilter<"Item"> | string
+    description?: StringFilter<"Item"> | string
+    payload?: JsonNullableFilter<"Item">
+    publishTokenId?: StringFilter<"Item"> | string
+    ownerId?: StringNullableFilter<"Item"> | string | null
+    registeredById?: StringFilter<"Item"> | string
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+    publishToken?: XOR<PublishTokenScalarRelationFilter, PublishTokenWhereInput>
+    owner?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
+    registeredBy?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    smartLabels?: SmartLabelListRelationFilter
+    transfers?: TransferItemListRelationFilter
+  }
+
+  export type ItemOrderByWithRelationInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    payload?: SortOrderInput | SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    publishToken?: PublishTokenOrderByWithRelationInput
+    owner?: AccountOrderByWithRelationInput
+    registeredBy?: AccountOrderByWithRelationInput
+    smartLabels?: SmartLabelOrderByRelationAggregateInput
+    transfers?: TransferItemOrderByRelationAggregateInput
+  }
+
+  export type ItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    serial?: string
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    name?: StringFilter<"Item"> | string
+    description?: StringFilter<"Item"> | string
+    payload?: JsonNullableFilter<"Item">
+    publishTokenId?: StringFilter<"Item"> | string
+    ownerId?: StringNullableFilter<"Item"> | string | null
+    registeredById?: StringFilter<"Item"> | string
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+    publishToken?: XOR<PublishTokenScalarRelationFilter, PublishTokenWhereInput>
+    owner?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
+    registeredBy?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    smartLabels?: SmartLabelListRelationFilter
+    transfers?: TransferItemListRelationFilter
+  }, "id" | "serial">
+
+  export type ItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    payload?: SortOrderInput | SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ItemCountOrderByAggregateInput
+    _max?: ItemMaxOrderByAggregateInput
+    _min?: ItemMinOrderByAggregateInput
+  }
+
+  export type ItemScalarWhereWithAggregatesInput = {
+    AND?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    OR?: ItemScalarWhereWithAggregatesInput[]
+    NOT?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Item"> | string
+    serial?: StringWithAggregatesFilter<"Item"> | string
+    name?: StringWithAggregatesFilter<"Item"> | string
+    description?: StringWithAggregatesFilter<"Item"> | string
+    payload?: JsonNullableWithAggregatesFilter<"Item">
+    publishTokenId?: StringWithAggregatesFilter<"Item"> | string
+    ownerId?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    registeredById?: StringWithAggregatesFilter<"Item"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+  }
+
+  export type TransferWhereInput = {
+    AND?: TransferWhereInput | TransferWhereInput[]
+    OR?: TransferWhereInput[]
+    NOT?: TransferWhereInput | TransferWhereInput[]
+    id?: StringFilter<"Transfer"> | string
+    reference?: StringFilter<"Transfer"> | string
+    sellerId?: StringFilter<"Transfer"> | string
+    recieverId?: StringFilter<"Transfer"> | string
+    transferType?: EnumTransferTypeFilter<"Transfer"> | $Enums.TransferType
+    publishTokenId?: StringFilter<"Transfer"> | string
+    createdAt?: DateTimeFilter<"Transfer"> | Date | string
+    updatedAt?: DateTimeFilter<"Transfer"> | Date | string
+    seller?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    reciever?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    publishToken?: XOR<PublishTokenScalarRelationFilter, PublishTokenWhereInput>
+    items?: TransferItemListRelationFilter
+    smartLabels?: TransferSmartLabelListRelationFilter
+  }
+
+  export type TransferOrderByWithRelationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    sellerId?: SortOrder
+    recieverId?: SortOrder
+    transferType?: SortOrder
+    publishTokenId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seller?: AccountOrderByWithRelationInput
+    reciever?: AccountOrderByWithRelationInput
+    publishToken?: PublishTokenOrderByWithRelationInput
+    items?: TransferItemOrderByRelationAggregateInput
+    smartLabels?: TransferSmartLabelOrderByRelationAggregateInput
+  }
+
+  export type TransferWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TransferWhereInput | TransferWhereInput[]
+    OR?: TransferWhereInput[]
+    NOT?: TransferWhereInput | TransferWhereInput[]
+    reference?: StringFilter<"Transfer"> | string
+    sellerId?: StringFilter<"Transfer"> | string
+    recieverId?: StringFilter<"Transfer"> | string
+    transferType?: EnumTransferTypeFilter<"Transfer"> | $Enums.TransferType
+    publishTokenId?: StringFilter<"Transfer"> | string
+    createdAt?: DateTimeFilter<"Transfer"> | Date | string
+    updatedAt?: DateTimeFilter<"Transfer"> | Date | string
+    seller?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    reciever?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    publishToken?: XOR<PublishTokenScalarRelationFilter, PublishTokenWhereInput>
+    items?: TransferItemListRelationFilter
+    smartLabels?: TransferSmartLabelListRelationFilter
+  }, "id">
+
+  export type TransferOrderByWithAggregationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    sellerId?: SortOrder
+    recieverId?: SortOrder
+    transferType?: SortOrder
+    publishTokenId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TransferCountOrderByAggregateInput
+    _max?: TransferMaxOrderByAggregateInput
+    _min?: TransferMinOrderByAggregateInput
+  }
+
+  export type TransferScalarWhereWithAggregatesInput = {
+    AND?: TransferScalarWhereWithAggregatesInput | TransferScalarWhereWithAggregatesInput[]
+    OR?: TransferScalarWhereWithAggregatesInput[]
+    NOT?: TransferScalarWhereWithAggregatesInput | TransferScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Transfer"> | string
+    reference?: StringWithAggregatesFilter<"Transfer"> | string
+    sellerId?: StringWithAggregatesFilter<"Transfer"> | string
+    recieverId?: StringWithAggregatesFilter<"Transfer"> | string
+    transferType?: EnumTransferTypeWithAggregatesFilter<"Transfer"> | $Enums.TransferType
+    publishTokenId?: StringWithAggregatesFilter<"Transfer"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Transfer"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Transfer"> | Date | string
+  }
+
+  export type TransferItemWhereInput = {
+    AND?: TransferItemWhereInput | TransferItemWhereInput[]
+    OR?: TransferItemWhereInput[]
+    NOT?: TransferItemWhereInput | TransferItemWhereInput[]
+    id?: StringFilter<"TransferItem"> | string
+    transferId?: StringFilter<"TransferItem"> | string
+    itemId?: StringFilter<"TransferItem"> | string
+    createdAt?: DateTimeFilter<"TransferItem"> | Date | string
+    updatedAt?: DateTimeFilter<"TransferItem"> | Date | string
+    transfer?: XOR<TransferScalarRelationFilter, TransferWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }
+
+  export type TransferItemOrderByWithRelationInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    itemId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    transfer?: TransferOrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
+  }
+
+  export type TransferItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TransferItemWhereInput | TransferItemWhereInput[]
+    OR?: TransferItemWhereInput[]
+    NOT?: TransferItemWhereInput | TransferItemWhereInput[]
+    transferId?: StringFilter<"TransferItem"> | string
+    itemId?: StringFilter<"TransferItem"> | string
+    createdAt?: DateTimeFilter<"TransferItem"> | Date | string
+    updatedAt?: DateTimeFilter<"TransferItem"> | Date | string
+    transfer?: XOR<TransferScalarRelationFilter, TransferWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }, "id">
+
+  export type TransferItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    itemId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TransferItemCountOrderByAggregateInput
+    _max?: TransferItemMaxOrderByAggregateInput
+    _min?: TransferItemMinOrderByAggregateInput
+  }
+
+  export type TransferItemScalarWhereWithAggregatesInput = {
+    AND?: TransferItemScalarWhereWithAggregatesInput | TransferItemScalarWhereWithAggregatesInput[]
+    OR?: TransferItemScalarWhereWithAggregatesInput[]
+    NOT?: TransferItemScalarWhereWithAggregatesInput | TransferItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TransferItem"> | string
+    transferId?: StringWithAggregatesFilter<"TransferItem"> | string
+    itemId?: StringWithAggregatesFilter<"TransferItem"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TransferItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TransferItem"> | Date | string
+  }
+
+  export type TransferSmartLabelWhereInput = {
+    AND?: TransferSmartLabelWhereInput | TransferSmartLabelWhereInput[]
+    OR?: TransferSmartLabelWhereInput[]
+    NOT?: TransferSmartLabelWhereInput | TransferSmartLabelWhereInput[]
+    id?: StringFilter<"TransferSmartLabel"> | string
+    transferId?: StringFilter<"TransferSmartLabel"> | string
+    smartLabelId?: StringFilter<"TransferSmartLabel"> | string
+    createdAt?: DateTimeFilter<"TransferSmartLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"TransferSmartLabel"> | Date | string
+    transfer?: XOR<TransferScalarRelationFilter, TransferWhereInput>
+    smartLabel?: XOR<SmartLabelScalarRelationFilter, SmartLabelWhereInput>
+  }
+
+  export type TransferSmartLabelOrderByWithRelationInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    smartLabelId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    transfer?: TransferOrderByWithRelationInput
+    smartLabel?: SmartLabelOrderByWithRelationInput
+  }
+
+  export type TransferSmartLabelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TransferSmartLabelWhereInput | TransferSmartLabelWhereInput[]
+    OR?: TransferSmartLabelWhereInput[]
+    NOT?: TransferSmartLabelWhereInput | TransferSmartLabelWhereInput[]
+    transferId?: StringFilter<"TransferSmartLabel"> | string
+    smartLabelId?: StringFilter<"TransferSmartLabel"> | string
+    createdAt?: DateTimeFilter<"TransferSmartLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"TransferSmartLabel"> | Date | string
+    transfer?: XOR<TransferScalarRelationFilter, TransferWhereInput>
+    smartLabel?: XOR<SmartLabelScalarRelationFilter, SmartLabelWhereInput>
+  }, "id">
+
+  export type TransferSmartLabelOrderByWithAggregationInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    smartLabelId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TransferSmartLabelCountOrderByAggregateInput
+    _max?: TransferSmartLabelMaxOrderByAggregateInput
+    _min?: TransferSmartLabelMinOrderByAggregateInput
+  }
+
+  export type TransferSmartLabelScalarWhereWithAggregatesInput = {
+    AND?: TransferSmartLabelScalarWhereWithAggregatesInput | TransferSmartLabelScalarWhereWithAggregatesInput[]
+    OR?: TransferSmartLabelScalarWhereWithAggregatesInput[]
+    NOT?: TransferSmartLabelScalarWhereWithAggregatesInput | TransferSmartLabelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TransferSmartLabel"> | string
+    transferId?: StringWithAggregatesFilter<"TransferSmartLabel"> | string
+    smartLabelId?: StringWithAggregatesFilter<"TransferSmartLabel"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TransferSmartLabel"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TransferSmartLabel"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -9315,11 +17943,20 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
     devices?: AccountDevicesCreateNestedManyWithoutAccountInput
     activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateInput = {
@@ -9327,11 +17964,20 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
     activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUpdateInput = {
@@ -9339,11 +17985,20 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
     devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
     activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateInput = {
@@ -9351,11 +18006,20 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
     activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountCreateManyInput = {
@@ -9363,6 +18027,8 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9373,6 +18039,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9382,7 +18050,97 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublishTokenCreateInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account: AccountCreateNestedOneWithoutPublishTokensInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutPublishTokenInput
+    items?: ItemCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenUncheckedCreateInput = {
+    id?: string
+    token?: string
+    accountId: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutPublishTokenInput
+    items?: ItemUncheckedCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferUncheckedCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutPublishTokensNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutPublishTokenNestedInput
+    items?: ItemUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutPublishTokenNestedInput
+    items?: ItemUncheckedUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUncheckedUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenCreateManyInput = {
+    id?: string
+    token?: string
+    accountId: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublishTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublishTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9390,6 +18148,7 @@ export namespace Prisma {
   export type AccountActivationCreateInput = {
     id?: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -9406,6 +18165,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -9420,6 +18180,7 @@ export namespace Prisma {
   export type AccountActivationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9436,6 +18197,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9451,6 +18213,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -9465,6 +18228,7 @@ export namespace Prisma {
   export type AccountActivationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9479,6 +18243,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9558,6 +18323,7 @@ export namespace Prisma {
 
   export type AccountDevicesCreateInput = {
     id?: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9570,6 +18336,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     deviceId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdById: string
     createdAt?: Date | string
@@ -9578,6 +18345,7 @@ export namespace Prisma {
 
   export type AccountDevicesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9590,6 +18358,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     deviceId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9600,6 +18369,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     deviceId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdById: string
     createdAt?: Date | string
@@ -9608,6 +18378,7 @@ export namespace Prisma {
 
   export type AccountDevicesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9617,8 +18388,407 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     deviceId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SmartLabelCreateInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutSmartLabelsInput
+    owner?: AccountCreateNestedOneWithoutOwnedSmartLabelsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredSmartLabelsInput
+    item?: ItemCreateNestedOneWithoutSmartLabelsInput
+    transfers?: TransferSmartLabelCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelUncheckedCreateInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+    transfers?: TransferSmartLabelUncheckedCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutSmartLabelsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedSmartLabelsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredSmartLabelsNestedInput
+    item?: ItemUpdateOneWithoutSmartLabelsNestedInput
+    transfers?: TransferSmartLabelUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    transfers?: TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelCreateManyInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+  }
+
+  export type SmartLabelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SmartLabelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ItemCreateInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutItemsInput
+    owner?: AccountCreateNestedOneWithoutOwnedItemsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredItemsInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutItemInput
+    transfers?: TransferItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutItemInput
+    transfers?: TransferItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutItemsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedItemsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredItemsNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemCreateManyInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferCreateInput = {
+    id?: string
+    reference: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seller: AccountCreateNestedOneWithoutTransferOutInput
+    reciever: AccountCreateNestedOneWithoutTransferInInput
+    publishToken: PublishTokenCreateNestedOneWithoutTransfersInput
+    items?: TransferItemCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUncheckedCreateInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: TransferItemUncheckedCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelUncheckedCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seller?: AccountUpdateOneRequiredWithoutTransferOutNestedInput
+    reciever?: AccountUpdateOneRequiredWithoutTransferInNestedInput
+    publishToken?: PublishTokenUpdateOneRequiredWithoutTransfersNestedInput
+    items?: TransferItemUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: TransferItemUncheckedUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUncheckedUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferCreateManyInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfer: TransferCreateNestedOneWithoutItemsInput
+    item: ItemCreateNestedOneWithoutTransfersInput
+  }
+
+  export type TransferItemUncheckedCreateInput = {
+    id?: string
+    transferId: string
+    itemId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfer?: TransferUpdateOneRequiredWithoutItemsNestedInput
+    item?: ItemUpdateOneRequiredWithoutTransfersNestedInput
+  }
+
+  export type TransferItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemCreateManyInput = {
+    id?: string
+    transferId: string
+    itemId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfer: TransferCreateNestedOneWithoutSmartLabelsInput
+    smartLabel: SmartLabelCreateNestedOneWithoutTransfersInput
+  }
+
+  export type TransferSmartLabelUncheckedCreateInput = {
+    id?: string
+    transferId: string
+    smartLabelId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferSmartLabelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfer?: TransferUpdateOneRequiredWithoutSmartLabelsNestedInput
+    smartLabel?: SmartLabelUpdateOneRequiredWithoutTransfersNestedInput
+  }
+
+  export type TransferSmartLabelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    smartLabelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelCreateManyInput = {
+    id?: string
+    transferId: string
+    smartLabelId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferSmartLabelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    smartLabelId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9925,11 +19095,53 @@ export namespace Prisma {
     _max?: NestedEnumPermissionTypeFilter<$PrismaModel>
   }
 
+  export type SmartLabelListRelationFilter = {
+    every?: SmartLabelWhereInput
+    some?: SmartLabelWhereInput
+    none?: SmartLabelWhereInput
+  }
+
+  export type ItemListRelationFilter = {
+    every?: ItemWhereInput
+    some?: ItemWhereInput
+    none?: ItemWhereInput
+  }
+
+  export type TransferListRelationFilter = {
+    every?: TransferWhereInput
+    some?: TransferWhereInput
+    none?: TransferWhereInput
+  }
+
+  export type PublishTokenListRelationFilter = {
+    every?: PublishTokenWhereInput
+    some?: PublishTokenWhereInput
+    none?: PublishTokenWhereInput
+  }
+
+  export type SmartLabelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TransferOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PublishTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AccountCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     isActive?: SortOrder
     activationLink?: SortOrder
+    publicKey?: SortOrder
+    pccCloudId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9940,6 +19152,8 @@ export namespace Prisma {
     name?: SortOrder
     isActive?: SortOrder
     activationLink?: SortOrder
+    publicKey?: SortOrder
+    pccCloudId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9950,7 +19164,47 @@ export namespace Prisma {
     name?: SortOrder
     isActive?: SortOrder
     activationLink?: SortOrder
+    publicKey?: SortOrder
+    pccCloudId?: SortOrder
     createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccountScalarRelationFilter = {
+    is?: AccountWhereInput
+    isNot?: AccountWhereInput
+  }
+
+  export type PublishTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    accountId?: SortOrder
+    isClaimed?: SortOrder
+    isActive?: SortOrder
+    isArchived?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PublishTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    accountId?: SortOrder
+    isClaimed?: SortOrder
+    isActive?: SortOrder
+    isArchived?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PublishTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    accountId?: SortOrder
+    isClaimed?: SortOrder
+    isActive?: SortOrder
+    isArchived?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9966,15 +19220,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type AccountScalarRelationFilter = {
-    is?: AccountWhereInput
-    isNot?: AccountWhereInput
-  }
-
   export type AccountActivationCountOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
     email?: SortOrder
+    name?: SortOrder
     code?: SortOrder
     activationLink?: SortOrder
     issueDate?: SortOrder
@@ -9990,6 +19240,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     email?: SortOrder
+    name?: SortOrder
     code?: SortOrder
     activationLink?: SortOrder
     issueDate?: SortOrder
@@ -10005,6 +19256,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     email?: SortOrder
+    name?: SortOrder
     code?: SortOrder
     activationLink?: SortOrder
     issueDate?: SortOrder
@@ -10071,6 +19323,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     deviceId?: SortOrder
+    pccCloudId?: SortOrder
     isActive?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -10081,6 +19334,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     deviceId?: SortOrder
+    pccCloudId?: SortOrder
     isActive?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -10091,8 +19345,289 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     deviceId?: SortOrder
+    pccCloudId?: SortOrder
     isActive?: SortOrder
     createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type PublishTokenScalarRelationFilter = {
+    is?: PublishTokenWhereInput
+    isNot?: PublishTokenWhereInput
+  }
+
+  export type AccountNullableScalarRelationFilter = {
+    is?: AccountWhereInput | null
+    isNot?: AccountWhereInput | null
+  }
+
+  export type ItemNullableScalarRelationFilter = {
+    is?: ItemWhereInput | null
+    isNot?: ItemWhereInput | null
+  }
+
+  export type TransferSmartLabelListRelationFilter = {
+    every?: TransferSmartLabelWhereInput
+    some?: TransferSmartLabelWhereInput
+    none?: TransferSmartLabelWhereInput
+  }
+
+  export type TransferSmartLabelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SmartLabelCountOrderByAggregateInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    reference?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    payload?: SortOrder
+    source?: SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    itemId?: SortOrder
+  }
+
+  export type SmartLabelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    reference?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    source?: SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    itemId?: SortOrder
+  }
+
+  export type SmartLabelMinOrderByAggregateInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    reference?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    source?: SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    itemId?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type TransferItemListRelationFilter = {
+    every?: TransferItemWhereInput
+    some?: TransferItemWhereInput
+    none?: TransferItemWhereInput
+  }
+
+  export type TransferItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    payload?: SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    serial?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    publishTokenId?: SortOrder
+    ownerId?: SortOrder
+    registeredById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumTransferTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransferType | EnumTransferTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransferTypeFilter<$PrismaModel> | $Enums.TransferType
+  }
+
+  export type TransferCountOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    sellerId?: SortOrder
+    recieverId?: SortOrder
+    transferType?: SortOrder
+    publishTokenId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TransferMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    sellerId?: SortOrder
+    recieverId?: SortOrder
+    transferType?: SortOrder
+    publishTokenId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TransferMinOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    sellerId?: SortOrder
+    recieverId?: SortOrder
+    transferType?: SortOrder
+    publishTokenId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumTransferTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransferType | EnumTransferTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransferTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransferType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransferTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransferTypeFilter<$PrismaModel>
+  }
+
+  export type TransferScalarRelationFilter = {
+    is?: TransferWhereInput
+    isNot?: TransferWhereInput
+  }
+
+  export type ItemScalarRelationFilter = {
+    is?: ItemWhereInput
+    isNot?: ItemWhereInput
+  }
+
+  export type TransferItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    itemId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TransferItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    itemId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TransferItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    itemId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SmartLabelScalarRelationFilter = {
+    is?: SmartLabelWhereInput
+    isNot?: SmartLabelWhereInput
+  }
+
+  export type TransferSmartLabelCountOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    smartLabelId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TransferSmartLabelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    smartLabelId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TransferSmartLabelMinOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    smartLabelId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10483,6 +20018,55 @@ export namespace Prisma {
     connect?: AccountActivationWhereUniqueInput | AccountActivationWhereUniqueInput[]
   }
 
+  export type SmartLabelCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<SmartLabelCreateWithoutOwnerInput, SmartLabelUncheckedCreateWithoutOwnerInput> | SmartLabelCreateWithoutOwnerInput[] | SmartLabelUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutOwnerInput | SmartLabelCreateOrConnectWithoutOwnerInput[]
+    createMany?: SmartLabelCreateManyOwnerInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type SmartLabelCreateNestedManyWithoutRegisteredByInput = {
+    create?: XOR<SmartLabelCreateWithoutRegisteredByInput, SmartLabelUncheckedCreateWithoutRegisteredByInput> | SmartLabelCreateWithoutRegisteredByInput[] | SmartLabelUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutRegisteredByInput | SmartLabelCreateOrConnectWithoutRegisteredByInput[]
+    createMany?: SmartLabelCreateManyRegisteredByInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type ItemCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<ItemCreateWithoutOwnerInput, ItemUncheckedCreateWithoutOwnerInput> | ItemCreateWithoutOwnerInput[] | ItemUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutOwnerInput | ItemCreateOrConnectWithoutOwnerInput[]
+    createMany?: ItemCreateManyOwnerInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type ItemCreateNestedManyWithoutRegisteredByInput = {
+    create?: XOR<ItemCreateWithoutRegisteredByInput, ItemUncheckedCreateWithoutRegisteredByInput> | ItemCreateWithoutRegisteredByInput[] | ItemUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutRegisteredByInput | ItemCreateOrConnectWithoutRegisteredByInput[]
+    createMany?: ItemCreateManyRegisteredByInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type TransferCreateNestedManyWithoutSellerInput = {
+    create?: XOR<TransferCreateWithoutSellerInput, TransferUncheckedCreateWithoutSellerInput> | TransferCreateWithoutSellerInput[] | TransferUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutSellerInput | TransferCreateOrConnectWithoutSellerInput[]
+    createMany?: TransferCreateManySellerInputEnvelope
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+  }
+
+  export type TransferCreateNestedManyWithoutRecieverInput = {
+    create?: XOR<TransferCreateWithoutRecieverInput, TransferUncheckedCreateWithoutRecieverInput> | TransferCreateWithoutRecieverInput[] | TransferUncheckedCreateWithoutRecieverInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutRecieverInput | TransferCreateOrConnectWithoutRecieverInput[]
+    createMany?: TransferCreateManyRecieverInputEnvelope
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+  }
+
+  export type PublishTokenCreateNestedManyWithoutAccountInput = {
+    create?: XOR<PublishTokenCreateWithoutAccountInput, PublishTokenUncheckedCreateWithoutAccountInput> | PublishTokenCreateWithoutAccountInput[] | PublishTokenUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutAccountInput | PublishTokenCreateOrConnectWithoutAccountInput[]
+    createMany?: PublishTokenCreateManyAccountInputEnvelope
+    connect?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+  }
+
   export type AccountDevicesUncheckedCreateNestedManyWithoutAccountInput = {
     create?: XOR<AccountDevicesCreateWithoutAccountInput, AccountDevicesUncheckedCreateWithoutAccountInput> | AccountDevicesCreateWithoutAccountInput[] | AccountDevicesUncheckedCreateWithoutAccountInput[]
     connectOrCreate?: AccountDevicesCreateOrConnectWithoutAccountInput | AccountDevicesCreateOrConnectWithoutAccountInput[]
@@ -10495,6 +20079,55 @@ export namespace Prisma {
     connectOrCreate?: AccountActivationCreateOrConnectWithoutAccountInput | AccountActivationCreateOrConnectWithoutAccountInput[]
     createMany?: AccountActivationCreateManyAccountInputEnvelope
     connect?: AccountActivationWhereUniqueInput | AccountActivationWhereUniqueInput[]
+  }
+
+  export type SmartLabelUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<SmartLabelCreateWithoutOwnerInput, SmartLabelUncheckedCreateWithoutOwnerInput> | SmartLabelCreateWithoutOwnerInput[] | SmartLabelUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutOwnerInput | SmartLabelCreateOrConnectWithoutOwnerInput[]
+    createMany?: SmartLabelCreateManyOwnerInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput = {
+    create?: XOR<SmartLabelCreateWithoutRegisteredByInput, SmartLabelUncheckedCreateWithoutRegisteredByInput> | SmartLabelCreateWithoutRegisteredByInput[] | SmartLabelUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutRegisteredByInput | SmartLabelCreateOrConnectWithoutRegisteredByInput[]
+    createMany?: SmartLabelCreateManyRegisteredByInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type ItemUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<ItemCreateWithoutOwnerInput, ItemUncheckedCreateWithoutOwnerInput> | ItemCreateWithoutOwnerInput[] | ItemUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutOwnerInput | ItemCreateOrConnectWithoutOwnerInput[]
+    createMany?: ItemCreateManyOwnerInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type ItemUncheckedCreateNestedManyWithoutRegisteredByInput = {
+    create?: XOR<ItemCreateWithoutRegisteredByInput, ItemUncheckedCreateWithoutRegisteredByInput> | ItemCreateWithoutRegisteredByInput[] | ItemUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutRegisteredByInput | ItemCreateOrConnectWithoutRegisteredByInput[]
+    createMany?: ItemCreateManyRegisteredByInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type TransferUncheckedCreateNestedManyWithoutSellerInput = {
+    create?: XOR<TransferCreateWithoutSellerInput, TransferUncheckedCreateWithoutSellerInput> | TransferCreateWithoutSellerInput[] | TransferUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutSellerInput | TransferCreateOrConnectWithoutSellerInput[]
+    createMany?: TransferCreateManySellerInputEnvelope
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+  }
+
+  export type TransferUncheckedCreateNestedManyWithoutRecieverInput = {
+    create?: XOR<TransferCreateWithoutRecieverInput, TransferUncheckedCreateWithoutRecieverInput> | TransferCreateWithoutRecieverInput[] | TransferUncheckedCreateWithoutRecieverInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutRecieverInput | TransferCreateOrConnectWithoutRecieverInput[]
+    createMany?: TransferCreateManyRecieverInputEnvelope
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+  }
+
+  export type PublishTokenUncheckedCreateNestedManyWithoutAccountInput = {
+    create?: XOR<PublishTokenCreateWithoutAccountInput, PublishTokenUncheckedCreateWithoutAccountInput> | PublishTokenCreateWithoutAccountInput[] | PublishTokenUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutAccountInput | PublishTokenCreateOrConnectWithoutAccountInput[]
+    createMany?: PublishTokenCreateManyAccountInputEnvelope
+    connect?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutCreatedAccountsNestedInput = {
@@ -10533,6 +20166,104 @@ export namespace Prisma {
     deleteMany?: AccountActivationScalarWhereInput | AccountActivationScalarWhereInput[]
   }
 
+  export type SmartLabelUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutOwnerInput, SmartLabelUncheckedCreateWithoutOwnerInput> | SmartLabelCreateWithoutOwnerInput[] | SmartLabelUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutOwnerInput | SmartLabelCreateOrConnectWithoutOwnerInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutOwnerInput | SmartLabelUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: SmartLabelCreateManyOwnerInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutOwnerInput | SmartLabelUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutOwnerInput | SmartLabelUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type SmartLabelUpdateManyWithoutRegisteredByNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutRegisteredByInput, SmartLabelUncheckedCreateWithoutRegisteredByInput> | SmartLabelCreateWithoutRegisteredByInput[] | SmartLabelUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutRegisteredByInput | SmartLabelCreateOrConnectWithoutRegisteredByInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutRegisteredByInput | SmartLabelUpsertWithWhereUniqueWithoutRegisteredByInput[]
+    createMany?: SmartLabelCreateManyRegisteredByInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutRegisteredByInput | SmartLabelUpdateWithWhereUniqueWithoutRegisteredByInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutRegisteredByInput | SmartLabelUpdateManyWithWhereWithoutRegisteredByInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type ItemUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<ItemCreateWithoutOwnerInput, ItemUncheckedCreateWithoutOwnerInput> | ItemCreateWithoutOwnerInput[] | ItemUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutOwnerInput | ItemCreateOrConnectWithoutOwnerInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutOwnerInput | ItemUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: ItemCreateManyOwnerInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutOwnerInput | ItemUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutOwnerInput | ItemUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type ItemUpdateManyWithoutRegisteredByNestedInput = {
+    create?: XOR<ItemCreateWithoutRegisteredByInput, ItemUncheckedCreateWithoutRegisteredByInput> | ItemCreateWithoutRegisteredByInput[] | ItemUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutRegisteredByInput | ItemCreateOrConnectWithoutRegisteredByInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutRegisteredByInput | ItemUpsertWithWhereUniqueWithoutRegisteredByInput[]
+    createMany?: ItemCreateManyRegisteredByInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutRegisteredByInput | ItemUpdateWithWhereUniqueWithoutRegisteredByInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutRegisteredByInput | ItemUpdateManyWithWhereWithoutRegisteredByInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type TransferUpdateManyWithoutSellerNestedInput = {
+    create?: XOR<TransferCreateWithoutSellerInput, TransferUncheckedCreateWithoutSellerInput> | TransferCreateWithoutSellerInput[] | TransferUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutSellerInput | TransferCreateOrConnectWithoutSellerInput[]
+    upsert?: TransferUpsertWithWhereUniqueWithoutSellerInput | TransferUpsertWithWhereUniqueWithoutSellerInput[]
+    createMany?: TransferCreateManySellerInputEnvelope
+    set?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    disconnect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    delete?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    update?: TransferUpdateWithWhereUniqueWithoutSellerInput | TransferUpdateWithWhereUniqueWithoutSellerInput[]
+    updateMany?: TransferUpdateManyWithWhereWithoutSellerInput | TransferUpdateManyWithWhereWithoutSellerInput[]
+    deleteMany?: TransferScalarWhereInput | TransferScalarWhereInput[]
+  }
+
+  export type TransferUpdateManyWithoutRecieverNestedInput = {
+    create?: XOR<TransferCreateWithoutRecieverInput, TransferUncheckedCreateWithoutRecieverInput> | TransferCreateWithoutRecieverInput[] | TransferUncheckedCreateWithoutRecieverInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutRecieverInput | TransferCreateOrConnectWithoutRecieverInput[]
+    upsert?: TransferUpsertWithWhereUniqueWithoutRecieverInput | TransferUpsertWithWhereUniqueWithoutRecieverInput[]
+    createMany?: TransferCreateManyRecieverInputEnvelope
+    set?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    disconnect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    delete?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    update?: TransferUpdateWithWhereUniqueWithoutRecieverInput | TransferUpdateWithWhereUniqueWithoutRecieverInput[]
+    updateMany?: TransferUpdateManyWithWhereWithoutRecieverInput | TransferUpdateManyWithWhereWithoutRecieverInput[]
+    deleteMany?: TransferScalarWhereInput | TransferScalarWhereInput[]
+  }
+
+  export type PublishTokenUpdateManyWithoutAccountNestedInput = {
+    create?: XOR<PublishTokenCreateWithoutAccountInput, PublishTokenUncheckedCreateWithoutAccountInput> | PublishTokenCreateWithoutAccountInput[] | PublishTokenUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutAccountInput | PublishTokenCreateOrConnectWithoutAccountInput[]
+    upsert?: PublishTokenUpsertWithWhereUniqueWithoutAccountInput | PublishTokenUpsertWithWhereUniqueWithoutAccountInput[]
+    createMany?: PublishTokenCreateManyAccountInputEnvelope
+    set?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    disconnect?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    delete?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    connect?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    update?: PublishTokenUpdateWithWhereUniqueWithoutAccountInput | PublishTokenUpdateWithWhereUniqueWithoutAccountInput[]
+    updateMany?: PublishTokenUpdateManyWithWhereWithoutAccountInput | PublishTokenUpdateManyWithWhereWithoutAccountInput[]
+    deleteMany?: PublishTokenScalarWhereInput | PublishTokenScalarWhereInput[]
+  }
+
   export type AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput = {
     create?: XOR<AccountDevicesCreateWithoutAccountInput, AccountDevicesUncheckedCreateWithoutAccountInput> | AccountDevicesCreateWithoutAccountInput[] | AccountDevicesUncheckedCreateWithoutAccountInput[]
     connectOrCreate?: AccountDevicesCreateOrConnectWithoutAccountInput | AccountDevicesCreateOrConnectWithoutAccountInput[]
@@ -10559,6 +20290,244 @@ export namespace Prisma {
     update?: AccountActivationUpdateWithWhereUniqueWithoutAccountInput | AccountActivationUpdateWithWhereUniqueWithoutAccountInput[]
     updateMany?: AccountActivationUpdateManyWithWhereWithoutAccountInput | AccountActivationUpdateManyWithWhereWithoutAccountInput[]
     deleteMany?: AccountActivationScalarWhereInput | AccountActivationScalarWhereInput[]
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutOwnerInput, SmartLabelUncheckedCreateWithoutOwnerInput> | SmartLabelCreateWithoutOwnerInput[] | SmartLabelUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutOwnerInput | SmartLabelCreateOrConnectWithoutOwnerInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutOwnerInput | SmartLabelUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: SmartLabelCreateManyOwnerInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutOwnerInput | SmartLabelUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutOwnerInput | SmartLabelUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutRegisteredByInput, SmartLabelUncheckedCreateWithoutRegisteredByInput> | SmartLabelCreateWithoutRegisteredByInput[] | SmartLabelUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutRegisteredByInput | SmartLabelCreateOrConnectWithoutRegisteredByInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutRegisteredByInput | SmartLabelUpsertWithWhereUniqueWithoutRegisteredByInput[]
+    createMany?: SmartLabelCreateManyRegisteredByInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutRegisteredByInput | SmartLabelUpdateWithWhereUniqueWithoutRegisteredByInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutRegisteredByInput | SmartLabelUpdateManyWithWhereWithoutRegisteredByInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type ItemUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<ItemCreateWithoutOwnerInput, ItemUncheckedCreateWithoutOwnerInput> | ItemCreateWithoutOwnerInput[] | ItemUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutOwnerInput | ItemCreateOrConnectWithoutOwnerInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutOwnerInput | ItemUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: ItemCreateManyOwnerInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutOwnerInput | ItemUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutOwnerInput | ItemUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type ItemUncheckedUpdateManyWithoutRegisteredByNestedInput = {
+    create?: XOR<ItemCreateWithoutRegisteredByInput, ItemUncheckedCreateWithoutRegisteredByInput> | ItemCreateWithoutRegisteredByInput[] | ItemUncheckedCreateWithoutRegisteredByInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutRegisteredByInput | ItemCreateOrConnectWithoutRegisteredByInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutRegisteredByInput | ItemUpsertWithWhereUniqueWithoutRegisteredByInput[]
+    createMany?: ItemCreateManyRegisteredByInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutRegisteredByInput | ItemUpdateWithWhereUniqueWithoutRegisteredByInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutRegisteredByInput | ItemUpdateManyWithWhereWithoutRegisteredByInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type TransferUncheckedUpdateManyWithoutSellerNestedInput = {
+    create?: XOR<TransferCreateWithoutSellerInput, TransferUncheckedCreateWithoutSellerInput> | TransferCreateWithoutSellerInput[] | TransferUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutSellerInput | TransferCreateOrConnectWithoutSellerInput[]
+    upsert?: TransferUpsertWithWhereUniqueWithoutSellerInput | TransferUpsertWithWhereUniqueWithoutSellerInput[]
+    createMany?: TransferCreateManySellerInputEnvelope
+    set?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    disconnect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    delete?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    update?: TransferUpdateWithWhereUniqueWithoutSellerInput | TransferUpdateWithWhereUniqueWithoutSellerInput[]
+    updateMany?: TransferUpdateManyWithWhereWithoutSellerInput | TransferUpdateManyWithWhereWithoutSellerInput[]
+    deleteMany?: TransferScalarWhereInput | TransferScalarWhereInput[]
+  }
+
+  export type TransferUncheckedUpdateManyWithoutRecieverNestedInput = {
+    create?: XOR<TransferCreateWithoutRecieverInput, TransferUncheckedCreateWithoutRecieverInput> | TransferCreateWithoutRecieverInput[] | TransferUncheckedCreateWithoutRecieverInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutRecieverInput | TransferCreateOrConnectWithoutRecieverInput[]
+    upsert?: TransferUpsertWithWhereUniqueWithoutRecieverInput | TransferUpsertWithWhereUniqueWithoutRecieverInput[]
+    createMany?: TransferCreateManyRecieverInputEnvelope
+    set?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    disconnect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    delete?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    update?: TransferUpdateWithWhereUniqueWithoutRecieverInput | TransferUpdateWithWhereUniqueWithoutRecieverInput[]
+    updateMany?: TransferUpdateManyWithWhereWithoutRecieverInput | TransferUpdateManyWithWhereWithoutRecieverInput[]
+    deleteMany?: TransferScalarWhereInput | TransferScalarWhereInput[]
+  }
+
+  export type PublishTokenUncheckedUpdateManyWithoutAccountNestedInput = {
+    create?: XOR<PublishTokenCreateWithoutAccountInput, PublishTokenUncheckedCreateWithoutAccountInput> | PublishTokenCreateWithoutAccountInput[] | PublishTokenUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutAccountInput | PublishTokenCreateOrConnectWithoutAccountInput[]
+    upsert?: PublishTokenUpsertWithWhereUniqueWithoutAccountInput | PublishTokenUpsertWithWhereUniqueWithoutAccountInput[]
+    createMany?: PublishTokenCreateManyAccountInputEnvelope
+    set?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    disconnect?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    delete?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    connect?: PublishTokenWhereUniqueInput | PublishTokenWhereUniqueInput[]
+    update?: PublishTokenUpdateWithWhereUniqueWithoutAccountInput | PublishTokenUpdateWithWhereUniqueWithoutAccountInput[]
+    updateMany?: PublishTokenUpdateManyWithWhereWithoutAccountInput | PublishTokenUpdateManyWithWhereWithoutAccountInput[]
+    deleteMany?: PublishTokenScalarWhereInput | PublishTokenScalarWhereInput[]
+  }
+
+  export type AccountCreateNestedOneWithoutPublishTokensInput = {
+    create?: XOR<AccountCreateWithoutPublishTokensInput, AccountUncheckedCreateWithoutPublishTokensInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutPublishTokensInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type SmartLabelCreateNestedManyWithoutPublishTokenInput = {
+    create?: XOR<SmartLabelCreateWithoutPublishTokenInput, SmartLabelUncheckedCreateWithoutPublishTokenInput> | SmartLabelCreateWithoutPublishTokenInput[] | SmartLabelUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutPublishTokenInput | SmartLabelCreateOrConnectWithoutPublishTokenInput[]
+    createMany?: SmartLabelCreateManyPublishTokenInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type ItemCreateNestedManyWithoutPublishTokenInput = {
+    create?: XOR<ItemCreateWithoutPublishTokenInput, ItemUncheckedCreateWithoutPublishTokenInput> | ItemCreateWithoutPublishTokenInput[] | ItemUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutPublishTokenInput | ItemCreateOrConnectWithoutPublishTokenInput[]
+    createMany?: ItemCreateManyPublishTokenInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type TransferCreateNestedManyWithoutPublishTokenInput = {
+    create?: XOR<TransferCreateWithoutPublishTokenInput, TransferUncheckedCreateWithoutPublishTokenInput> | TransferCreateWithoutPublishTokenInput[] | TransferUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutPublishTokenInput | TransferCreateOrConnectWithoutPublishTokenInput[]
+    createMany?: TransferCreateManyPublishTokenInputEnvelope
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+  }
+
+  export type SmartLabelUncheckedCreateNestedManyWithoutPublishTokenInput = {
+    create?: XOR<SmartLabelCreateWithoutPublishTokenInput, SmartLabelUncheckedCreateWithoutPublishTokenInput> | SmartLabelCreateWithoutPublishTokenInput[] | SmartLabelUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutPublishTokenInput | SmartLabelCreateOrConnectWithoutPublishTokenInput[]
+    createMany?: SmartLabelCreateManyPublishTokenInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type ItemUncheckedCreateNestedManyWithoutPublishTokenInput = {
+    create?: XOR<ItemCreateWithoutPublishTokenInput, ItemUncheckedCreateWithoutPublishTokenInput> | ItemCreateWithoutPublishTokenInput[] | ItemUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutPublishTokenInput | ItemCreateOrConnectWithoutPublishTokenInput[]
+    createMany?: ItemCreateManyPublishTokenInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type TransferUncheckedCreateNestedManyWithoutPublishTokenInput = {
+    create?: XOR<TransferCreateWithoutPublishTokenInput, TransferUncheckedCreateWithoutPublishTokenInput> | TransferCreateWithoutPublishTokenInput[] | TransferUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutPublishTokenInput | TransferCreateOrConnectWithoutPublishTokenInput[]
+    createMany?: TransferCreateManyPublishTokenInputEnvelope
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+  }
+
+  export type AccountUpdateOneRequiredWithoutPublishTokensNestedInput = {
+    create?: XOR<AccountCreateWithoutPublishTokensInput, AccountUncheckedCreateWithoutPublishTokensInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutPublishTokensInput
+    upsert?: AccountUpsertWithoutPublishTokensInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutPublishTokensInput, AccountUpdateWithoutPublishTokensInput>, AccountUncheckedUpdateWithoutPublishTokensInput>
+  }
+
+  export type SmartLabelUpdateManyWithoutPublishTokenNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutPublishTokenInput, SmartLabelUncheckedCreateWithoutPublishTokenInput> | SmartLabelCreateWithoutPublishTokenInput[] | SmartLabelUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutPublishTokenInput | SmartLabelCreateOrConnectWithoutPublishTokenInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutPublishTokenInput | SmartLabelUpsertWithWhereUniqueWithoutPublishTokenInput[]
+    createMany?: SmartLabelCreateManyPublishTokenInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutPublishTokenInput | SmartLabelUpdateWithWhereUniqueWithoutPublishTokenInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutPublishTokenInput | SmartLabelUpdateManyWithWhereWithoutPublishTokenInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type ItemUpdateManyWithoutPublishTokenNestedInput = {
+    create?: XOR<ItemCreateWithoutPublishTokenInput, ItemUncheckedCreateWithoutPublishTokenInput> | ItemCreateWithoutPublishTokenInput[] | ItemUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutPublishTokenInput | ItemCreateOrConnectWithoutPublishTokenInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutPublishTokenInput | ItemUpsertWithWhereUniqueWithoutPublishTokenInput[]
+    createMany?: ItemCreateManyPublishTokenInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutPublishTokenInput | ItemUpdateWithWhereUniqueWithoutPublishTokenInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutPublishTokenInput | ItemUpdateManyWithWhereWithoutPublishTokenInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type TransferUpdateManyWithoutPublishTokenNestedInput = {
+    create?: XOR<TransferCreateWithoutPublishTokenInput, TransferUncheckedCreateWithoutPublishTokenInput> | TransferCreateWithoutPublishTokenInput[] | TransferUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutPublishTokenInput | TransferCreateOrConnectWithoutPublishTokenInput[]
+    upsert?: TransferUpsertWithWhereUniqueWithoutPublishTokenInput | TransferUpsertWithWhereUniqueWithoutPublishTokenInput[]
+    createMany?: TransferCreateManyPublishTokenInputEnvelope
+    set?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    disconnect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    delete?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    update?: TransferUpdateWithWhereUniqueWithoutPublishTokenInput | TransferUpdateWithWhereUniqueWithoutPublishTokenInput[]
+    updateMany?: TransferUpdateManyWithWhereWithoutPublishTokenInput | TransferUpdateManyWithWhereWithoutPublishTokenInput[]
+    deleteMany?: TransferScalarWhereInput | TransferScalarWhereInput[]
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutPublishTokenNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutPublishTokenInput, SmartLabelUncheckedCreateWithoutPublishTokenInput> | SmartLabelCreateWithoutPublishTokenInput[] | SmartLabelUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutPublishTokenInput | SmartLabelCreateOrConnectWithoutPublishTokenInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutPublishTokenInput | SmartLabelUpsertWithWhereUniqueWithoutPublishTokenInput[]
+    createMany?: SmartLabelCreateManyPublishTokenInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutPublishTokenInput | SmartLabelUpdateWithWhereUniqueWithoutPublishTokenInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutPublishTokenInput | SmartLabelUpdateManyWithWhereWithoutPublishTokenInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type ItemUncheckedUpdateManyWithoutPublishTokenNestedInput = {
+    create?: XOR<ItemCreateWithoutPublishTokenInput, ItemUncheckedCreateWithoutPublishTokenInput> | ItemCreateWithoutPublishTokenInput[] | ItemUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutPublishTokenInput | ItemCreateOrConnectWithoutPublishTokenInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutPublishTokenInput | ItemUpsertWithWhereUniqueWithoutPublishTokenInput[]
+    createMany?: ItemCreateManyPublishTokenInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutPublishTokenInput | ItemUpdateWithWhereUniqueWithoutPublishTokenInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutPublishTokenInput | ItemUpdateManyWithWhereWithoutPublishTokenInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type TransferUncheckedUpdateManyWithoutPublishTokenNestedInput = {
+    create?: XOR<TransferCreateWithoutPublishTokenInput, TransferUncheckedCreateWithoutPublishTokenInput> | TransferCreateWithoutPublishTokenInput[] | TransferUncheckedCreateWithoutPublishTokenInput[]
+    connectOrCreate?: TransferCreateOrConnectWithoutPublishTokenInput | TransferCreateOrConnectWithoutPublishTokenInput[]
+    upsert?: TransferUpsertWithWhereUniqueWithoutPublishTokenInput | TransferUpsertWithWhereUniqueWithoutPublishTokenInput[]
+    createMany?: TransferCreateManyPublishTokenInputEnvelope
+    set?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    disconnect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    delete?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    connect?: TransferWhereUniqueInput | TransferWhereUniqueInput[]
+    update?: TransferUpdateWithWhereUniqueWithoutPublishTokenInput | TransferUpdateWithWhereUniqueWithoutPublishTokenInput[]
+    updateMany?: TransferUpdateManyWithWhereWithoutPublishTokenInput | TransferUpdateManyWithWhereWithoutPublishTokenInput[]
+    deleteMany?: TransferScalarWhereInput | TransferScalarWhereInput[]
   }
 
   export type AccountCreateNestedOneWithoutActivationsInput = {
@@ -10689,6 +20658,422 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCreatedAccountDevicesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedAccountDevicesInput, UserUpdateWithoutCreatedAccountDevicesInput>, UserUncheckedUpdateWithoutCreatedAccountDevicesInput>
+  }
+
+  export type PublishTokenCreateNestedOneWithoutSmartLabelsInput = {
+    create?: XOR<PublishTokenCreateWithoutSmartLabelsInput, PublishTokenUncheckedCreateWithoutSmartLabelsInput>
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutSmartLabelsInput
+    connect?: PublishTokenWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutOwnedSmartLabelsInput = {
+    create?: XOR<AccountCreateWithoutOwnedSmartLabelsInput, AccountUncheckedCreateWithoutOwnedSmartLabelsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutOwnedSmartLabelsInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutRegisteredSmartLabelsInput = {
+    create?: XOR<AccountCreateWithoutRegisteredSmartLabelsInput, AccountUncheckedCreateWithoutRegisteredSmartLabelsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutRegisteredSmartLabelsInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutSmartLabelsInput = {
+    create?: XOR<ItemCreateWithoutSmartLabelsInput, ItemUncheckedCreateWithoutSmartLabelsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutSmartLabelsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type TransferSmartLabelCreateNestedManyWithoutSmartLabelInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutSmartLabelInput, TransferSmartLabelUncheckedCreateWithoutSmartLabelInput> | TransferSmartLabelCreateWithoutSmartLabelInput[] | TransferSmartLabelUncheckedCreateWithoutSmartLabelInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutSmartLabelInput | TransferSmartLabelCreateOrConnectWithoutSmartLabelInput[]
+    createMany?: TransferSmartLabelCreateManySmartLabelInputEnvelope
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+  }
+
+  export type TransferSmartLabelUncheckedCreateNestedManyWithoutSmartLabelInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutSmartLabelInput, TransferSmartLabelUncheckedCreateWithoutSmartLabelInput> | TransferSmartLabelCreateWithoutSmartLabelInput[] | TransferSmartLabelUncheckedCreateWithoutSmartLabelInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutSmartLabelInput | TransferSmartLabelCreateOrConnectWithoutSmartLabelInput[]
+    createMany?: TransferSmartLabelCreateManySmartLabelInputEnvelope
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+  }
+
+  export type PublishTokenUpdateOneRequiredWithoutSmartLabelsNestedInput = {
+    create?: XOR<PublishTokenCreateWithoutSmartLabelsInput, PublishTokenUncheckedCreateWithoutSmartLabelsInput>
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutSmartLabelsInput
+    upsert?: PublishTokenUpsertWithoutSmartLabelsInput
+    connect?: PublishTokenWhereUniqueInput
+    update?: XOR<XOR<PublishTokenUpdateToOneWithWhereWithoutSmartLabelsInput, PublishTokenUpdateWithoutSmartLabelsInput>, PublishTokenUncheckedUpdateWithoutSmartLabelsInput>
+  }
+
+  export type AccountUpdateOneWithoutOwnedSmartLabelsNestedInput = {
+    create?: XOR<AccountCreateWithoutOwnedSmartLabelsInput, AccountUncheckedCreateWithoutOwnedSmartLabelsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutOwnedSmartLabelsInput
+    upsert?: AccountUpsertWithoutOwnedSmartLabelsInput
+    disconnect?: AccountWhereInput | boolean
+    delete?: AccountWhereInput | boolean
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutOwnedSmartLabelsInput, AccountUpdateWithoutOwnedSmartLabelsInput>, AccountUncheckedUpdateWithoutOwnedSmartLabelsInput>
+  }
+
+  export type AccountUpdateOneRequiredWithoutRegisteredSmartLabelsNestedInput = {
+    create?: XOR<AccountCreateWithoutRegisteredSmartLabelsInput, AccountUncheckedCreateWithoutRegisteredSmartLabelsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutRegisteredSmartLabelsInput
+    upsert?: AccountUpsertWithoutRegisteredSmartLabelsInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutRegisteredSmartLabelsInput, AccountUpdateWithoutRegisteredSmartLabelsInput>, AccountUncheckedUpdateWithoutRegisteredSmartLabelsInput>
+  }
+
+  export type ItemUpdateOneWithoutSmartLabelsNestedInput = {
+    create?: XOR<ItemCreateWithoutSmartLabelsInput, ItemUncheckedCreateWithoutSmartLabelsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutSmartLabelsInput
+    upsert?: ItemUpsertWithoutSmartLabelsInput
+    disconnect?: ItemWhereInput | boolean
+    delete?: ItemWhereInput | boolean
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutSmartLabelsInput, ItemUpdateWithoutSmartLabelsInput>, ItemUncheckedUpdateWithoutSmartLabelsInput>
+  }
+
+  export type TransferSmartLabelUpdateManyWithoutSmartLabelNestedInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutSmartLabelInput, TransferSmartLabelUncheckedCreateWithoutSmartLabelInput> | TransferSmartLabelCreateWithoutSmartLabelInput[] | TransferSmartLabelUncheckedCreateWithoutSmartLabelInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutSmartLabelInput | TransferSmartLabelCreateOrConnectWithoutSmartLabelInput[]
+    upsert?: TransferSmartLabelUpsertWithWhereUniqueWithoutSmartLabelInput | TransferSmartLabelUpsertWithWhereUniqueWithoutSmartLabelInput[]
+    createMany?: TransferSmartLabelCreateManySmartLabelInputEnvelope
+    set?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    disconnect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    delete?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    update?: TransferSmartLabelUpdateWithWhereUniqueWithoutSmartLabelInput | TransferSmartLabelUpdateWithWhereUniqueWithoutSmartLabelInput[]
+    updateMany?: TransferSmartLabelUpdateManyWithWhereWithoutSmartLabelInput | TransferSmartLabelUpdateManyWithWhereWithoutSmartLabelInput[]
+    deleteMany?: TransferSmartLabelScalarWhereInput | TransferSmartLabelScalarWhereInput[]
+  }
+
+  export type TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelNestedInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutSmartLabelInput, TransferSmartLabelUncheckedCreateWithoutSmartLabelInput> | TransferSmartLabelCreateWithoutSmartLabelInput[] | TransferSmartLabelUncheckedCreateWithoutSmartLabelInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutSmartLabelInput | TransferSmartLabelCreateOrConnectWithoutSmartLabelInput[]
+    upsert?: TransferSmartLabelUpsertWithWhereUniqueWithoutSmartLabelInput | TransferSmartLabelUpsertWithWhereUniqueWithoutSmartLabelInput[]
+    createMany?: TransferSmartLabelCreateManySmartLabelInputEnvelope
+    set?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    disconnect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    delete?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    update?: TransferSmartLabelUpdateWithWhereUniqueWithoutSmartLabelInput | TransferSmartLabelUpdateWithWhereUniqueWithoutSmartLabelInput[]
+    updateMany?: TransferSmartLabelUpdateManyWithWhereWithoutSmartLabelInput | TransferSmartLabelUpdateManyWithWhereWithoutSmartLabelInput[]
+    deleteMany?: TransferSmartLabelScalarWhereInput | TransferSmartLabelScalarWhereInput[]
+  }
+
+  export type PublishTokenCreateNestedOneWithoutItemsInput = {
+    create?: XOR<PublishTokenCreateWithoutItemsInput, PublishTokenUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutItemsInput
+    connect?: PublishTokenWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutOwnedItemsInput = {
+    create?: XOR<AccountCreateWithoutOwnedItemsInput, AccountUncheckedCreateWithoutOwnedItemsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutOwnedItemsInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutRegisteredItemsInput = {
+    create?: XOR<AccountCreateWithoutRegisteredItemsInput, AccountUncheckedCreateWithoutRegisteredItemsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutRegisteredItemsInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type SmartLabelCreateNestedManyWithoutItemInput = {
+    create?: XOR<SmartLabelCreateWithoutItemInput, SmartLabelUncheckedCreateWithoutItemInput> | SmartLabelCreateWithoutItemInput[] | SmartLabelUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutItemInput | SmartLabelCreateOrConnectWithoutItemInput[]
+    createMany?: SmartLabelCreateManyItemInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type TransferItemCreateNestedManyWithoutItemInput = {
+    create?: XOR<TransferItemCreateWithoutItemInput, TransferItemUncheckedCreateWithoutItemInput> | TransferItemCreateWithoutItemInput[] | TransferItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutItemInput | TransferItemCreateOrConnectWithoutItemInput[]
+    createMany?: TransferItemCreateManyItemInputEnvelope
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+  }
+
+  export type SmartLabelUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<SmartLabelCreateWithoutItemInput, SmartLabelUncheckedCreateWithoutItemInput> | SmartLabelCreateWithoutItemInput[] | SmartLabelUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutItemInput | SmartLabelCreateOrConnectWithoutItemInput[]
+    createMany?: SmartLabelCreateManyItemInputEnvelope
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+  }
+
+  export type TransferItemUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<TransferItemCreateWithoutItemInput, TransferItemUncheckedCreateWithoutItemInput> | TransferItemCreateWithoutItemInput[] | TransferItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutItemInput | TransferItemCreateOrConnectWithoutItemInput[]
+    createMany?: TransferItemCreateManyItemInputEnvelope
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+  }
+
+  export type PublishTokenUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<PublishTokenCreateWithoutItemsInput, PublishTokenUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutItemsInput
+    upsert?: PublishTokenUpsertWithoutItemsInput
+    connect?: PublishTokenWhereUniqueInput
+    update?: XOR<XOR<PublishTokenUpdateToOneWithWhereWithoutItemsInput, PublishTokenUpdateWithoutItemsInput>, PublishTokenUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type AccountUpdateOneWithoutOwnedItemsNestedInput = {
+    create?: XOR<AccountCreateWithoutOwnedItemsInput, AccountUncheckedCreateWithoutOwnedItemsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutOwnedItemsInput
+    upsert?: AccountUpsertWithoutOwnedItemsInput
+    disconnect?: AccountWhereInput | boolean
+    delete?: AccountWhereInput | boolean
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutOwnedItemsInput, AccountUpdateWithoutOwnedItemsInput>, AccountUncheckedUpdateWithoutOwnedItemsInput>
+  }
+
+  export type AccountUpdateOneRequiredWithoutRegisteredItemsNestedInput = {
+    create?: XOR<AccountCreateWithoutRegisteredItemsInput, AccountUncheckedCreateWithoutRegisteredItemsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutRegisteredItemsInput
+    upsert?: AccountUpsertWithoutRegisteredItemsInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutRegisteredItemsInput, AccountUpdateWithoutRegisteredItemsInput>, AccountUncheckedUpdateWithoutRegisteredItemsInput>
+  }
+
+  export type SmartLabelUpdateManyWithoutItemNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutItemInput, SmartLabelUncheckedCreateWithoutItemInput> | SmartLabelCreateWithoutItemInput[] | SmartLabelUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutItemInput | SmartLabelCreateOrConnectWithoutItemInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutItemInput | SmartLabelUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: SmartLabelCreateManyItemInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutItemInput | SmartLabelUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutItemInput | SmartLabelUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type TransferItemUpdateManyWithoutItemNestedInput = {
+    create?: XOR<TransferItemCreateWithoutItemInput, TransferItemUncheckedCreateWithoutItemInput> | TransferItemCreateWithoutItemInput[] | TransferItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutItemInput | TransferItemCreateOrConnectWithoutItemInput[]
+    upsert?: TransferItemUpsertWithWhereUniqueWithoutItemInput | TransferItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: TransferItemCreateManyItemInputEnvelope
+    set?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    disconnect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    delete?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    update?: TransferItemUpdateWithWhereUniqueWithoutItemInput | TransferItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: TransferItemUpdateManyWithWhereWithoutItemInput | TransferItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: TransferItemScalarWhereInput | TransferItemScalarWhereInput[]
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutItemInput, SmartLabelUncheckedCreateWithoutItemInput> | SmartLabelCreateWithoutItemInput[] | SmartLabelUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutItemInput | SmartLabelCreateOrConnectWithoutItemInput[]
+    upsert?: SmartLabelUpsertWithWhereUniqueWithoutItemInput | SmartLabelUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: SmartLabelCreateManyItemInputEnvelope
+    set?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    disconnect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    delete?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    connect?: SmartLabelWhereUniqueInput | SmartLabelWhereUniqueInput[]
+    update?: SmartLabelUpdateWithWhereUniqueWithoutItemInput | SmartLabelUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: SmartLabelUpdateManyWithWhereWithoutItemInput | SmartLabelUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+  }
+
+  export type TransferItemUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<TransferItemCreateWithoutItemInput, TransferItemUncheckedCreateWithoutItemInput> | TransferItemCreateWithoutItemInput[] | TransferItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutItemInput | TransferItemCreateOrConnectWithoutItemInput[]
+    upsert?: TransferItemUpsertWithWhereUniqueWithoutItemInput | TransferItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: TransferItemCreateManyItemInputEnvelope
+    set?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    disconnect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    delete?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    update?: TransferItemUpdateWithWhereUniqueWithoutItemInput | TransferItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: TransferItemUpdateManyWithWhereWithoutItemInput | TransferItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: TransferItemScalarWhereInput | TransferItemScalarWhereInput[]
+  }
+
+  export type AccountCreateNestedOneWithoutTransferOutInput = {
+    create?: XOR<AccountCreateWithoutTransferOutInput, AccountUncheckedCreateWithoutTransferOutInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutTransferOutInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutTransferInInput = {
+    create?: XOR<AccountCreateWithoutTransferInInput, AccountUncheckedCreateWithoutTransferInInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutTransferInInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type PublishTokenCreateNestedOneWithoutTransfersInput = {
+    create?: XOR<PublishTokenCreateWithoutTransfersInput, PublishTokenUncheckedCreateWithoutTransfersInput>
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutTransfersInput
+    connect?: PublishTokenWhereUniqueInput
+  }
+
+  export type TransferItemCreateNestedManyWithoutTransferInput = {
+    create?: XOR<TransferItemCreateWithoutTransferInput, TransferItemUncheckedCreateWithoutTransferInput> | TransferItemCreateWithoutTransferInput[] | TransferItemUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutTransferInput | TransferItemCreateOrConnectWithoutTransferInput[]
+    createMany?: TransferItemCreateManyTransferInputEnvelope
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+  }
+
+  export type TransferSmartLabelCreateNestedManyWithoutTransferInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutTransferInput, TransferSmartLabelUncheckedCreateWithoutTransferInput> | TransferSmartLabelCreateWithoutTransferInput[] | TransferSmartLabelUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutTransferInput | TransferSmartLabelCreateOrConnectWithoutTransferInput[]
+    createMany?: TransferSmartLabelCreateManyTransferInputEnvelope
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+  }
+
+  export type TransferItemUncheckedCreateNestedManyWithoutTransferInput = {
+    create?: XOR<TransferItemCreateWithoutTransferInput, TransferItemUncheckedCreateWithoutTransferInput> | TransferItemCreateWithoutTransferInput[] | TransferItemUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutTransferInput | TransferItemCreateOrConnectWithoutTransferInput[]
+    createMany?: TransferItemCreateManyTransferInputEnvelope
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+  }
+
+  export type TransferSmartLabelUncheckedCreateNestedManyWithoutTransferInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutTransferInput, TransferSmartLabelUncheckedCreateWithoutTransferInput> | TransferSmartLabelCreateWithoutTransferInput[] | TransferSmartLabelUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutTransferInput | TransferSmartLabelCreateOrConnectWithoutTransferInput[]
+    createMany?: TransferSmartLabelCreateManyTransferInputEnvelope
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+  }
+
+  export type EnumTransferTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TransferType
+  }
+
+  export type AccountUpdateOneRequiredWithoutTransferOutNestedInput = {
+    create?: XOR<AccountCreateWithoutTransferOutInput, AccountUncheckedCreateWithoutTransferOutInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutTransferOutInput
+    upsert?: AccountUpsertWithoutTransferOutInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutTransferOutInput, AccountUpdateWithoutTransferOutInput>, AccountUncheckedUpdateWithoutTransferOutInput>
+  }
+
+  export type AccountUpdateOneRequiredWithoutTransferInNestedInput = {
+    create?: XOR<AccountCreateWithoutTransferInInput, AccountUncheckedCreateWithoutTransferInInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutTransferInInput
+    upsert?: AccountUpsertWithoutTransferInInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutTransferInInput, AccountUpdateWithoutTransferInInput>, AccountUncheckedUpdateWithoutTransferInInput>
+  }
+
+  export type PublishTokenUpdateOneRequiredWithoutTransfersNestedInput = {
+    create?: XOR<PublishTokenCreateWithoutTransfersInput, PublishTokenUncheckedCreateWithoutTransfersInput>
+    connectOrCreate?: PublishTokenCreateOrConnectWithoutTransfersInput
+    upsert?: PublishTokenUpsertWithoutTransfersInput
+    connect?: PublishTokenWhereUniqueInput
+    update?: XOR<XOR<PublishTokenUpdateToOneWithWhereWithoutTransfersInput, PublishTokenUpdateWithoutTransfersInput>, PublishTokenUncheckedUpdateWithoutTransfersInput>
+  }
+
+  export type TransferItemUpdateManyWithoutTransferNestedInput = {
+    create?: XOR<TransferItemCreateWithoutTransferInput, TransferItemUncheckedCreateWithoutTransferInput> | TransferItemCreateWithoutTransferInput[] | TransferItemUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutTransferInput | TransferItemCreateOrConnectWithoutTransferInput[]
+    upsert?: TransferItemUpsertWithWhereUniqueWithoutTransferInput | TransferItemUpsertWithWhereUniqueWithoutTransferInput[]
+    createMany?: TransferItemCreateManyTransferInputEnvelope
+    set?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    disconnect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    delete?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    update?: TransferItemUpdateWithWhereUniqueWithoutTransferInput | TransferItemUpdateWithWhereUniqueWithoutTransferInput[]
+    updateMany?: TransferItemUpdateManyWithWhereWithoutTransferInput | TransferItemUpdateManyWithWhereWithoutTransferInput[]
+    deleteMany?: TransferItemScalarWhereInput | TransferItemScalarWhereInput[]
+  }
+
+  export type TransferSmartLabelUpdateManyWithoutTransferNestedInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutTransferInput, TransferSmartLabelUncheckedCreateWithoutTransferInput> | TransferSmartLabelCreateWithoutTransferInput[] | TransferSmartLabelUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutTransferInput | TransferSmartLabelCreateOrConnectWithoutTransferInput[]
+    upsert?: TransferSmartLabelUpsertWithWhereUniqueWithoutTransferInput | TransferSmartLabelUpsertWithWhereUniqueWithoutTransferInput[]
+    createMany?: TransferSmartLabelCreateManyTransferInputEnvelope
+    set?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    disconnect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    delete?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    update?: TransferSmartLabelUpdateWithWhereUniqueWithoutTransferInput | TransferSmartLabelUpdateWithWhereUniqueWithoutTransferInput[]
+    updateMany?: TransferSmartLabelUpdateManyWithWhereWithoutTransferInput | TransferSmartLabelUpdateManyWithWhereWithoutTransferInput[]
+    deleteMany?: TransferSmartLabelScalarWhereInput | TransferSmartLabelScalarWhereInput[]
+  }
+
+  export type TransferItemUncheckedUpdateManyWithoutTransferNestedInput = {
+    create?: XOR<TransferItemCreateWithoutTransferInput, TransferItemUncheckedCreateWithoutTransferInput> | TransferItemCreateWithoutTransferInput[] | TransferItemUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferItemCreateOrConnectWithoutTransferInput | TransferItemCreateOrConnectWithoutTransferInput[]
+    upsert?: TransferItemUpsertWithWhereUniqueWithoutTransferInput | TransferItemUpsertWithWhereUniqueWithoutTransferInput[]
+    createMany?: TransferItemCreateManyTransferInputEnvelope
+    set?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    disconnect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    delete?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    connect?: TransferItemWhereUniqueInput | TransferItemWhereUniqueInput[]
+    update?: TransferItemUpdateWithWhereUniqueWithoutTransferInput | TransferItemUpdateWithWhereUniqueWithoutTransferInput[]
+    updateMany?: TransferItemUpdateManyWithWhereWithoutTransferInput | TransferItemUpdateManyWithWhereWithoutTransferInput[]
+    deleteMany?: TransferItemScalarWhereInput | TransferItemScalarWhereInput[]
+  }
+
+  export type TransferSmartLabelUncheckedUpdateManyWithoutTransferNestedInput = {
+    create?: XOR<TransferSmartLabelCreateWithoutTransferInput, TransferSmartLabelUncheckedCreateWithoutTransferInput> | TransferSmartLabelCreateWithoutTransferInput[] | TransferSmartLabelUncheckedCreateWithoutTransferInput[]
+    connectOrCreate?: TransferSmartLabelCreateOrConnectWithoutTransferInput | TransferSmartLabelCreateOrConnectWithoutTransferInput[]
+    upsert?: TransferSmartLabelUpsertWithWhereUniqueWithoutTransferInput | TransferSmartLabelUpsertWithWhereUniqueWithoutTransferInput[]
+    createMany?: TransferSmartLabelCreateManyTransferInputEnvelope
+    set?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    disconnect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    delete?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    connect?: TransferSmartLabelWhereUniqueInput | TransferSmartLabelWhereUniqueInput[]
+    update?: TransferSmartLabelUpdateWithWhereUniqueWithoutTransferInput | TransferSmartLabelUpdateWithWhereUniqueWithoutTransferInput[]
+    updateMany?: TransferSmartLabelUpdateManyWithWhereWithoutTransferInput | TransferSmartLabelUpdateManyWithWhereWithoutTransferInput[]
+    deleteMany?: TransferSmartLabelScalarWhereInput | TransferSmartLabelScalarWhereInput[]
+  }
+
+  export type TransferCreateNestedOneWithoutItemsInput = {
+    create?: XOR<TransferCreateWithoutItemsInput, TransferUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: TransferCreateOrConnectWithoutItemsInput
+    connect?: TransferWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutTransfersInput = {
+    create?: XOR<ItemCreateWithoutTransfersInput, ItemUncheckedCreateWithoutTransfersInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutTransfersInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type TransferUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<TransferCreateWithoutItemsInput, TransferUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: TransferCreateOrConnectWithoutItemsInput
+    upsert?: TransferUpsertWithoutItemsInput
+    connect?: TransferWhereUniqueInput
+    update?: XOR<XOR<TransferUpdateToOneWithWhereWithoutItemsInput, TransferUpdateWithoutItemsInput>, TransferUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ItemUpdateOneRequiredWithoutTransfersNestedInput = {
+    create?: XOR<ItemCreateWithoutTransfersInput, ItemUncheckedCreateWithoutTransfersInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutTransfersInput
+    upsert?: ItemUpsertWithoutTransfersInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutTransfersInput, ItemUpdateWithoutTransfersInput>, ItemUncheckedUpdateWithoutTransfersInput>
+  }
+
+  export type TransferCreateNestedOneWithoutSmartLabelsInput = {
+    create?: XOR<TransferCreateWithoutSmartLabelsInput, TransferUncheckedCreateWithoutSmartLabelsInput>
+    connectOrCreate?: TransferCreateOrConnectWithoutSmartLabelsInput
+    connect?: TransferWhereUniqueInput
+  }
+
+  export type SmartLabelCreateNestedOneWithoutTransfersInput = {
+    create?: XOR<SmartLabelCreateWithoutTransfersInput, SmartLabelUncheckedCreateWithoutTransfersInput>
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutTransfersInput
+    connect?: SmartLabelWhereUniqueInput
+  }
+
+  export type TransferUpdateOneRequiredWithoutSmartLabelsNestedInput = {
+    create?: XOR<TransferCreateWithoutSmartLabelsInput, TransferUncheckedCreateWithoutSmartLabelsInput>
+    connectOrCreate?: TransferCreateOrConnectWithoutSmartLabelsInput
+    upsert?: TransferUpsertWithoutSmartLabelsInput
+    connect?: TransferWhereUniqueInput
+    update?: XOR<XOR<TransferUpdateToOneWithWhereWithoutSmartLabelsInput, TransferUpdateWithoutSmartLabelsInput>, TransferUncheckedUpdateWithoutSmartLabelsInput>
+  }
+
+  export type SmartLabelUpdateOneRequiredWithoutTransfersNestedInput = {
+    create?: XOR<SmartLabelCreateWithoutTransfersInput, SmartLabelUncheckedCreateWithoutTransfersInput>
+    connectOrCreate?: SmartLabelCreateOrConnectWithoutTransfersInput
+    upsert?: SmartLabelUpsertWithoutTransfersInput
+    connect?: SmartLabelWhereUniqueInput
+    update?: XOR<XOR<SmartLabelUpdateToOneWithWhereWithoutTransfersInput, SmartLabelUpdateWithoutTransfersInput>, SmartLabelUncheckedUpdateWithoutTransfersInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -10888,16 +21273,65 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumTransferTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransferType | EnumTransferTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransferTypeFilter<$PrismaModel> | $Enums.TransferType
+  }
+
+  export type NestedEnumTransferTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransferType | EnumTransferTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransferType[] | ListEnumTransferTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransferTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransferType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransferTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransferTypeFilter<$PrismaModel>
+  }
 
   export type AccountCreateWithoutCreatedByInput = {
     id?: string
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devices?: AccountDevicesCreateNestedManyWithoutAccountInput
     activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateWithoutCreatedByInput = {
@@ -10905,10 +21339,19 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
     activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountCreateOrConnectWithoutCreatedByInput = {
@@ -10952,6 +21395,7 @@ export namespace Prisma {
   export type AccountActivationCreateWithoutCreatedByInput = {
     id?: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -10967,6 +21411,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -10989,6 +21434,7 @@ export namespace Prisma {
 
   export type AccountDevicesCreateWithoutCreatedByInput = {
     id?: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11000,6 +21446,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     deviceId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11182,6 +21629,8 @@ export namespace Prisma {
     name?: StringFilter<"Account"> | string
     isActive?: BoolFilter<"Account"> | boolean
     activationLink?: StringNullableFilter<"Account"> | string | null
+    publicKey?: StringNullableFilter<"Account"> | string | null
+    pccCloudId?: StringNullableFilter<"Account"> | string | null
     createdById?: StringFilter<"Account"> | string
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
@@ -11238,6 +21687,7 @@ export namespace Prisma {
     id?: StringFilter<"AccountActivation"> | string
     accountId?: StringFilter<"AccountActivation"> | string
     email?: StringFilter<"AccountActivation"> | string
+    name?: StringNullableFilter<"AccountActivation"> | string | null
     code?: StringFilter<"AccountActivation"> | string
     activationLink?: StringFilter<"AccountActivation"> | string
     issueDate?: DateTimeFilter<"AccountActivation"> | Date | string
@@ -11272,6 +21722,7 @@ export namespace Prisma {
     id?: StringFilter<"AccountDevices"> | string
     accountId?: StringFilter<"AccountDevices"> | string
     deviceId?: StringFilter<"AccountDevices"> | string
+    pccCloudId?: StringNullableFilter<"AccountDevices"> | string | null
     isActive?: BoolFilter<"AccountDevices"> | boolean
     createdById?: StringFilter<"AccountDevices"> | string
     createdAt?: DateTimeFilter<"AccountDevices"> | Date | string
@@ -11620,6 +22071,7 @@ export namespace Prisma {
 
   export type AccountDevicesCreateWithoutAccountInput = {
     id?: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11630,6 +22082,7 @@ export namespace Prisma {
   export type AccountDevicesUncheckedCreateWithoutAccountInput = {
     id?: string
     deviceId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdById: string
     createdAt?: Date | string
@@ -11649,6 +22102,7 @@ export namespace Prisma {
   export type AccountActivationCreateWithoutAccountInput = {
     id?: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -11663,6 +22117,7 @@ export namespace Prisma {
   export type AccountActivationUncheckedCreateWithoutAccountInput = {
     id?: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -11681,6 +22136,270 @@ export namespace Prisma {
 
   export type AccountActivationCreateManyAccountInputEnvelope = {
     data: AccountActivationCreateManyAccountInput | AccountActivationCreateManyAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SmartLabelCreateWithoutOwnerInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutSmartLabelsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredSmartLabelsInput
+    item?: ItemCreateNestedOneWithoutSmartLabelsInput
+    transfers?: TransferSmartLabelCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelUncheckedCreateWithoutOwnerInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+    transfers?: TransferSmartLabelUncheckedCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelCreateOrConnectWithoutOwnerInput = {
+    where: SmartLabelWhereUniqueInput
+    create: XOR<SmartLabelCreateWithoutOwnerInput, SmartLabelUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type SmartLabelCreateManyOwnerInputEnvelope = {
+    data: SmartLabelCreateManyOwnerInput | SmartLabelCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SmartLabelCreateWithoutRegisteredByInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutSmartLabelsInput
+    owner?: AccountCreateNestedOneWithoutOwnedSmartLabelsInput
+    item?: ItemCreateNestedOneWithoutSmartLabelsInput
+    transfers?: TransferSmartLabelCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelUncheckedCreateWithoutRegisteredByInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+    transfers?: TransferSmartLabelUncheckedCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelCreateOrConnectWithoutRegisteredByInput = {
+    where: SmartLabelWhereUniqueInput
+    create: XOR<SmartLabelCreateWithoutRegisteredByInput, SmartLabelUncheckedCreateWithoutRegisteredByInput>
+  }
+
+  export type SmartLabelCreateManyRegisteredByInputEnvelope = {
+    data: SmartLabelCreateManyRegisteredByInput | SmartLabelCreateManyRegisteredByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemCreateWithoutOwnerInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutItemsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredItemsInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutItemInput
+    transfers?: TransferItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutOwnerInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutItemInput
+    transfers?: TransferItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutOwnerInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutOwnerInput, ItemUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type ItemCreateManyOwnerInputEnvelope = {
+    data: ItemCreateManyOwnerInput | ItemCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemCreateWithoutRegisteredByInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutItemsInput
+    owner?: AccountCreateNestedOneWithoutOwnedItemsInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutItemInput
+    transfers?: TransferItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutRegisteredByInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    ownerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutItemInput
+    transfers?: TransferItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutRegisteredByInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutRegisteredByInput, ItemUncheckedCreateWithoutRegisteredByInput>
+  }
+
+  export type ItemCreateManyRegisteredByInputEnvelope = {
+    data: ItemCreateManyRegisteredByInput | ItemCreateManyRegisteredByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransferCreateWithoutSellerInput = {
+    id?: string
+    reference: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reciever: AccountCreateNestedOneWithoutTransferInInput
+    publishToken: PublishTokenCreateNestedOneWithoutTransfersInput
+    items?: TransferItemCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUncheckedCreateWithoutSellerInput = {
+    id?: string
+    reference: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: TransferItemUncheckedCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelUncheckedCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferCreateOrConnectWithoutSellerInput = {
+    where: TransferWhereUniqueInput
+    create: XOR<TransferCreateWithoutSellerInput, TransferUncheckedCreateWithoutSellerInput>
+  }
+
+  export type TransferCreateManySellerInputEnvelope = {
+    data: TransferCreateManySellerInput | TransferCreateManySellerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransferCreateWithoutRecieverInput = {
+    id?: string
+    reference: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seller: AccountCreateNestedOneWithoutTransferOutInput
+    publishToken: PublishTokenCreateNestedOneWithoutTransfersInput
+    items?: TransferItemCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUncheckedCreateWithoutRecieverInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: TransferItemUncheckedCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelUncheckedCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferCreateOrConnectWithoutRecieverInput = {
+    where: TransferWhereUniqueInput
+    create: XOR<TransferCreateWithoutRecieverInput, TransferUncheckedCreateWithoutRecieverInput>
+  }
+
+  export type TransferCreateManyRecieverInputEnvelope = {
+    data: TransferCreateManyRecieverInput | TransferCreateManyRecieverInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PublishTokenCreateWithoutAccountInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelCreateNestedManyWithoutPublishTokenInput
+    items?: ItemCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenUncheckedCreateWithoutAccountInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutPublishTokenInput
+    items?: ItemUncheckedCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferUncheckedCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenCreateOrConnectWithoutAccountInput = {
+    where: PublishTokenWhereUniqueInput
+    create: XOR<PublishTokenCreateWithoutAccountInput, PublishTokenUncheckedCreateWithoutAccountInput>
+  }
+
+  export type PublishTokenCreateManyAccountInputEnvelope = {
+    data: PublishTokenCreateManyAccountInput | PublishTokenCreateManyAccountInput[]
     skipDuplicates?: boolean
   }
 
@@ -11763,15 +22482,457 @@ export namespace Prisma {
     data: XOR<AccountActivationUpdateManyMutationInput, AccountActivationUncheckedUpdateManyWithoutAccountInput>
   }
 
+  export type SmartLabelUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: SmartLabelWhereUniqueInput
+    update: XOR<SmartLabelUpdateWithoutOwnerInput, SmartLabelUncheckedUpdateWithoutOwnerInput>
+    create: XOR<SmartLabelCreateWithoutOwnerInput, SmartLabelUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type SmartLabelUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: SmartLabelWhereUniqueInput
+    data: XOR<SmartLabelUpdateWithoutOwnerInput, SmartLabelUncheckedUpdateWithoutOwnerInput>
+  }
+
+  export type SmartLabelUpdateManyWithWhereWithoutOwnerInput = {
+    where: SmartLabelScalarWhereInput
+    data: XOR<SmartLabelUpdateManyMutationInput, SmartLabelUncheckedUpdateManyWithoutOwnerInput>
+  }
+
+  export type SmartLabelScalarWhereInput = {
+    AND?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+    OR?: SmartLabelScalarWhereInput[]
+    NOT?: SmartLabelScalarWhereInput | SmartLabelScalarWhereInput[]
+    id?: StringFilter<"SmartLabel"> | string
+    serial?: StringFilter<"SmartLabel"> | string
+    reference?: StringNullableFilter<"SmartLabel"> | string | null
+    name?: StringNullableFilter<"SmartLabel"> | string | null
+    description?: StringNullableFilter<"SmartLabel"> | string | null
+    payload?: JsonNullableFilter<"SmartLabel">
+    source?: StringNullableFilter<"SmartLabel"> | string | null
+    publishTokenId?: StringFilter<"SmartLabel"> | string
+    ownerId?: StringNullableFilter<"SmartLabel"> | string | null
+    registeredById?: StringFilter<"SmartLabel"> | string
+    createdAt?: DateTimeFilter<"SmartLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"SmartLabel"> | Date | string
+    itemId?: StringNullableFilter<"SmartLabel"> | string | null
+  }
+
+  export type SmartLabelUpsertWithWhereUniqueWithoutRegisteredByInput = {
+    where: SmartLabelWhereUniqueInput
+    update: XOR<SmartLabelUpdateWithoutRegisteredByInput, SmartLabelUncheckedUpdateWithoutRegisteredByInput>
+    create: XOR<SmartLabelCreateWithoutRegisteredByInput, SmartLabelUncheckedCreateWithoutRegisteredByInput>
+  }
+
+  export type SmartLabelUpdateWithWhereUniqueWithoutRegisteredByInput = {
+    where: SmartLabelWhereUniqueInput
+    data: XOR<SmartLabelUpdateWithoutRegisteredByInput, SmartLabelUncheckedUpdateWithoutRegisteredByInput>
+  }
+
+  export type SmartLabelUpdateManyWithWhereWithoutRegisteredByInput = {
+    where: SmartLabelScalarWhereInput
+    data: XOR<SmartLabelUpdateManyMutationInput, SmartLabelUncheckedUpdateManyWithoutRegisteredByInput>
+  }
+
+  export type ItemUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: ItemWhereUniqueInput
+    update: XOR<ItemUpdateWithoutOwnerInput, ItemUncheckedUpdateWithoutOwnerInput>
+    create: XOR<ItemCreateWithoutOwnerInput, ItemUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type ItemUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: ItemWhereUniqueInput
+    data: XOR<ItemUpdateWithoutOwnerInput, ItemUncheckedUpdateWithoutOwnerInput>
+  }
+
+  export type ItemUpdateManyWithWhereWithoutOwnerInput = {
+    where: ItemScalarWhereInput
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutOwnerInput>
+  }
+
+  export type ItemScalarWhereInput = {
+    AND?: ItemScalarWhereInput | ItemScalarWhereInput[]
+    OR?: ItemScalarWhereInput[]
+    NOT?: ItemScalarWhereInput | ItemScalarWhereInput[]
+    id?: StringFilter<"Item"> | string
+    serial?: StringFilter<"Item"> | string
+    name?: StringFilter<"Item"> | string
+    description?: StringFilter<"Item"> | string
+    payload?: JsonNullableFilter<"Item">
+    publishTokenId?: StringFilter<"Item"> | string
+    ownerId?: StringNullableFilter<"Item"> | string | null
+    registeredById?: StringFilter<"Item"> | string
+    createdAt?: DateTimeFilter<"Item"> | Date | string
+    updatedAt?: DateTimeFilter<"Item"> | Date | string
+  }
+
+  export type ItemUpsertWithWhereUniqueWithoutRegisteredByInput = {
+    where: ItemWhereUniqueInput
+    update: XOR<ItemUpdateWithoutRegisteredByInput, ItemUncheckedUpdateWithoutRegisteredByInput>
+    create: XOR<ItemCreateWithoutRegisteredByInput, ItemUncheckedCreateWithoutRegisteredByInput>
+  }
+
+  export type ItemUpdateWithWhereUniqueWithoutRegisteredByInput = {
+    where: ItemWhereUniqueInput
+    data: XOR<ItemUpdateWithoutRegisteredByInput, ItemUncheckedUpdateWithoutRegisteredByInput>
+  }
+
+  export type ItemUpdateManyWithWhereWithoutRegisteredByInput = {
+    where: ItemScalarWhereInput
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutRegisteredByInput>
+  }
+
+  export type TransferUpsertWithWhereUniqueWithoutSellerInput = {
+    where: TransferWhereUniqueInput
+    update: XOR<TransferUpdateWithoutSellerInput, TransferUncheckedUpdateWithoutSellerInput>
+    create: XOR<TransferCreateWithoutSellerInput, TransferUncheckedCreateWithoutSellerInput>
+  }
+
+  export type TransferUpdateWithWhereUniqueWithoutSellerInput = {
+    where: TransferWhereUniqueInput
+    data: XOR<TransferUpdateWithoutSellerInput, TransferUncheckedUpdateWithoutSellerInput>
+  }
+
+  export type TransferUpdateManyWithWhereWithoutSellerInput = {
+    where: TransferScalarWhereInput
+    data: XOR<TransferUpdateManyMutationInput, TransferUncheckedUpdateManyWithoutSellerInput>
+  }
+
+  export type TransferScalarWhereInput = {
+    AND?: TransferScalarWhereInput | TransferScalarWhereInput[]
+    OR?: TransferScalarWhereInput[]
+    NOT?: TransferScalarWhereInput | TransferScalarWhereInput[]
+    id?: StringFilter<"Transfer"> | string
+    reference?: StringFilter<"Transfer"> | string
+    sellerId?: StringFilter<"Transfer"> | string
+    recieverId?: StringFilter<"Transfer"> | string
+    transferType?: EnumTransferTypeFilter<"Transfer"> | $Enums.TransferType
+    publishTokenId?: StringFilter<"Transfer"> | string
+    createdAt?: DateTimeFilter<"Transfer"> | Date | string
+    updatedAt?: DateTimeFilter<"Transfer"> | Date | string
+  }
+
+  export type TransferUpsertWithWhereUniqueWithoutRecieverInput = {
+    where: TransferWhereUniqueInput
+    update: XOR<TransferUpdateWithoutRecieverInput, TransferUncheckedUpdateWithoutRecieverInput>
+    create: XOR<TransferCreateWithoutRecieverInput, TransferUncheckedCreateWithoutRecieverInput>
+  }
+
+  export type TransferUpdateWithWhereUniqueWithoutRecieverInput = {
+    where: TransferWhereUniqueInput
+    data: XOR<TransferUpdateWithoutRecieverInput, TransferUncheckedUpdateWithoutRecieverInput>
+  }
+
+  export type TransferUpdateManyWithWhereWithoutRecieverInput = {
+    where: TransferScalarWhereInput
+    data: XOR<TransferUpdateManyMutationInput, TransferUncheckedUpdateManyWithoutRecieverInput>
+  }
+
+  export type PublishTokenUpsertWithWhereUniqueWithoutAccountInput = {
+    where: PublishTokenWhereUniqueInput
+    update: XOR<PublishTokenUpdateWithoutAccountInput, PublishTokenUncheckedUpdateWithoutAccountInput>
+    create: XOR<PublishTokenCreateWithoutAccountInput, PublishTokenUncheckedCreateWithoutAccountInput>
+  }
+
+  export type PublishTokenUpdateWithWhereUniqueWithoutAccountInput = {
+    where: PublishTokenWhereUniqueInput
+    data: XOR<PublishTokenUpdateWithoutAccountInput, PublishTokenUncheckedUpdateWithoutAccountInput>
+  }
+
+  export type PublishTokenUpdateManyWithWhereWithoutAccountInput = {
+    where: PublishTokenScalarWhereInput
+    data: XOR<PublishTokenUpdateManyMutationInput, PublishTokenUncheckedUpdateManyWithoutAccountInput>
+  }
+
+  export type PublishTokenScalarWhereInput = {
+    AND?: PublishTokenScalarWhereInput | PublishTokenScalarWhereInput[]
+    OR?: PublishTokenScalarWhereInput[]
+    NOT?: PublishTokenScalarWhereInput | PublishTokenScalarWhereInput[]
+    id?: StringFilter<"PublishToken"> | string
+    token?: StringFilter<"PublishToken"> | string
+    accountId?: StringFilter<"PublishToken"> | string
+    isClaimed?: BoolFilter<"PublishToken"> | boolean
+    isActive?: BoolFilter<"PublishToken"> | boolean
+    isArchived?: BoolFilter<"PublishToken"> | boolean
+    createdAt?: DateTimeFilter<"PublishToken"> | Date | string
+    updatedAt?: DateTimeFilter<"PublishToken"> | Date | string
+  }
+
+  export type AccountCreateWithoutPublishTokensInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+  }
+
+  export type AccountUncheckedCreateWithoutPublishTokensInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+  }
+
+  export type AccountCreateOrConnectWithoutPublishTokensInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutPublishTokensInput, AccountUncheckedCreateWithoutPublishTokensInput>
+  }
+
+  export type SmartLabelCreateWithoutPublishTokenInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner?: AccountCreateNestedOneWithoutOwnedSmartLabelsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredSmartLabelsInput
+    item?: ItemCreateNestedOneWithoutSmartLabelsInput
+    transfers?: TransferSmartLabelCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelUncheckedCreateWithoutPublishTokenInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+    transfers?: TransferSmartLabelUncheckedCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelCreateOrConnectWithoutPublishTokenInput = {
+    where: SmartLabelWhereUniqueInput
+    create: XOR<SmartLabelCreateWithoutPublishTokenInput, SmartLabelUncheckedCreateWithoutPublishTokenInput>
+  }
+
+  export type SmartLabelCreateManyPublishTokenInputEnvelope = {
+    data: SmartLabelCreateManyPublishTokenInput | SmartLabelCreateManyPublishTokenInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemCreateWithoutPublishTokenInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner?: AccountCreateNestedOneWithoutOwnedItemsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredItemsInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutItemInput
+    transfers?: TransferItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutPublishTokenInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutItemInput
+    transfers?: TransferItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutPublishTokenInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutPublishTokenInput, ItemUncheckedCreateWithoutPublishTokenInput>
+  }
+
+  export type ItemCreateManyPublishTokenInputEnvelope = {
+    data: ItemCreateManyPublishTokenInput | ItemCreateManyPublishTokenInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransferCreateWithoutPublishTokenInput = {
+    id?: string
+    reference: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seller: AccountCreateNestedOneWithoutTransferOutInput
+    reciever: AccountCreateNestedOneWithoutTransferInInput
+    items?: TransferItemCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUncheckedCreateWithoutPublishTokenInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: TransferItemUncheckedCreateNestedManyWithoutTransferInput
+    smartLabels?: TransferSmartLabelUncheckedCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferCreateOrConnectWithoutPublishTokenInput = {
+    where: TransferWhereUniqueInput
+    create: XOR<TransferCreateWithoutPublishTokenInput, TransferUncheckedCreateWithoutPublishTokenInput>
+  }
+
+  export type TransferCreateManyPublishTokenInputEnvelope = {
+    data: TransferCreateManyPublishTokenInput | TransferCreateManyPublishTokenInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AccountUpsertWithoutPublishTokensInput = {
+    update: XOR<AccountUpdateWithoutPublishTokensInput, AccountUncheckedUpdateWithoutPublishTokensInput>
+    create: XOR<AccountCreateWithoutPublishTokensInput, AccountUncheckedCreateWithoutPublishTokensInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutPublishTokensInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutPublishTokensInput, AccountUncheckedUpdateWithoutPublishTokensInput>
+  }
+
+  export type AccountUpdateWithoutPublishTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutPublishTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+  }
+
+  export type SmartLabelUpsertWithWhereUniqueWithoutPublishTokenInput = {
+    where: SmartLabelWhereUniqueInput
+    update: XOR<SmartLabelUpdateWithoutPublishTokenInput, SmartLabelUncheckedUpdateWithoutPublishTokenInput>
+    create: XOR<SmartLabelCreateWithoutPublishTokenInput, SmartLabelUncheckedCreateWithoutPublishTokenInput>
+  }
+
+  export type SmartLabelUpdateWithWhereUniqueWithoutPublishTokenInput = {
+    where: SmartLabelWhereUniqueInput
+    data: XOR<SmartLabelUpdateWithoutPublishTokenInput, SmartLabelUncheckedUpdateWithoutPublishTokenInput>
+  }
+
+  export type SmartLabelUpdateManyWithWhereWithoutPublishTokenInput = {
+    where: SmartLabelScalarWhereInput
+    data: XOR<SmartLabelUpdateManyMutationInput, SmartLabelUncheckedUpdateManyWithoutPublishTokenInput>
+  }
+
+  export type ItemUpsertWithWhereUniqueWithoutPublishTokenInput = {
+    where: ItemWhereUniqueInput
+    update: XOR<ItemUpdateWithoutPublishTokenInput, ItemUncheckedUpdateWithoutPublishTokenInput>
+    create: XOR<ItemCreateWithoutPublishTokenInput, ItemUncheckedCreateWithoutPublishTokenInput>
+  }
+
+  export type ItemUpdateWithWhereUniqueWithoutPublishTokenInput = {
+    where: ItemWhereUniqueInput
+    data: XOR<ItemUpdateWithoutPublishTokenInput, ItemUncheckedUpdateWithoutPublishTokenInput>
+  }
+
+  export type ItemUpdateManyWithWhereWithoutPublishTokenInput = {
+    where: ItemScalarWhereInput
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutPublishTokenInput>
+  }
+
+  export type TransferUpsertWithWhereUniqueWithoutPublishTokenInput = {
+    where: TransferWhereUniqueInput
+    update: XOR<TransferUpdateWithoutPublishTokenInput, TransferUncheckedUpdateWithoutPublishTokenInput>
+    create: XOR<TransferCreateWithoutPublishTokenInput, TransferUncheckedCreateWithoutPublishTokenInput>
+  }
+
+  export type TransferUpdateWithWhereUniqueWithoutPublishTokenInput = {
+    where: TransferWhereUniqueInput
+    data: XOR<TransferUpdateWithoutPublishTokenInput, TransferUncheckedUpdateWithoutPublishTokenInput>
+  }
+
+  export type TransferUpdateManyWithWhereWithoutPublishTokenInput = {
+    where: TransferScalarWhereInput
+    data: XOR<TransferUpdateManyMutationInput, TransferUncheckedUpdateManyWithoutPublishTokenInput>
+  }
+
   export type AccountCreateWithoutActivationsInput = {
     id?: string
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
     devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateWithoutActivationsInput = {
@@ -11779,10 +22940,19 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountCreateOrConnectWithoutActivationsInput = {
@@ -11847,10 +23017,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
     devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutActivationsInput = {
@@ -11858,10 +23037,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type UserUpsertWithoutCreatedAccountActivationsInput = {
@@ -11954,6 +23142,7 @@ export namespace Prisma {
 
   export type AccountDevicesCreateWithoutDeviceInput = {
     id?: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11964,6 +23153,7 @@ export namespace Prisma {
   export type AccountDevicesUncheckedCreateWithoutDeviceInput = {
     id?: string
     accountId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdById: string
     createdAt?: Date | string
@@ -12048,10 +23238,19 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
     activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateWithoutDevicesInput = {
@@ -12059,10 +23258,19 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountCreateOrConnectWithoutDevicesInput = {
@@ -12150,10 +23358,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
     activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutDevicesInput = {
@@ -12161,10 +23378,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type DeviceUpsertWithoutAccountsInput = {
@@ -12243,11 +23469,1385 @@ export namespace Prisma {
     createdUsers?: UserUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
+  export type PublishTokenCreateWithoutSmartLabelsInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account: AccountCreateNestedOneWithoutPublishTokensInput
+    items?: ItemCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenUncheckedCreateWithoutSmartLabelsInput = {
+    id?: string
+    token?: string
+    accountId: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: ItemUncheckedCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferUncheckedCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenCreateOrConnectWithoutSmartLabelsInput = {
+    where: PublishTokenWhereUniqueInput
+    create: XOR<PublishTokenCreateWithoutSmartLabelsInput, PublishTokenUncheckedCreateWithoutSmartLabelsInput>
+  }
+
+  export type AccountCreateWithoutOwnedSmartLabelsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutOwnedSmartLabelsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutOwnedSmartLabelsInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutOwnedSmartLabelsInput, AccountUncheckedCreateWithoutOwnedSmartLabelsInput>
+  }
+
+  export type AccountCreateWithoutRegisteredSmartLabelsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutRegisteredSmartLabelsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutRegisteredSmartLabelsInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutRegisteredSmartLabelsInput, AccountUncheckedCreateWithoutRegisteredSmartLabelsInput>
+  }
+
+  export type ItemCreateWithoutSmartLabelsInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutItemsInput
+    owner?: AccountCreateNestedOneWithoutOwnedItemsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredItemsInput
+    transfers?: TransferItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutSmartLabelsInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfers?: TransferItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutSmartLabelsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutSmartLabelsInput, ItemUncheckedCreateWithoutSmartLabelsInput>
+  }
+
+  export type TransferSmartLabelCreateWithoutSmartLabelInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfer: TransferCreateNestedOneWithoutSmartLabelsInput
+  }
+
+  export type TransferSmartLabelUncheckedCreateWithoutSmartLabelInput = {
+    id?: string
+    transferId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferSmartLabelCreateOrConnectWithoutSmartLabelInput = {
+    where: TransferSmartLabelWhereUniqueInput
+    create: XOR<TransferSmartLabelCreateWithoutSmartLabelInput, TransferSmartLabelUncheckedCreateWithoutSmartLabelInput>
+  }
+
+  export type TransferSmartLabelCreateManySmartLabelInputEnvelope = {
+    data: TransferSmartLabelCreateManySmartLabelInput | TransferSmartLabelCreateManySmartLabelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PublishTokenUpsertWithoutSmartLabelsInput = {
+    update: XOR<PublishTokenUpdateWithoutSmartLabelsInput, PublishTokenUncheckedUpdateWithoutSmartLabelsInput>
+    create: XOR<PublishTokenCreateWithoutSmartLabelsInput, PublishTokenUncheckedCreateWithoutSmartLabelsInput>
+    where?: PublishTokenWhereInput
+  }
+
+  export type PublishTokenUpdateToOneWithWhereWithoutSmartLabelsInput = {
+    where?: PublishTokenWhereInput
+    data: XOR<PublishTokenUpdateWithoutSmartLabelsInput, PublishTokenUncheckedUpdateWithoutSmartLabelsInput>
+  }
+
+  export type PublishTokenUpdateWithoutSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutPublishTokensNestedInput
+    items?: ItemUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenUncheckedUpdateWithoutSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ItemUncheckedUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUncheckedUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type AccountUpsertWithoutOwnedSmartLabelsInput = {
+    update: XOR<AccountUpdateWithoutOwnedSmartLabelsInput, AccountUncheckedUpdateWithoutOwnedSmartLabelsInput>
+    create: XOR<AccountCreateWithoutOwnedSmartLabelsInput, AccountUncheckedCreateWithoutOwnedSmartLabelsInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutOwnedSmartLabelsInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutOwnedSmartLabelsInput, AccountUncheckedUpdateWithoutOwnedSmartLabelsInput>
+  }
+
+  export type AccountUpdateWithoutOwnedSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutOwnedSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUpsertWithoutRegisteredSmartLabelsInput = {
+    update: XOR<AccountUpdateWithoutRegisteredSmartLabelsInput, AccountUncheckedUpdateWithoutRegisteredSmartLabelsInput>
+    create: XOR<AccountCreateWithoutRegisteredSmartLabelsInput, AccountUncheckedCreateWithoutRegisteredSmartLabelsInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutRegisteredSmartLabelsInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutRegisteredSmartLabelsInput, AccountUncheckedUpdateWithoutRegisteredSmartLabelsInput>
+  }
+
+  export type AccountUpdateWithoutRegisteredSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutRegisteredSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type ItemUpsertWithoutSmartLabelsInput = {
+    update: XOR<ItemUpdateWithoutSmartLabelsInput, ItemUncheckedUpdateWithoutSmartLabelsInput>
+    create: XOR<ItemCreateWithoutSmartLabelsInput, ItemUncheckedCreateWithoutSmartLabelsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutSmartLabelsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutSmartLabelsInput, ItemUncheckedUpdateWithoutSmartLabelsInput>
+  }
+
+  export type ItemUpdateWithoutSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutItemsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedItemsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredItemsNestedInput
+    transfers?: TransferItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfers?: TransferItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type TransferSmartLabelUpsertWithWhereUniqueWithoutSmartLabelInput = {
+    where: TransferSmartLabelWhereUniqueInput
+    update: XOR<TransferSmartLabelUpdateWithoutSmartLabelInput, TransferSmartLabelUncheckedUpdateWithoutSmartLabelInput>
+    create: XOR<TransferSmartLabelCreateWithoutSmartLabelInput, TransferSmartLabelUncheckedCreateWithoutSmartLabelInput>
+  }
+
+  export type TransferSmartLabelUpdateWithWhereUniqueWithoutSmartLabelInput = {
+    where: TransferSmartLabelWhereUniqueInput
+    data: XOR<TransferSmartLabelUpdateWithoutSmartLabelInput, TransferSmartLabelUncheckedUpdateWithoutSmartLabelInput>
+  }
+
+  export type TransferSmartLabelUpdateManyWithWhereWithoutSmartLabelInput = {
+    where: TransferSmartLabelScalarWhereInput
+    data: XOR<TransferSmartLabelUpdateManyMutationInput, TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelInput>
+  }
+
+  export type TransferSmartLabelScalarWhereInput = {
+    AND?: TransferSmartLabelScalarWhereInput | TransferSmartLabelScalarWhereInput[]
+    OR?: TransferSmartLabelScalarWhereInput[]
+    NOT?: TransferSmartLabelScalarWhereInput | TransferSmartLabelScalarWhereInput[]
+    id?: StringFilter<"TransferSmartLabel"> | string
+    transferId?: StringFilter<"TransferSmartLabel"> | string
+    smartLabelId?: StringFilter<"TransferSmartLabel"> | string
+    createdAt?: DateTimeFilter<"TransferSmartLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"TransferSmartLabel"> | Date | string
+  }
+
+  export type PublishTokenCreateWithoutItemsInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account: AccountCreateNestedOneWithoutPublishTokensInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenUncheckedCreateWithoutItemsInput = {
+    id?: string
+    token?: string
+    accountId: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutPublishTokenInput
+    transfers?: TransferUncheckedCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenCreateOrConnectWithoutItemsInput = {
+    where: PublishTokenWhereUniqueInput
+    create: XOR<PublishTokenCreateWithoutItemsInput, PublishTokenUncheckedCreateWithoutItemsInput>
+  }
+
+  export type AccountCreateWithoutOwnedItemsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutOwnedItemsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutOwnedItemsInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutOwnedItemsInput, AccountUncheckedCreateWithoutOwnedItemsInput>
+  }
+
+  export type AccountCreateWithoutRegisteredItemsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutRegisteredItemsInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutRegisteredItemsInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutRegisteredItemsInput, AccountUncheckedCreateWithoutRegisteredItemsInput>
+  }
+
+  export type SmartLabelCreateWithoutItemInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutSmartLabelsInput
+    owner?: AccountCreateNestedOneWithoutOwnedSmartLabelsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredSmartLabelsInput
+    transfers?: TransferSmartLabelCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelUncheckedCreateWithoutItemInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfers?: TransferSmartLabelUncheckedCreateNestedManyWithoutSmartLabelInput
+  }
+
+  export type SmartLabelCreateOrConnectWithoutItemInput = {
+    where: SmartLabelWhereUniqueInput
+    create: XOR<SmartLabelCreateWithoutItemInput, SmartLabelUncheckedCreateWithoutItemInput>
+  }
+
+  export type SmartLabelCreateManyItemInputEnvelope = {
+    data: SmartLabelCreateManyItemInput | SmartLabelCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransferItemCreateWithoutItemInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfer: TransferCreateNestedOneWithoutItemsInput
+  }
+
+  export type TransferItemUncheckedCreateWithoutItemInput = {
+    id?: string
+    transferId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferItemCreateOrConnectWithoutItemInput = {
+    where: TransferItemWhereUniqueInput
+    create: XOR<TransferItemCreateWithoutItemInput, TransferItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type TransferItemCreateManyItemInputEnvelope = {
+    data: TransferItemCreateManyItemInput | TransferItemCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PublishTokenUpsertWithoutItemsInput = {
+    update: XOR<PublishTokenUpdateWithoutItemsInput, PublishTokenUncheckedUpdateWithoutItemsInput>
+    create: XOR<PublishTokenCreateWithoutItemsInput, PublishTokenUncheckedCreateWithoutItemsInput>
+    where?: PublishTokenWhereInput
+  }
+
+  export type PublishTokenUpdateToOneWithWhereWithoutItemsInput = {
+    where?: PublishTokenWhereInput
+    data: XOR<PublishTokenUpdateWithoutItemsInput, PublishTokenUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PublishTokenUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutPublishTokensNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUncheckedUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type AccountUpsertWithoutOwnedItemsInput = {
+    update: XOR<AccountUpdateWithoutOwnedItemsInput, AccountUncheckedUpdateWithoutOwnedItemsInput>
+    create: XOR<AccountCreateWithoutOwnedItemsInput, AccountUncheckedCreateWithoutOwnedItemsInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutOwnedItemsInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutOwnedItemsInput, AccountUncheckedUpdateWithoutOwnedItemsInput>
+  }
+
+  export type AccountUpdateWithoutOwnedItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutOwnedItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUpsertWithoutRegisteredItemsInput = {
+    update: XOR<AccountUpdateWithoutRegisteredItemsInput, AccountUncheckedUpdateWithoutRegisteredItemsInput>
+    create: XOR<AccountCreateWithoutRegisteredItemsInput, AccountUncheckedCreateWithoutRegisteredItemsInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutRegisteredItemsInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutRegisteredItemsInput, AccountUncheckedUpdateWithoutRegisteredItemsInput>
+  }
+
+  export type AccountUpdateWithoutRegisteredItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutRegisteredItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type SmartLabelUpsertWithWhereUniqueWithoutItemInput = {
+    where: SmartLabelWhereUniqueInput
+    update: XOR<SmartLabelUpdateWithoutItemInput, SmartLabelUncheckedUpdateWithoutItemInput>
+    create: XOR<SmartLabelCreateWithoutItemInput, SmartLabelUncheckedCreateWithoutItemInput>
+  }
+
+  export type SmartLabelUpdateWithWhereUniqueWithoutItemInput = {
+    where: SmartLabelWhereUniqueInput
+    data: XOR<SmartLabelUpdateWithoutItemInput, SmartLabelUncheckedUpdateWithoutItemInput>
+  }
+
+  export type SmartLabelUpdateManyWithWhereWithoutItemInput = {
+    where: SmartLabelScalarWhereInput
+    data: XOR<SmartLabelUpdateManyMutationInput, SmartLabelUncheckedUpdateManyWithoutItemInput>
+  }
+
+  export type TransferItemUpsertWithWhereUniqueWithoutItemInput = {
+    where: TransferItemWhereUniqueInput
+    update: XOR<TransferItemUpdateWithoutItemInput, TransferItemUncheckedUpdateWithoutItemInput>
+    create: XOR<TransferItemCreateWithoutItemInput, TransferItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type TransferItemUpdateWithWhereUniqueWithoutItemInput = {
+    where: TransferItemWhereUniqueInput
+    data: XOR<TransferItemUpdateWithoutItemInput, TransferItemUncheckedUpdateWithoutItemInput>
+  }
+
+  export type TransferItemUpdateManyWithWhereWithoutItemInput = {
+    where: TransferItemScalarWhereInput
+    data: XOR<TransferItemUpdateManyMutationInput, TransferItemUncheckedUpdateManyWithoutItemInput>
+  }
+
+  export type TransferItemScalarWhereInput = {
+    AND?: TransferItemScalarWhereInput | TransferItemScalarWhereInput[]
+    OR?: TransferItemScalarWhereInput[]
+    NOT?: TransferItemScalarWhereInput | TransferItemScalarWhereInput[]
+    id?: StringFilter<"TransferItem"> | string
+    transferId?: StringFilter<"TransferItem"> | string
+    itemId?: StringFilter<"TransferItem"> | string
+    createdAt?: DateTimeFilter<"TransferItem"> | Date | string
+    updatedAt?: DateTimeFilter<"TransferItem"> | Date | string
+  }
+
+  export type AccountCreateWithoutTransferOutInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferIn?: TransferCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutTransferOutInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferIn?: TransferUncheckedCreateNestedManyWithoutRecieverInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutTransferOutInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutTransferOutInput, AccountUncheckedCreateWithoutTransferOutInput>
+  }
+
+  export type AccountCreateWithoutTransferInInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedAccountsInput
+    devices?: AccountDevicesCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferCreateNestedManyWithoutSellerInput
+    publishTokens?: PublishTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutTransferInInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devices?: AccountDevicesUncheckedCreateNestedManyWithoutAccountInput
+    activations?: AccountActivationUncheckedCreateNestedManyWithoutAccountInput
+    ownedSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutOwnerInput
+    registeredSmartLabels?: SmartLabelUncheckedCreateNestedManyWithoutRegisteredByInput
+    ownedItems?: ItemUncheckedCreateNestedManyWithoutOwnerInput
+    registeredItems?: ItemUncheckedCreateNestedManyWithoutRegisteredByInput
+    transferOut?: TransferUncheckedCreateNestedManyWithoutSellerInput
+    publishTokens?: PublishTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutTransferInInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutTransferInInput, AccountUncheckedCreateWithoutTransferInInput>
+  }
+
+  export type PublishTokenCreateWithoutTransfersInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account: AccountCreateNestedOneWithoutPublishTokensInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutPublishTokenInput
+    items?: ItemCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenUncheckedCreateWithoutTransfersInput = {
+    id?: string
+    token?: string
+    accountId: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutPublishTokenInput
+    items?: ItemUncheckedCreateNestedManyWithoutPublishTokenInput
+  }
+
+  export type PublishTokenCreateOrConnectWithoutTransfersInput = {
+    where: PublishTokenWhereUniqueInput
+    create: XOR<PublishTokenCreateWithoutTransfersInput, PublishTokenUncheckedCreateWithoutTransfersInput>
+  }
+
+  export type TransferItemCreateWithoutTransferInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    item: ItemCreateNestedOneWithoutTransfersInput
+  }
+
+  export type TransferItemUncheckedCreateWithoutTransferInput = {
+    id?: string
+    itemId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferItemCreateOrConnectWithoutTransferInput = {
+    where: TransferItemWhereUniqueInput
+    create: XOR<TransferItemCreateWithoutTransferInput, TransferItemUncheckedCreateWithoutTransferInput>
+  }
+
+  export type TransferItemCreateManyTransferInputEnvelope = {
+    data: TransferItemCreateManyTransferInput | TransferItemCreateManyTransferInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransferSmartLabelCreateWithoutTransferInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabel: SmartLabelCreateNestedOneWithoutTransfersInput
+  }
+
+  export type TransferSmartLabelUncheckedCreateWithoutTransferInput = {
+    id?: string
+    smartLabelId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferSmartLabelCreateOrConnectWithoutTransferInput = {
+    where: TransferSmartLabelWhereUniqueInput
+    create: XOR<TransferSmartLabelCreateWithoutTransferInput, TransferSmartLabelUncheckedCreateWithoutTransferInput>
+  }
+
+  export type TransferSmartLabelCreateManyTransferInputEnvelope = {
+    data: TransferSmartLabelCreateManyTransferInput | TransferSmartLabelCreateManyTransferInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AccountUpsertWithoutTransferOutInput = {
+    update: XOR<AccountUpdateWithoutTransferOutInput, AccountUncheckedUpdateWithoutTransferOutInput>
+    create: XOR<AccountCreateWithoutTransferOutInput, AccountUncheckedCreateWithoutTransferOutInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutTransferOutInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutTransferOutInput, AccountUncheckedUpdateWithoutTransferOutInput>
+  }
+
+  export type AccountUpdateWithoutTransferOutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutTransferOutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUpsertWithoutTransferInInput = {
+    update: XOR<AccountUpdateWithoutTransferInInput, AccountUncheckedUpdateWithoutTransferInInput>
+    create: XOR<AccountCreateWithoutTransferInInput, AccountUncheckedCreateWithoutTransferInInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutTransferInInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutTransferInInput, AccountUncheckedUpdateWithoutTransferInInput>
+  }
+
+  export type AccountUpdateWithoutTransferInInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedAccountsNestedInput
+    devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutTransferInInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
+    activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type PublishTokenUpsertWithoutTransfersInput = {
+    update: XOR<PublishTokenUpdateWithoutTransfersInput, PublishTokenUncheckedUpdateWithoutTransfersInput>
+    create: XOR<PublishTokenCreateWithoutTransfersInput, PublishTokenUncheckedCreateWithoutTransfersInput>
+    where?: PublishTokenWhereInput
+  }
+
+  export type PublishTokenUpdateToOneWithWhereWithoutTransfersInput = {
+    where?: PublishTokenWhereInput
+    data: XOR<PublishTokenUpdateWithoutTransfersInput, PublishTokenUncheckedUpdateWithoutTransfersInput>
+  }
+
+  export type PublishTokenUpdateWithoutTransfersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutPublishTokensNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutPublishTokenNestedInput
+    items?: ItemUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenUncheckedUpdateWithoutTransfersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutPublishTokenNestedInput
+    items?: ItemUncheckedUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type TransferItemUpsertWithWhereUniqueWithoutTransferInput = {
+    where: TransferItemWhereUniqueInput
+    update: XOR<TransferItemUpdateWithoutTransferInput, TransferItemUncheckedUpdateWithoutTransferInput>
+    create: XOR<TransferItemCreateWithoutTransferInput, TransferItemUncheckedCreateWithoutTransferInput>
+  }
+
+  export type TransferItemUpdateWithWhereUniqueWithoutTransferInput = {
+    where: TransferItemWhereUniqueInput
+    data: XOR<TransferItemUpdateWithoutTransferInput, TransferItemUncheckedUpdateWithoutTransferInput>
+  }
+
+  export type TransferItemUpdateManyWithWhereWithoutTransferInput = {
+    where: TransferItemScalarWhereInput
+    data: XOR<TransferItemUpdateManyMutationInput, TransferItemUncheckedUpdateManyWithoutTransferInput>
+  }
+
+  export type TransferSmartLabelUpsertWithWhereUniqueWithoutTransferInput = {
+    where: TransferSmartLabelWhereUniqueInput
+    update: XOR<TransferSmartLabelUpdateWithoutTransferInput, TransferSmartLabelUncheckedUpdateWithoutTransferInput>
+    create: XOR<TransferSmartLabelCreateWithoutTransferInput, TransferSmartLabelUncheckedCreateWithoutTransferInput>
+  }
+
+  export type TransferSmartLabelUpdateWithWhereUniqueWithoutTransferInput = {
+    where: TransferSmartLabelWhereUniqueInput
+    data: XOR<TransferSmartLabelUpdateWithoutTransferInput, TransferSmartLabelUncheckedUpdateWithoutTransferInput>
+  }
+
+  export type TransferSmartLabelUpdateManyWithWhereWithoutTransferInput = {
+    where: TransferSmartLabelScalarWhereInput
+    data: XOR<TransferSmartLabelUpdateManyMutationInput, TransferSmartLabelUncheckedUpdateManyWithoutTransferInput>
+  }
+
+  export type TransferCreateWithoutItemsInput = {
+    id?: string
+    reference: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seller: AccountCreateNestedOneWithoutTransferOutInput
+    reciever: AccountCreateNestedOneWithoutTransferInInput
+    publishToken: PublishTokenCreateNestedOneWithoutTransfersInput
+    smartLabels?: TransferSmartLabelCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUncheckedCreateWithoutItemsInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: TransferSmartLabelUncheckedCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferCreateOrConnectWithoutItemsInput = {
+    where: TransferWhereUniqueInput
+    create: XOR<TransferCreateWithoutItemsInput, TransferUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ItemCreateWithoutTransfersInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutItemsInput
+    owner?: AccountCreateNestedOneWithoutOwnedItemsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredItemsInput
+    smartLabels?: SmartLabelCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutTransfersInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    smartLabels?: SmartLabelUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutTransfersInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutTransfersInput, ItemUncheckedCreateWithoutTransfersInput>
+  }
+
+  export type TransferUpsertWithoutItemsInput = {
+    update: XOR<TransferUpdateWithoutItemsInput, TransferUncheckedUpdateWithoutItemsInput>
+    create: XOR<TransferCreateWithoutItemsInput, TransferUncheckedCreateWithoutItemsInput>
+    where?: TransferWhereInput
+  }
+
+  export type TransferUpdateToOneWithWhereWithoutItemsInput = {
+    where?: TransferWhereInput
+    data: XOR<TransferUpdateWithoutItemsInput, TransferUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type TransferUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seller?: AccountUpdateOneRequiredWithoutTransferOutNestedInput
+    reciever?: AccountUpdateOneRequiredWithoutTransferInNestedInput
+    publishToken?: PublishTokenUpdateOneRequiredWithoutTransfersNestedInput
+    smartLabels?: TransferSmartLabelUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: TransferSmartLabelUncheckedUpdateManyWithoutTransferNestedInput
+  }
+
+  export type ItemUpsertWithoutTransfersInput = {
+    update: XOR<ItemUpdateWithoutTransfersInput, ItemUncheckedUpdateWithoutTransfersInput>
+    create: XOR<ItemCreateWithoutTransfersInput, ItemUncheckedCreateWithoutTransfersInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutTransfersInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutTransfersInput, ItemUncheckedUpdateWithoutTransfersInput>
+  }
+
+  export type ItemUpdateWithoutTransfersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutItemsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedItemsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredItemsNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutTransfersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type TransferCreateWithoutSmartLabelsInput = {
+    id?: string
+    reference: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seller: AccountCreateNestedOneWithoutTransferOutInput
+    reciever: AccountCreateNestedOneWithoutTransferInInput
+    publishToken: PublishTokenCreateNestedOneWithoutTransfersInput
+    items?: TransferItemCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferUncheckedCreateWithoutSmartLabelsInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: TransferItemUncheckedCreateNestedManyWithoutTransferInput
+  }
+
+  export type TransferCreateOrConnectWithoutSmartLabelsInput = {
+    where: TransferWhereUniqueInput
+    create: XOR<TransferCreateWithoutSmartLabelsInput, TransferUncheckedCreateWithoutSmartLabelsInput>
+  }
+
+  export type SmartLabelCreateWithoutTransfersInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishToken: PublishTokenCreateNestedOneWithoutSmartLabelsInput
+    owner?: AccountCreateNestedOneWithoutOwnedSmartLabelsInput
+    registeredBy: AccountCreateNestedOneWithoutRegisteredSmartLabelsInput
+    item?: ItemCreateNestedOneWithoutSmartLabelsInput
+  }
+
+  export type SmartLabelUncheckedCreateWithoutTransfersInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+  }
+
+  export type SmartLabelCreateOrConnectWithoutTransfersInput = {
+    where: SmartLabelWhereUniqueInput
+    create: XOR<SmartLabelCreateWithoutTransfersInput, SmartLabelUncheckedCreateWithoutTransfersInput>
+  }
+
+  export type TransferUpsertWithoutSmartLabelsInput = {
+    update: XOR<TransferUpdateWithoutSmartLabelsInput, TransferUncheckedUpdateWithoutSmartLabelsInput>
+    create: XOR<TransferCreateWithoutSmartLabelsInput, TransferUncheckedCreateWithoutSmartLabelsInput>
+    where?: TransferWhereInput
+  }
+
+  export type TransferUpdateToOneWithWhereWithoutSmartLabelsInput = {
+    where?: TransferWhereInput
+    data: XOR<TransferUpdateWithoutSmartLabelsInput, TransferUncheckedUpdateWithoutSmartLabelsInput>
+  }
+
+  export type TransferUpdateWithoutSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seller?: AccountUpdateOneRequiredWithoutTransferOutNestedInput
+    reciever?: AccountUpdateOneRequiredWithoutTransferInNestedInput
+    publishToken?: PublishTokenUpdateOneRequiredWithoutTransfersNestedInput
+    items?: TransferItemUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateWithoutSmartLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: TransferItemUncheckedUpdateManyWithoutTransferNestedInput
+  }
+
+  export type SmartLabelUpsertWithoutTransfersInput = {
+    update: XOR<SmartLabelUpdateWithoutTransfersInput, SmartLabelUncheckedUpdateWithoutTransfersInput>
+    create: XOR<SmartLabelCreateWithoutTransfersInput, SmartLabelUncheckedCreateWithoutTransfersInput>
+    where?: SmartLabelWhereInput
+  }
+
+  export type SmartLabelUpdateToOneWithWhereWithoutTransfersInput = {
+    where?: SmartLabelWhereInput
+    data: XOR<SmartLabelUpdateWithoutTransfersInput, SmartLabelUncheckedUpdateWithoutTransfersInput>
+  }
+
+  export type SmartLabelUpdateWithoutTransfersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutSmartLabelsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedSmartLabelsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredSmartLabelsNestedInput
+    item?: ItemUpdateOneWithoutSmartLabelsNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateWithoutTransfersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type AccountCreateManyCreatedByInput = {
     id?: string
     name: string
     isActive?: boolean
     activationLink?: string | null
+    publicKey?: string | null
+    pccCloudId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12264,6 +24864,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -12278,6 +24879,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     deviceId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12317,10 +24919,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: AccountDevicesUpdateManyWithoutAccountNestedInput
     activations?: AccountActivationUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutCreatedByInput = {
@@ -12328,10 +24939,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: AccountDevicesUncheckedUpdateManyWithoutAccountNestedInput
     activations?: AccountActivationUncheckedUpdateManyWithoutAccountNestedInput
+    ownedSmartLabels?: SmartLabelUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredSmartLabels?: SmartLabelUncheckedUpdateManyWithoutRegisteredByNestedInput
+    ownedItems?: ItemUncheckedUpdateManyWithoutOwnerNestedInput
+    registeredItems?: ItemUncheckedUpdateManyWithoutRegisteredByNestedInput
+    transferOut?: TransferUncheckedUpdateManyWithoutSellerNestedInput
+    transferIn?: TransferUncheckedUpdateManyWithoutRecieverNestedInput
+    publishTokens?: PublishTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateManyWithoutCreatedByInput = {
@@ -12339,6 +24959,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     activationLink?: NullableStringFieldUpdateOperationsInput | string | null
+    publicKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12372,6 +24994,7 @@ export namespace Prisma {
   export type AccountActivationUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12387,6 +25010,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12401,6 +25025,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12413,6 +25038,7 @@ export namespace Prisma {
 
   export type AccountDevicesUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12424,6 +25050,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     deviceId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12433,6 +25060,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     deviceId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12542,6 +25170,7 @@ export namespace Prisma {
   export type AccountDevicesCreateManyAccountInput = {
     id?: string
     deviceId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdById: string
     createdAt?: Date | string
@@ -12551,6 +25180,7 @@ export namespace Prisma {
   export type AccountActivationCreateManyAccountInput = {
     id?: string
     email: string
+    name?: string | null
     code?: string
     activationLink: string
     issueDate?: Date | string
@@ -12562,8 +25192,93 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type SmartLabelCreateManyOwnerInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+  }
+
+  export type SmartLabelCreateManyRegisteredByInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+  }
+
+  export type ItemCreateManyOwnerInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ItemCreateManyRegisteredByInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId: string
+    ownerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferCreateManySellerInput = {
+    id?: string
+    reference: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferCreateManyRecieverInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    transferType: $Enums.TransferType
+    publishTokenId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublishTokenCreateManyAccountInput = {
+    id?: string
+    token?: string
+    isClaimed?: boolean
+    isActive?: boolean
+    isArchived?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AccountDevicesUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12574,6 +25289,7 @@ export namespace Prisma {
   export type AccountDevicesUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     deviceId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12583,6 +25299,7 @@ export namespace Prisma {
   export type AccountDevicesUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     deviceId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12592,6 +25309,7 @@ export namespace Prisma {
   export type AccountActivationUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12606,6 +25324,7 @@ export namespace Prisma {
   export type AccountActivationUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12620,6 +25339,7 @@ export namespace Prisma {
   export type AccountActivationUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     activationLink?: StringFieldUpdateOperationsInput | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12631,9 +25351,446 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SmartLabelUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutSmartLabelsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredSmartLabelsNestedInput
+    item?: ItemUpdateOneWithoutSmartLabelsNestedInput
+    transfers?: TransferSmartLabelUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    transfers?: TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SmartLabelUpdateWithoutRegisteredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutSmartLabelsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedSmartLabelsNestedInput
+    item?: ItemUpdateOneWithoutSmartLabelsNestedInput
+    transfers?: TransferSmartLabelUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateWithoutRegisteredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    transfers?: TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutRegisteredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ItemUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutItemsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredItemsNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ItemUpdateWithoutRegisteredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutItemsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedItemsNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutRegisteredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateManyWithoutRegisteredByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferUpdateWithoutSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reciever?: AccountUpdateOneRequiredWithoutTransferInNestedInput
+    publishToken?: PublishTokenUpdateOneRequiredWithoutTransfersNestedInput
+    items?: TransferItemUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateWithoutSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: TransferItemUncheckedUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUncheckedUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateManyWithoutSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferUpdateWithoutRecieverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seller?: AccountUpdateOneRequiredWithoutTransferOutNestedInput
+    publishToken?: PublishTokenUpdateOneRequiredWithoutTransfersNestedInput
+    items?: TransferItemUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateWithoutRecieverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: TransferItemUncheckedUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUncheckedUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateManyWithoutRecieverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublishTokenUpdateWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUpdateManyWithoutPublishTokenNestedInput
+    items?: ItemUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenUncheckedUpdateWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutPublishTokenNestedInput
+    items?: ItemUncheckedUpdateManyWithoutPublishTokenNestedInput
+    transfers?: TransferUncheckedUpdateManyWithoutPublishTokenNestedInput
+  }
+
+  export type PublishTokenUncheckedUpdateManyWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    isClaimed?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isArchived?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SmartLabelCreateManyPublishTokenInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    itemId?: string | null
+  }
+
+  export type ItemCreateManyPublishTokenInput = {
+    id?: string
+    serial: string
+    name: string
+    description: string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferCreateManyPublishTokenInput = {
+    id?: string
+    reference: string
+    sellerId: string
+    recieverId: string
+    transferType: $Enums.TransferType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SmartLabelUpdateWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: AccountUpdateOneWithoutOwnedSmartLabelsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredSmartLabelsNestedInput
+    item?: ItemUpdateOneWithoutSmartLabelsNestedInput
+    transfers?: TransferSmartLabelUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+    transfers?: TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    itemId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ItemUpdateWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: AccountUpdateOneWithoutOwnedItemsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredItemsNestedInput
+    smartLabels?: SmartLabelUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabels?: SmartLabelUncheckedUpdateManyWithoutItemNestedInput
+    transfers?: TransferItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateManyWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferUpdateWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seller?: AccountUpdateOneRequiredWithoutTransferOutNestedInput
+    reciever?: AccountUpdateOneRequiredWithoutTransferInNestedInput
+    items?: TransferItemUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: TransferItemUncheckedUpdateManyWithoutTransferNestedInput
+    smartLabels?: TransferSmartLabelUncheckedUpdateManyWithoutTransferNestedInput
+  }
+
+  export type TransferUncheckedUpdateManyWithoutPublishTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    recieverId?: StringFieldUpdateOperationsInput | string
+    transferType?: EnumTransferTypeFieldUpdateOperationsInput | $Enums.TransferType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AccountDevicesCreateManyDeviceInput = {
     id?: string
     accountId: string
+    pccCloudId?: string | null
     isActive?: boolean
     createdById: string
     createdAt?: Date | string
@@ -12642,6 +25799,7 @@ export namespace Prisma {
 
   export type AccountDevicesUpdateWithoutDeviceInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12652,6 +25810,7 @@ export namespace Prisma {
   export type AccountDevicesUncheckedUpdateWithoutDeviceInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12661,8 +25820,183 @@ export namespace Prisma {
   export type AccountDevicesUncheckedUpdateManyWithoutDeviceInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    pccCloudId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelCreateManySmartLabelInput = {
+    id?: string
+    transferId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferSmartLabelUpdateWithoutSmartLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfer?: TransferUpdateOneRequiredWithoutSmartLabelsNestedInput
+  }
+
+  export type TransferSmartLabelUncheckedUpdateWithoutSmartLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SmartLabelCreateManyItemInput = {
+    id?: string
+    serial: string
+    reference?: string | null
+    name?: string | null
+    description?: string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: string | null
+    publishTokenId: string
+    ownerId?: string | null
+    registeredById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferItemCreateManyItemInput = {
+    id?: string
+    transferId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SmartLabelUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishToken?: PublishTokenUpdateOneRequiredWithoutSmartLabelsNestedInput
+    owner?: AccountUpdateOneWithoutOwnedSmartLabelsNestedInput
+    registeredBy?: AccountUpdateOneRequiredWithoutRegisteredSmartLabelsNestedInput
+    transfers?: TransferSmartLabelUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfers?: TransferSmartLabelUncheckedUpdateManyWithoutSmartLabelNestedInput
+  }
+
+  export type SmartLabelUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serial?: StringFieldUpdateOperationsInput | string
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    payload?: NullableJsonNullValueInput | InputJsonValue
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    publishTokenId?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    registeredById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfer?: TransferUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type TransferItemUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    transferId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemCreateManyTransferInput = {
+    id?: string
+    itemId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferSmartLabelCreateManyTransferInput = {
+    id?: string
+    smartLabelId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TransferItemUpdateWithoutTransferInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    item?: ItemUpdateOneRequiredWithoutTransfersNestedInput
+  }
+
+  export type TransferItemUncheckedUpdateWithoutTransferInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferItemUncheckedUpdateManyWithoutTransferInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelUpdateWithoutTransferInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    smartLabel?: SmartLabelUpdateOneRequiredWithoutTransfersNestedInput
+  }
+
+  export type TransferSmartLabelUncheckedUpdateWithoutTransferInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    smartLabelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransferSmartLabelUncheckedUpdateManyWithoutTransferInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    smartLabelId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

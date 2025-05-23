@@ -1,0 +1,9 @@
+services:
+  app:
+    image: pchip/pcc-admin-service-app:prod
+    ports:
+      - '80:80'
+    environment:
+      - NODE_ENV=production
+    env_file: ".env.production"
+    command: npm run start
